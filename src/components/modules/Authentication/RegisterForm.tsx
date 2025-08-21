@@ -14,7 +14,7 @@ import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRegisterMutation } from "@/redux/features/User/user.apit";
+import { useRegisterMutation } from "@/redux/features/User/user.api";
 
 const createUserZodSchema = z.object({
   name: z
