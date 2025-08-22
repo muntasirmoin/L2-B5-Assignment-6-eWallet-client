@@ -20,10 +20,14 @@ export default function DashboardLayout() {
             orientation="vertical"
             className="mr-2 data-[orientation=vertical]:h-4"
           />
+
+          <h1 className="absolute left-1/2 transform -translate-x-1/2 text-lg font-bold text-rose-500">
+            Dashboard
+          </h1>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
           <Outlet />
-          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+          {/* <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" /> */}
         </div>
       </SidebarInset>
     </SidebarProvider>

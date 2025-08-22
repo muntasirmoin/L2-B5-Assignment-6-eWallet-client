@@ -5,10 +5,22 @@ export const transactionApi = baseApi.injectEndpoints({
     //
     // get-my-transaction
     getMyTransaction: builder.query({
-      query: () => ({
-        url: "/transaction/my-transactions",
-        method: "GET",
-      }),
+      query: (params) => {
+        // If no params, return the base URL (get all)
+        if (!params) {
+          return {
+            url: "/transaction/my-transactions",
+            method: "GET",
+          };
+        }
+
+        // If params exist, pass them (page & limit)
+        return {
+          url: "/transaction/my-transactions",
+          method: "GET",
+          params,
+        };
+      },
       providesTags: ["TRANSACTION"],
     }),
   }),

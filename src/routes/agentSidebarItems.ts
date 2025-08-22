@@ -3,10 +3,10 @@ import type { ISidebarItem } from "@/types";
 
 export const agentSidebarItems: ISidebarItem[] = [
   {
-    title: "Dashboard Agent",
+    title: "Overview",
     items: [
       {
-        title: "Agent",
+        title: "CashIn/CashOut Summary",
         url: "/agent/overview",
         component: Overview,
       },
