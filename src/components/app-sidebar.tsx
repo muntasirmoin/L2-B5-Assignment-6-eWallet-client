@@ -23,10 +23,11 @@ import { getSidebarItems } from "@/utils/getSidebarItems";
 
 import Logo from "@/assets/icons/Logo";
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
+import { useLocation } from "react-router";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userInfo } = useUserInfoQuery(undefined);
-
+  const location = useLocation();
   const data = {
     navMain: getSidebarItems(userInfo?.data?.role),
   };
@@ -54,10 +55,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {data.navMain.map((item, index) => (
+            {data.navMain.map((item) => (
               <Collapsible
                 key={item.title}
-                defaultOpen={index === 1}
+                defaultOpen={item.items.some(
+                  (subItem) => location.pathname === subItem.url
+                )}
                 className="group/collapsible"
               >
                 <SidebarMenuItem>
