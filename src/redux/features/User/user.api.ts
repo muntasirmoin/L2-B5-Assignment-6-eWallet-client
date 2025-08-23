@@ -19,8 +19,20 @@ export const userApi = baseApi.injectEndpoints({
       providesTags: ["USER"],
     }),
 
+    //get  user by phone number
+    userByPhoneNumber: builder.query({
+      query: (phone) => ({
+        url: `/user/get-user-by-number?phone=${phone}`,
+        method: "GET",
+      }),
+    }),
     //
   }),
 });
 
-export const { useRegisterMutation, useUserInfoQuery } = userApi;
+export const {
+  useRegisterMutation,
+  useUserInfoQuery,
+  useUserByPhoneNumberQuery,
+  useLazyUserByPhoneNumberQuery,
+} = userApi;
