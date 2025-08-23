@@ -1,4 +1,6 @@
 import CashIn from "@/pages/Agent/CashIn";
+import CashOut from "@/pages/Agent/CashOut";
+import MyCommissionTable from "@/pages/Agent/MyCommissionTable";
 
 import MyTransactionTable from "@/pages/Agent/MyTransactionTable";
 import Overview from "@/pages/Agent/Overview";
@@ -15,6 +17,28 @@ export const agentSidebarItems: ISidebarItem[] = [
       },
     ],
   },
+
+  {
+    title: "Add Money",
+    items: [
+      {
+        title: "Cash In",
+        url: "/agent/cash-in",
+        component: CashIn,
+      },
+    ],
+  },
+  {
+    title: "Withdraw Money",
+    items: [
+      {
+        title: "Cash Out",
+        url: "/agent/cash-out",
+        component: CashOut,
+      },
+    ],
+  },
+
   {
     title: "Transaction History",
     items: [
@@ -26,12 +50,12 @@ export const agentSidebarItems: ISidebarItem[] = [
     ],
   },
   {
-    title: "Add Money",
+    title: "Commission History",
     items: [
       {
-        title: "Cash In",
-        url: "/agent/cash-in",
-        component: CashIn,
+        title: "All Commission",
+        url: "/agent/all-commission",
+        component: MyCommissionTable,
       },
     ],
   },

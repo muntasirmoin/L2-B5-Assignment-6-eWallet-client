@@ -11,7 +11,17 @@ export const agentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["TRANSACTION"],
     }),
+
+    //   cash out
+    cashOut: builder.mutation({
+      query: (cashInInfo) => ({
+        url: "/agent/cash-out",
+        method: "POST",
+        data: cashInInfo,
+      }),
+      invalidatesTags: ["TRANSACTION"],
+    }),
   }),
 });
 
-export const { useCashInMutation } = agentApi;
+export const { useCashInMutation, useCashOutMutation } = agentApi;
