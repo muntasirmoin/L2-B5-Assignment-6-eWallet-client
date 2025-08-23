@@ -1,4 +1,5 @@
 import { baseApi } from "@/redux/baseApi";
+import type { IUser, UpdateProfileResponse } from "@/types/user";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -26,6 +27,16 @@ export const userApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    //update profile
+
+    updateProfile: builder.mutation<UpdateProfileResponse, Partial<IUser>>({
+      query: (payload) => ({
+        url: "/user/profile-update",
+        method: "PATCH",
+        data: payload,
+      }),
+      invalidatesTags: ["USER"], // Optional: triggers cache invalidation
+    }),
     //
   }),
 });
@@ -35,4 +46,5 @@ export const {
   useUserInfoQuery,
   useUserByPhoneNumberQuery,
   useLazyUserByPhoneNumberQuery,
+  useUpdateProfileMutation,
 } = userApi;

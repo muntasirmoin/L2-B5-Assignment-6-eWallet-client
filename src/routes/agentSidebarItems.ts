@@ -4,6 +4,7 @@ import MyCommissionTable from "@/pages/Agent/MyCommissionTable";
 
 import MyTransactionTable from "@/pages/Agent/MyTransactionTable";
 import Overview from "@/pages/Agent/Overview";
+import UpdatePersonalInfo from "@/pages/Agent/UpdatePersonalInfo";
 import type { ISidebarItem } from "@/types";
 
 export const agentSidebarItems: ISidebarItem[] = [
@@ -56,6 +57,17 @@ export const agentSidebarItems: ISidebarItem[] = [
         title: "All Commission",
         url: "/agent/all-commission",
         component: MyCommissionTable,
+      },
+    ],
+  },
+
+  {
+    title: "Profile Management",
+    items: [
+      {
+        title: "Update personal Info",
+        url: "/agent/update-profile-info",
+        component: UpdatePersonalInfo,
       },
     ],
   },
