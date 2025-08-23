@@ -11,10 +11,11 @@ const Overview = () => {
     data: allData,
     isLoading: isAllLoading,
     isError: isAllError,
-  } = useGetMyTransactionQuery(undefined);
+  } = useGetMyTransactionQuery({ limit: "all" });
 
   const allInvoices: ITransaction[] = allData?.data ?? [];
-  console.log("all", allInvoices);
+
+  // console.log("allInvoices", allInvoices);
   //  all data for totals cash-in-out
   const totalCashInCompleted = getTotalByTypeAndStatus(
     allInvoices,

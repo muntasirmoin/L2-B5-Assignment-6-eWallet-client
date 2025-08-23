@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { useCashInMutation } from "@/redux/features/Agent/agent.api";
 import { useLazyUserByPhoneNumberQuery } from "@/redux/features/User/user.api";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -43,6 +44,7 @@ const cashInZodSchema = z.object({
 type CashInInput = z.infer<typeof cashInZodSchema>;
 
 export function AddMoneyModal() {
+  const [open, setOpen] = useState(false);
   const form = useForm<CashInInput>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(cashInZodSchema) as any,
@@ -77,7 +79,10 @@ export function AddMoneyModal() {
       }).unwrap();
 
       if (res.success) {
-        toast.success("Cash In Done");
+        toast.success(`Cash In Done: ${data.amount} tk`);
+
+        form.reset(); //  Reset form
+        setOpen(false); //  Close modal
       }
 
       form.reset();
@@ -110,7 +115,7 @@ export function AddMoneyModal() {
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <form>
         <DialogTrigger asChild>
           <Button className="cursor-pointer font-bold">Cash In</Button>

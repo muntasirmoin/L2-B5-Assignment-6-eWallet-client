@@ -23,14 +23,23 @@ import { getSidebarItems } from "@/utils/getSidebarItems";
 
 import Logo from "@/assets/icons/Logo";
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
+import { useMyWalletQuery } from "@/redux/features/Wallet/wallet.api";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userInfo } = useUserInfoQuery(undefined);
+  console.log("userInfo", userInfo);
   const location = useLocation();
   const data = {
     navMain: getSidebarItems(userInfo?.data?.role),
   };
+
+  const { data: userWallet, error, isLoading } = useMyWalletQuery();
+  console.log("userWallet", userWallet);
+
+  if (isLoading) return <p>Loading wallet...</p>;
+  if (error) return <p>Error fetching wallet data</p>;
+  console.log("balance", userWallet?.myWallet?.balance);
 
   return (
     <Sidebar {...props}>
@@ -38,15 +47,36 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              {/* <a href="#">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Logo />
                 </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Balance</span>
-                  <span className="">v1.0.0</span>
+                {["user", "agent"].includes(userInfo?.data?.role ?? "") && (
+                  <div className="flex flex-col gap-0.5 leading-none ml-1.5">
+                    <span className="font-bold mb-0.5 text-center">
+                      Balance
+                    </span>
+                    <span className="font-bold mb-0.5 text-rose-500 bg-white rounded-md border px-2 py-1 inline-block">
+                      {userWallet?.myWallet?.balance} Taka
+                    </span>
+                  </div>
+                )}
+              </a> */}
+              <Link to="/" className="flex items-center gap-2 no-underline ">
+                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square w-8 h-8 items-center justify-center rounded-lg">
+                  <Logo />
                 </div>
-              </a>
+                {["user", "agent"].includes(userInfo?.data?.role ?? "") && (
+                  <div className="flex flex-col gap-0.5 leading-none ml-1.5">
+                    <span className="font-bold mb-0.5 text-center">
+                      Balance
+                    </span>
+                    <span className="font-bold mb-0.5 text-rose-500 bg-white rounded-md border px-2 py-1 inline-block">
+                      {userWallet?.myWallet?.balance} Taka
+                    </span>
+                  </div>
+                )}
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

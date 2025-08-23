@@ -9,6 +9,7 @@ export const agentApi = baseApi.injectEndpoints({
         method: "POST",
         data: cashInInfo,
       }),
+      invalidatesTags: ["TRANSACTION"],
     }),
   }),
 });
