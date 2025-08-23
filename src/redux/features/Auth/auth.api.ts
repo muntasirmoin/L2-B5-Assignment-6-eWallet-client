@@ -20,8 +20,19 @@ export const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["USER"],
     }),
 
+    //change pin
+
+    changePin: builder.mutation({
+      query: (data) => ({
+        url: "/auth/change-pin",
+        method: "POST",
+        data,
+      }),
+    }),
+
     //
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation } = authApi;
+export const { useLoginMutation, useLogoutMutation, useChangePinMutation } =
+  authApi;

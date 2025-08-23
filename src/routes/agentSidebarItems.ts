@@ -5,6 +5,7 @@ import MyCommissionTable from "@/pages/Agent/MyCommissionTable";
 import MyTransactionTable from "@/pages/Agent/MyTransactionTable";
 import Overview from "@/pages/Agent/Overview";
 import UpdatePersonalInfo from "@/pages/Agent/UpdatePersonalInfo";
+import ChangePin from "@/pages/ChangePin";
 import type { ISidebarItem } from "@/types";
 
 export const agentSidebarItems: ISidebarItem[] = [
@@ -68,6 +69,11 @@ export const agentSidebarItems: ISidebarItem[] = [
         title: "Update personal Info",
         url: "/agent/update-profile-info",
         component: UpdatePersonalInfo,
+      },
+      {
+        title: "Change Pin",
+        url: "/agent/change-pin",
+        component: ChangePin,
       },
     ],
   },
