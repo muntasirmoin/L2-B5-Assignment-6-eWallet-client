@@ -1,4 +1,10 @@
-type TransactionType = "cash-in" | "cash-out" | "reversal";
+type TransactionType =
+  | "cash-in"
+  | "cash-out"
+  | "reversal"
+  | "send-money"
+  | "withdraw-money"
+  | "add-money";
 type TransactionStatus = "completed" | "pending" | "reversed";
 
 interface Invoice {

@@ -1,4 +1,4 @@
-import Admin from "@/pages/Admin/Admin";
+import UserOverview from "@/pages/User/UserOverview";
 import type { ISidebarItem } from "@/types";
 
 export const userSidebarItems: ISidebarItem[] = [
@@ -6,9 +6,9 @@ export const userSidebarItems: ISidebarItem[] = [
     title: "Dashboard",
     items: [
       {
-        title: "Admin",
-        url: "/admin/admin",
-        component: Admin,
+        title: "Overview",
+        url: "/user/user-overview",
+        component: UserOverview,
       },
     ],
   },

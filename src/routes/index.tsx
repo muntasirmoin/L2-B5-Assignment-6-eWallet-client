@@ -8,6 +8,7 @@ import { withAuth } from "@/utils/withAuth";
 import { createBrowserRouter, Navigate } from "react-router";
 import { agentSidebarItems } from "./agentSidebarItems";
 import { generateRoutes } from "@/utils/generateRoutes";
+import { userSidebarItems } from "./userSidebarItems";
 export const router = createBrowserRouter([
   {
     Component: App,
@@ -21,12 +22,24 @@ export const router = createBrowserRouter([
     Component: Register,
     path: "/register",
   },
+
+  // agent dashboard
   {
     Component: withAuth(DashboardLayout, role.AGENT as TRole),
     path: "/agent",
     children: [
       { index: true, element: <Navigate to="/agent/overview" /> },
       ...generateRoutes(agentSidebarItems),
+    ],
+  },
+
+  // user dashboard
+  {
+    Component: withAuth(DashboardLayout, role.USER as TRole),
+    path: "/user",
+    children: [
+      { index: true, element: <Navigate to="/user/user-overview" /> },
+      ...generateRoutes(userSidebarItems),
     ],
   },
 ]);

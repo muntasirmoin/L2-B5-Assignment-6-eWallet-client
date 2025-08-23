@@ -3,7 +3,14 @@ export type ITransaction = {
   amount: number;
   commission?: number;
   fee?: number;
-  type: "cash-in" | "cash-out" | "reversal";
+  type:
+    | "cash-in"
+    | "cash-out"
+    | "reversal"
+    | "send-money"
+    | "withdraw-money"
+    | "add-money";
+
   status: "completed" | "pending" | "reversed";
 
   sender?: {
@@ -27,4 +34,5 @@ export type ITransaction = {
 
   createdAt: string;
   updatedAt: string;
+  source: string;
 };
