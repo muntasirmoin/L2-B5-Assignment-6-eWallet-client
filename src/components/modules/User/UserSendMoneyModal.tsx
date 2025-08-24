@@ -18,15 +18,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useCashInMutation } from "@/redux/features/Agent/agent.api";
-import { useLazyUserByPhoneNumberQuery } from "@/redux/features/User/user.api";
+import {
+  useLazyUserByPhoneNumberQuery,
+  useSendMoneyMutation,
+} from "@/redux/features/User/user.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const cashInZodSchema = z.object({
+const sendMoneyZodSchema = z.object({
   amount: z.preprocess(
     (val) => (val !== "" ? Number(val) : undefined),
     z
@@ -41,13 +43,13 @@ const cashInZodSchema = z.object({
   }),
 });
 
-type CashInInput = z.infer<typeof cashInZodSchema>;
+type SendMoneyInput = z.infer<typeof sendMoneyZodSchema>;
 
-export function AddMoneyModal() {
+export function UserSendMoneyModal() {
   const [open, setOpen] = useState(false);
-  const form = useForm<CashInInput>({
+  const form = useForm<SendMoneyInput>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    resolver: zodResolver(cashInZodSchema) as any,
+    resolver: zodResolver(sendMoneyZodSchema) as any,
     mode: "onChange",
     defaultValues: {
       phone: "",
@@ -56,7 +58,7 @@ export function AddMoneyModal() {
   });
 
   const [fetchUserByPhone] = useLazyUserByPhoneNumberQuery();
-  const [cashIn] = useCashInMutation();
+  const [sendMoney] = useSendMoneyMutation();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
@@ -65,23 +67,23 @@ export function AddMoneyModal() {
     try {
       const userResponse = await fetchUserByPhone(data.phone).unwrap();
 
-      const userId = userResponse?.data?.userId;
+      const receiverUserId = userResponse?.data?.userId;
 
-      if (!userId) {
+      if (!receiverUserId) {
         toast.error(
           "User not found. Please enter a Register User phone number."
         );
         return;
       }
 
-      const res = await cashIn({
+      const res = await sendMoney({
         // userId: data.phone,
-        userId,
+        receiverUserId,
         amount: data.amount,
       }).unwrap();
 
       if (res.success) {
-        toast.success(`Cash In Done: ${data.amount} tk`);
+        toast.success(`Send Money Done: ${data.amount} tk`);
 
         form.reset(); //  Reset form
         setOpen(false); //  Close modal
@@ -91,7 +93,7 @@ export function AddMoneyModal() {
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      console.error("error cash in", err);
+      console.error("error send money", err);
 
       const errorSources = err?.data?.errorSources || [];
       const errorMessageFromSource = errorSources[0]?.message;
@@ -100,6 +102,10 @@ export function AddMoneyModal() {
 
       if (errorMessageFromSource === "Amount must be a number.") {
         toast.error("Amount must be a number.");
+      } else if (
+        errorMessageFromSource === "Amount must be greater than zero."
+      ) {
+        toast.error("Amount must be greater than equal zero.");
       } else if (message?.includes("Insufficient balance")) {
         toast.error(message);
       } else if (message === "Same agent & cash-in receiver.") {
@@ -121,21 +127,21 @@ export function AddMoneyModal() {
       <form>
         <DialogTrigger asChild>
           <Button className="cursor-pointer font-bold  hover:bg-green-600 hover:text-white transition-colors duration-200">
-            Cash In
+            Send Money
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Cash In</DialogTitle>
+            <DialogTitle>Send Money</DialogTitle>
           </DialogHeader>
           <Form {...form}>
-            <form id="cash-in" onSubmit={form.handleSubmit(onSubmit)}>
+            <form id="send-money" onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel>Phone Number (Receiver) </FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Phone Number"
@@ -175,7 +181,7 @@ export function AddMoneyModal() {
             </DialogClose>
             <Button
               type="submit"
-              form="cash-in"
+              form="send-money"
               className="cursor-pointer font-bold  hover:bg-green-600 hover:text-white transition-colors duration-200"
             >
               Confirm

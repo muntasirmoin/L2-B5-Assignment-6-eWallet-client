@@ -67,6 +67,18 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["TRANSACTION", "USER"],
     }),
+
+    // send money
+    // cash in
+    sendMoney: builder.mutation({
+      query: (cashInInfo) => ({
+        url: "/wallet/send-money",
+        method: "POST",
+        data: cashInInfo,
+      }),
+      invalidatesTags: ["TRANSACTION"],
+    }),
+    //
   }),
 });
 
@@ -79,4 +91,5 @@ export const {
   useAddMoneyMutation,
   useCompleteTransactionMutation,
   useWithdrawMoneyMutation,
+  useSendMoneyMutation,
 } = userApi;

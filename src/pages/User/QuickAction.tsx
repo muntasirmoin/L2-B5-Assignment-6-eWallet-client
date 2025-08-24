@@ -28,7 +28,7 @@ export function QuickAction() {
 
         <div className="w-full flex flex-col md:flex-row items-center justify-around gap-4 pb-4 mb-2">
           {/* Send Money */}
-          <Link to="/dashboard/send-money">
+          <Link to="/user/user-send-money">
             <Button
               variant="outline"
               className="w-full sm:w-[150px] md:w-[200px] border border-red-500 bg-gradient-to-r from-red-100 to-red-200 text-red-700 dark:from-red-900 dark:to-red-800 dark:text-red-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer"
@@ -39,7 +39,7 @@ export function QuickAction() {
           </Link>
 
           {/* Add Money */}
-          <Link to="/dashboard/add-money">
+          <Link to="/user/user-add-money">
             <Button className="w-full sm:w-[150px] md:w-[200px] bg-gradient-to-r from-green-400 to-emerald-500 text-white font-semibold border border-green-600 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer">
               <Wallet className="mr-2 h-5 w-5" />
               Add Money
@@ -47,7 +47,7 @@ export function QuickAction() {
           </Link>
 
           {/* Withdraw Money */}
-          <Link to="/dashboard/withdraw-money">
+          <Link to="/user/user-withdraw-money">
             <Button
               variant="outline"
               className="w-full sm:w-[150px] md:w-[200px] border border-yellow-500 bg-gradient-to-r from-yellow-100 to-yellow-200 text-yellow-700 dark:from-yellow-900 dark:to-yellow-800 dark:text-yellow-200 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 cursor-pointer"

@@ -68,7 +68,9 @@ export function CashOutModal() {
       const userId = userResponse?.data?.userId;
 
       if (!userId) {
-        toast.error("User not found. Please enter a valid phone number.");
+        toast.error(
+          "User not found. Please enter a Register User phone number."
+        );
         return;
       }
 
@@ -118,7 +120,9 @@ export function CashOutModal() {
     <Dialog open={open} onOpenChange={setOpen}>
       <form>
         <DialogTrigger asChild>
-          <Button className="cursor-pointer font-bold">Cash Out</Button>
+          <Button className="cursor-pointer font-bold  hover:bg-green-600 hover:text-white transition-colors duration-200">
+            Cash Out
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -169,7 +173,11 @@ export function CashOutModal() {
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit" form="cash-out">
+            <Button
+              type="submit"
+              form="cash-out"
+              className="cursor-pointer font-bold  hover:bg-green-600 hover:text-white transition-colors duration-200"
+            >
               Confirm
             </Button>
           </DialogFooter>
