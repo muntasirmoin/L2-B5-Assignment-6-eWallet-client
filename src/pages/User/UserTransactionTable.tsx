@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import PaginationComponent from "@/components/pagination";
 
-const MyTransactionTable = () => {
+const UserTransactionTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
@@ -206,4 +206,4 @@ const MyTransactionTable = () => {
   );
 };
 
-export default MyTransactionTable;
+export default UserTransactionTable;
