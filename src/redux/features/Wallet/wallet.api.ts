@@ -18,6 +18,8 @@ export const walletApi = baseApi.injectEndpoints({
       providesTags: ["WALLET", "TRANSACTION"],
     }),
 
+    //block/unblock
+
     //
   }),
 });

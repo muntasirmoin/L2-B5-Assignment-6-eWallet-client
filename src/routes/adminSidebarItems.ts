@@ -1,14 +1,33 @@
-import Admin from "@/pages/Admin/Admin";
+import { ManageUserTable } from "@/pages/Admin/MangeUserTable";
+import UpdatePersonalInfo from "@/pages/Agent/UpdatePersonalInfo";
+import ChangePin from "@/pages/ChangePin";
 import type { ISidebarItem } from "@/types";
 
 export const adminSidebarItems: ISidebarItem[] = [
   {
-    title: "Dashboard",
+    title: "Profile Management",
     items: [
       {
-        title: "Admin",
-        url: "/admin/admin",
-        component: Admin,
+        title: "Update personal Info",
+        url: "/admin/update-profile-info",
+        component: UpdatePersonalInfo,
+      },
+      {
+        title: "Change Pin",
+        url: "/admin/change-pin",
+        component: ChangePin,
+      },
+    ],
+  },
+
+  // manage user
+  {
+    title: "Mange Users",
+    items: [
+      {
+        title: "Block/Unblock",
+        url: "/admin/block-unblock",
+        component: ManageUserTable,
       },
     ],
   },

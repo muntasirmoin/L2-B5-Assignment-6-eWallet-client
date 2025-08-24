@@ -146,8 +146,8 @@ export default function Navbar() {
                 {/* logout */}
                 <Button
                   onClick={handleLogout}
-                  variant="outline"
-                  className="text-sm"
+                  // variant="outline"
+                  className="text-sm cursor-pointer"
                 >
                   Logout
                 </Button>

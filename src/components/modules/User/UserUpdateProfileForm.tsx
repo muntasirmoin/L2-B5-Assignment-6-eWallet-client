@@ -26,11 +26,15 @@ import {
 
 // <-- Import your user info query hook here
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
-
+import { useNavigate } from "react-router";
+import { useLogoutMutation } from "@/redux/features/Auth/auth.api";
 export function UserUpdateProfileForm() {
   // Fetch the user info from API
   const { data: userInfo, isLoading } = useUserInfoQuery(undefined);
   const user = userInfo?.data;
+
+  const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
 
   // Initialize form with empty strings
   const form = useForm<UpdateUserInput>({
@@ -59,6 +63,7 @@ export function UserUpdateProfileForm() {
   const [updateProfile] = useUpdateProfileMutation();
 
   const onSubmit: SubmitHandler<UpdateUserInput> = async (data) => {
+    let shouldLogout: boolean = false;
     try {
       const userResponse = await fetchUserByPhone(data.phone).unwrap();
       const userPhone = userResponse?.data?.phone;
@@ -100,6 +105,9 @@ export function UserUpdateProfileForm() {
       );
       return;
     }
+    if (user?.phone && data.phone !== user.phone) {
+      shouldLogout = true;
+    }
 
     try {
       const res = await updateProfile(data).unwrap();
@@ -107,6 +115,13 @@ export function UserUpdateProfileForm() {
       if (res.success) {
         toast.success("Profile updated successfully.");
       }
+
+      if (shouldLogout) {
+        await logout(undefined).unwrap();
+        toast.info("You've been logged out due to phone number change.");
+        navigate("/login"); // ✅ use navigate instead of router.push
+      }
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       const errorSources = err?.data?.errorSources || [];

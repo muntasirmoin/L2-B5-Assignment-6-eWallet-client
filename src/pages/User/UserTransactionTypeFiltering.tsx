@@ -27,6 +27,8 @@ export const TransactionType = {
   Add: "add-money",
   Withdraw: "withdraw-money",
   SendMoney: "send-money",
+  CashIn: "cash-in",
+  CashOut: "cash-out",
 } as const;
 
 export type TransactionTypeKey = keyof typeof TransactionType;
@@ -93,19 +95,8 @@ const UserTransactionTypeFiltering = () => {
         </h2>
       </div>
 
-      {/* Search and Filter */}
+      {/*  Filter */}
       <div className="mt-4 sm:mt-6 mb-4 flex flex-col sm:flex-row justify-center items-center gap-4 px-4">
-        {/* <input
-          type="text"
-          placeholder="Search by status, type, or by exact amount/TRX No"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="border rounded p-2 w-full max-w-md"
-        /> */}
-
         <select
           value={typeFilter}
           onChange={(e) => {
@@ -119,9 +110,11 @@ const UserTransactionTypeFiltering = () => {
 
           <option value={TransactionType.Add}>Add Money</option>
           <option value={TransactionType.SendMoney}>Send Money</option>
+          <option value={TransactionType.CashIn}>Cash In</option>
+          <option value={TransactionType.CashOut}>Cash Out</option>
         </select>
       </div>
-
+      {/* Filter end */}
       {/* Table or No Result */}
       {transactions.length === 0 ? (
         <p className="text-center text-sm text-muted-foreground py-6">
@@ -168,13 +161,25 @@ const UserTransactionTypeFiltering = () => {
                   }`}
                 >
                   <TableCell className="text-center font-bold">
+                    {/* {invoice.type === "send-money"
+                      ? invoice.receiver?.name
+                      : `You`} */}
                     {invoice.type === "send-money"
                       ? invoice.receiver?.name
-                      : `You`}
+                      : invoice.type === "cash-in" ||
+                        invoice.type === "cash-out"
+                      ? invoice.createdBy?.name
+                      : "You"}
                   </TableCell>
                   <TableCell className="text-center font-semibold">
+                    {/* {invoice.type === "send-money"
+                      ? invoice.receiver?.phone
+                      : invoice.source} */}
                     {invoice.type === "send-money"
                       ? invoice.receiver?.phone
+                      : invoice.type === "cash-in" ||
+                        invoice.type === "cash-out"
+                      ? invoice.createdBy?.phone
                       : invoice.source}
                   </TableCell>
                   <TableCell className="text-center font-semibold uppercase">

@@ -9,6 +9,7 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { agentSidebarItems } from "./agentSidebarItems";
 import { generateRoutes } from "@/utils/generateRoutes";
 import { userSidebarItems } from "./userSidebarItems";
+import { adminSidebarItems } from "./adminSidebarItems";
 export const router = createBrowserRouter([
   {
     Component: App,
@@ -40,6 +41,16 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="/user/user-overview" /> },
       ...generateRoutes(userSidebarItems),
+    ],
+  },
+
+  // admin dashboard
+  {
+    Component: withAuth(DashboardLayout, role.ADMIN as TRole),
+    path: "/admin",
+    children: [
+      { index: true, element: <Navigate to="/admin/update-profile-info" /> },
+      ...generateRoutes(adminSidebarItems),
     ],
   },
 ]);

@@ -104,13 +104,25 @@ const UserCompleteTransactionTable = () => {
                     }`}
                   >
                     <TableCell className="text-center font-bold">
+                      {/* {invoice.type === "send-money"
+                        ? invoice.receiver?.name
+                        : `You`} */}
                       {invoice.type === "send-money"
                         ? invoice.receiver?.name
-                        : `You`}
+                        : invoice.type === "cash-in" ||
+                          invoice.type === "cash-out"
+                        ? invoice.createdBy?.name
+                        : "You"}
                     </TableCell>
                     <TableCell className="text-center font-semibold">
+                      {/* {invoice.type === "send-money"
+                        ? invoice.receiver?.phone
+                        : invoice.source} */}
                       {invoice.type === "send-money"
                         ? invoice.receiver?.phone
+                        : invoice.type === "cash-in" ||
+                          invoice.type === "cash-out"
+                        ? invoice.createdBy?.phone
                         : invoice.source}
                     </TableCell>
                     <TableCell className="text-center font-semibold uppercase">

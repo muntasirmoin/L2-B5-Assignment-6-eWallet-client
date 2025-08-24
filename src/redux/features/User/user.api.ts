@@ -78,6 +78,35 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["TRANSACTION"],
     }),
+    //get all users by admin
+    allUserInfo: builder.query({
+      query: (params) => ({
+        url: "/user/get-all-user",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["USER"],
+    }),
+
+    //block/unblock user
+    blockUser: builder.mutation({
+      query: (userId) => ({
+        url: `/user/${userId}`,
+        method: "PATCH",
+        data: { isBlocked: true }, // blocking
+      }),
+      invalidatesTags: ["USER"],
+    }),
+
+    unblockUser: builder.mutation({
+      query: (userId) => ({
+        url: `/user/${userId}`,
+        method: "PATCH",
+        data: { isBlocked: false }, // unblocking
+      }),
+      invalidatesTags: ["USER"],
+    }),
+
     //
   }),
 });
@@ -92,4 +121,7 @@ export const {
   useCompleteTransactionMutation,
   useWithdrawMoneyMutation,
   useSendMoneyMutation,
+  useAllUserInfoQuery,
+  useBlockUserMutation,
+  useUnblockUserMutation,
 } = userApi;
