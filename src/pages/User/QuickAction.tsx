@@ -1,13 +1,29 @@
 import { Button } from "@/components/ui/button";
+import { useMyWalletQuery } from "@/redux/features/Wallet/wallet.api";
 import { ArrowDown, ArrowUpRight, Wallet } from "lucide-react";
 import { Link } from "react-router";
 
 export function QuickAction() {
+  const { data: userWallet, error, isLoading } = useMyWalletQuery();
+
+  if (isLoading)
+    return (
+      <div className="flex flex-col gap-1 leading-none ml-1.5 animate-pulse">
+        <span className="h-4 w-16 bg-gray-300 rounded-md mb-1"></span>
+        <span className="h-6 w-24 bg-gray-300 rounded-md"></span>
+      </div>
+    );
+  if (error) return <p>Error fetching wallet data</p>;
+  // console.log("balance", userWallet?.myWallet?.balance);
+
   return (
     <>
       <div className="px-4 md:px-0 border border-green-300 dark:border-green-700 rounded-2xl bg-gradient-to-r from-green-50 to-lime-100 dark:from-green-900 dark:to-lime-900 transition-all duration-300 ">
         <h2 className="mt-2 text-2xl font-semibold mb-6 text-center text-green-800 dark:text-green-300 tracking-tight">
-          💰 Add Balance
+          Wallet Balance :{" "}
+          <span className="font-bold mb-0.5 text-rose-500 bg-white rounded-md border px-2 py-1 inline-block">
+            {userWallet?.myWallet?.balance} Taka
+          </span>
         </h2>
 
         <div className="w-full flex flex-col md:flex-row items-center justify-around gap-4 pb-4 mb-2">

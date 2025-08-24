@@ -37,7 +37,24 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["USER"], // Optional: triggers cache invalidation
     }),
-    //
+    //user add-money
+    addMoney: builder.mutation({
+      query: (addMoneyInfo) => ({
+        url: "/wallet/add-money",
+        method: "POST",
+        data: addMoneyInfo,
+      }),
+      invalidatesTags: ["TRANSACTION"],
+    }),
+
+    //transaction complete
+    completeTransaction: builder.mutation({
+      query: (transactionId: string) => ({
+        url: `/transaction/complete/${transactionId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["TRANSACTION", "USER"],
+    }),
   }),
 });
 
@@ -47,4 +64,6 @@ export const {
   useUserByPhoneNumberQuery,
   useLazyUserByPhoneNumberQuery,
   useUpdateProfileMutation,
+  useAddMoneyMutation,
+  useCompleteTransactionMutation,
 } = userApi;
