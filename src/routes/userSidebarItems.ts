@@ -1,5 +1,7 @@
+import ChangePin from "@/pages/ChangePin";
 import UserAddMoney from "@/pages/User/UserAddMoney";
 import UserOverview from "@/pages/User/UserOverview";
+import UserProfileUpdate from "@/pages/User/UserProfileUpdate";
 import UserSendMoney from "@/pages/User/UserSendMoney";
 import UserTransactionTable from "@/pages/User/UserTransactionTable";
 import UserTransactionTypeFiltering from "@/pages/User/UserTransactionTypeFiltering";
@@ -67,6 +69,22 @@ export const userSidebarItems: ISidebarItem[] = [
         title: "Type Filtering Transactions",
         url: "/user/user-type-filtering-transaction",
         component: UserTransactionTypeFiltering,
+      },
+    ],
+  },
+
+  {
+    title: "Profile Management",
+    items: [
+      {
+        title: "Update personal Info",
+        url: "/user/update-profile-info",
+        component: UserProfileUpdate,
+      },
+      {
+        title: "Change Pin",
+        url: "/user/change-pin",
+        component: ChangePin,
       },
     ],
   },

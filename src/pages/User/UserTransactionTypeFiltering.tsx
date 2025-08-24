@@ -134,61 +134,71 @@ const UserTransactionTypeFiltering = () => {
           <Table>
             <TableHeader>
               <TableRow className="text-center bg-gray-100 dark:bg-gray-800 font-semibold text-gray-700 dark:text-gray-300">
-                <TableHead>Name</TableHead>
-                <TableHead>Phone</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>TRX No</TableHead>
-                <TableHead>TRX Date</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Amount</TableHead>
+                <TableHead className="py-3 px-2 text-center font-bold">
+                  Name
+                </TableHead>
+                <TableHead className="py-3 px-2 text-center font-bold">
+                  Phone/Source
+                </TableHead>
+                <TableHead className="py-3 px-2 text-center font-bold">
+                  Status
+                </TableHead>
+                <TableHead className="py-3 px-2 text-center font-bold">
+                  TRX No
+                </TableHead>
+                <TableHead className="py-3 px-2 text-center font-bold">
+                  TRX Date
+                </TableHead>
+                <TableHead className="py-3 px-2 text-center font-bold">
+                  Type
+                </TableHead>
+                <TableHead className="py-3 px-2 text-center font-bold">
+                  Amount
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {transactions.map((trx) => (
+              {transactions.map((invoice) => (
                 <TableRow
-                  key={trx._id}
+                  key={invoice._id}
                   className={`text-center ${
-                    trx.type === "cash-in"
+                    invoice.type === "add-money"
                       ? "bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-300"
-                      : trx.type === "cash-out"
-                      ? "bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-300"
-                      : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+                      : "bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-300"
                   }`}
                 >
-                  <TableCell>
-                    {trx.type === "cash-out"
-                      ? trx.sender?.name
-                      : trx.type === "cash-in"
-                      ? trx.receiver?.name
-                      : trx.createdBy?.name}
+                  <TableCell className="text-center font-bold">
+                    {invoice.type === "send-money"
+                      ? invoice.receiver?.name
+                      : `You`}
                   </TableCell>
-                  <TableCell>
-                    {trx.type === "cash-out"
-                      ? trx.sender?.phone
-                      : trx.type === "cash-in"
-                      ? trx.receiver?.phone
-                      : trx.createdBy?.phone}
+                  <TableCell className="text-center font-semibold">
+                    {invoice.type === "send-money"
+                      ? invoice.receiver?.phone
+                      : invoice.source}
                   </TableCell>
-                  <TableCell className="uppercase">{trx.status}</TableCell>
-                  <TableCell>{trx._id}</TableCell>
-                  <TableCell>
-                    {new Date(trx.createdAt)
-                      .toLocaleString("en-GB", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "2-digit",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        second: "2-digit",
-                        hour12: false,
-                      })
-                      .replace(",", "")
-                      .replace(/\//g, "-")
-                      .replace(" ", " (") + ")"}
+                  <TableCell className="text-center font-semibold uppercase">
+                    {invoice.status}
                   </TableCell>
-                  <TableCell className="uppercase">{trx.type}</TableCell>
-                  <TableCell className="font-extrabold">
-                    {trx.amount.toLocaleString()}
+                  <TableCell className="text-center font-semibold">
+                    {invoice._id}
+                  </TableCell>
+                  <TableCell className="text-center font-semibold">
+                    {new Date(invoice.createdAt).toLocaleString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                      hour12: false,
+                    })}
+                  </TableCell>
+                  <TableCell className="text-center font-semibold uppercase">
+                    {invoice.type}
+                  </TableCell>
+                  <TableCell className="text-center font-extrabold">
+                    {invoice.amount.toLocaleString()}
                   </TableCell>
                 </TableRow>
               ))}

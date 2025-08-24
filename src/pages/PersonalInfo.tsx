@@ -39,12 +39,22 @@ const PersonalInfo = () => {
                 {user?.role}
               </p>
             </div>
-            <div>
-              <span className="font-bold">🛡️ Agent Approved:</span>
-              <p className="font-semibold text-emerald-700 dark:text-emerald-300">
-                {user?.isAgentApproved ? "✅ Yes" : "❌ No"}
-              </p>
-            </div>
+            {user?.role === "agent" ? (
+              <div>
+                <span className="font-bold">🛡️ Agent Approved:</span>
+                <p className="font-semibold text-emerald-700 dark:text-emerald-300">
+                  {user?.isAgentApproved ? "✅ Yes" : "❌ No"}
+                </p>
+              </div>
+            ) : (
+              <div>
+                <span className="font-bold">🚫 Blocked:</span>
+                <p className="font-semibold text-red-700 dark:text-red-300">
+                  {user?.isBlocked ? "❌ Yes" : "✅ No"}
+                </p>
+              </div>
+            )}
+
             <div>
               <span className="font-bold">📍 Address:</span>
               <p className="font-semibold text-emerald-700 dark:text-emerald-300">

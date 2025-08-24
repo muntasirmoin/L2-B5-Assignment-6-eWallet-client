@@ -16,6 +16,14 @@ export const updateUserZodSchema = z.object({
     .max(100, "Address cannot exceed 100 characters.")
     .optional(),
 
+  phone: z
+    .string()
+    .regex(/^(01)[3-9]\d{8}$/, {
+      message:
+        "Phone number must be a valid number (11 digits, starting with 01 followed by 3-9).",
+    })
+    .optional(),
+
   // picture: z.string().url("Must be a valid URL.").optional(),
 });
 

@@ -162,7 +162,7 @@ export function ChangePinForm({
 
             <Button
               type="submit"
-              className="w-full"
+              className="w-full cursor-pointer font-bold  hover:bg-green-600 hover:text-white transition-colors duration-200"
               disabled={!form.formState.isValid}
             >
               {isLoading ? "Changing..." : "Change PIN"}

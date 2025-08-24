@@ -106,14 +106,13 @@ const UserTransactionTable = () => {
         ) : (
           <>
             <Table>
-              {/* <TableCaption>Recent Cash-In and Cash-Out Transactions</TableCaption> */}
               <TableHeader>
                 <TableRow className="text-center bg-gray-100 dark:bg-gray-800 font-semibold text-gray-700 dark:text-gray-300">
                   <TableHead className="py-3 px-2 text-center font-bold">
                     Name
                   </TableHead>
                   <TableHead className="py-3 px-2 text-center font-bold">
-                    Phone
+                    Phone/Source
                   </TableHead>
                   <TableHead className="py-3 px-2 text-center font-bold">
                     Status
@@ -137,26 +136,20 @@ const UserTransactionTable = () => {
                   <TableRow
                     key={invoice._id}
                     className={`text-center ${
-                      invoice.type === "cash-in"
+                      invoice.type === "add-money"
                         ? "bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-300"
-                        : invoice.type === "cash-out"
-                        ? "bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-300"
-                        : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+                        : "bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-300"
                     }`}
                   >
                     <TableCell className="text-center font-bold">
-                      {invoice.type === "cash-out"
-                        ? invoice.sender?.name
-                        : invoice.type === "cash-in"
+                      {invoice.type === "send-money"
                         ? invoice.receiver?.name
-                        : invoice.createdBy?.name}
+                        : `You`}
                     </TableCell>
                     <TableCell className="text-center font-semibold">
-                      {invoice.type === "cash-out"
-                        ? invoice.sender?.phone
-                        : invoice.type === "cash-in"
+                      {invoice.type === "send-money"
                         ? invoice.receiver?.phone
-                        : invoice.createdBy?.phone}
+                        : invoice.source}
                     </TableCell>
                     <TableCell className="text-center font-semibold uppercase">
                       {invoice.status}
@@ -165,19 +158,15 @@ const UserTransactionTable = () => {
                       {invoice._id}
                     </TableCell>
                     <TableCell className="text-center font-semibold">
-                      {new Date(invoice.createdAt)
-                        .toLocaleString("en-GB", {
-                          day: "2-digit",
-                          month: "2-digit",
-                          year: "2-digit",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                          second: "2-digit",
-                          hour12: false,
-                        })
-                        .replace(",", "")
-                        .replace(/\//g, "-")
-                        .replace(" ", " (") + ")"}
+                      {new Date(invoice.createdAt).toLocaleString("en-GB", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: false,
+                      })}
                     </TableCell>
                     <TableCell className="text-center font-semibold uppercase">
                       {invoice.type}

@@ -19,12 +19,15 @@ import {
   updateUserZodSchema,
   type UpdateUserInput,
 } from "../Schema/updateUserSchema";
-import { useUpdateProfileMutation } from "@/redux/features/User/user.api";
+import {
+  useLazyUserByPhoneNumberQuery,
+  useUpdateProfileMutation,
+} from "@/redux/features/User/user.api";
 
 // <-- Import your user info query hook here
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
 
-export function UpdateProfileForm() {
+export function UserUpdateProfileForm() {
   // Fetch the user info from API
   const { data: userInfo, isLoading } = useUserInfoQuery(undefined);
   const user = userInfo?.data;
@@ -36,6 +39,7 @@ export function UpdateProfileForm() {
       name: "",
       email: "",
       address: "",
+      phone: "",
     },
     mode: "onChange",
   });
@@ -47,17 +51,53 @@ export function UpdateProfileForm() {
         name: user.name || "",
         email: user.email || "",
         address: user.address || "",
+        phone: user.phone || "",
       });
     }
   }, [user, form]);
-
+  const [fetchUserByPhone] = useLazyUserByPhoneNumberQuery();
   const [updateProfile] = useUpdateProfileMutation();
 
   const onSubmit: SubmitHandler<UpdateUserInput> = async (data) => {
+    try {
+      const userResponse = await fetchUserByPhone(data.phone).unwrap();
+      const userPhone = userResponse?.data?.phone;
+      const userMessage = userResponse?.message;
+
+      if (userPhone) {
+        //Phone is already registered
+        toast.error(
+          "Already registered with this phone number. Try with another."
+        );
+        return;
+      }
+
+      if (userMessage === "With This Phone Number user not found") {
+        console.log("Phone not found in database. Proceeding with update.");
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      const errorMessage = err?.data?.message;
+
+      if (errorMessage === "With This Phone Number user not found") {
+        console.log("Phone not found (via catch). Proceeding with update.");
+      } else {
+        toast.error("Something went wrong while checking the phone.");
+        console.error(err);
+        return;
+      }
+    }
+
     console.log("Submitting data:", data, "email:", user?.email);
 
     if (user?.email && data.email === "") {
       toast.error("Email cannot be removed. Please provide a valid email.");
+      return;
+    }
+    if (user?.phone && data.phone === "") {
+      toast.error(
+        "Phone number cannot be removed. Please provide a valid number."
+      );
       return;
     }
 
@@ -114,6 +154,26 @@ export function UpdateProfileForm() {
             )}
           />
 
+          {/* Phone */}
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="01XXXXXXXXX"
+                    maxLength={11}
+                    {...field}
+                    value={field.value || ""}
+                    className="border border-emerald-500"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="email"
