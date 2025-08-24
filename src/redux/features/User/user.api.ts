@@ -47,6 +47,18 @@ export const userApi = baseApi.injectEndpoints({
       invalidatesTags: ["TRANSACTION"],
     }),
 
+    // withdraw money
+    withdrawMoney: builder.mutation({
+      query: (withdrawMoneyInfo) => ({
+        url: "/wallet/withdraw",
+        method: "POST",
+        data: withdrawMoneyInfo,
+      }),
+      invalidatesTags: ["TRANSACTION"],
+    }),
+
+    //
+
     //transaction complete
     completeTransaction: builder.mutation({
       query: (transactionId: string) => ({
@@ -66,4 +78,5 @@ export const {
   useUpdateProfileMutation,
   useAddMoneyMutation,
   useCompleteTransactionMutation,
+  useWithdrawMoneyMutation,
 } = userApi;

@@ -114,7 +114,7 @@ export function UserAddMoneyModal() {
       if (errorMessageFromSource === "Amount must be greater than zero") {
         toast.error("Amount must be greater than equal zero");
       } else if (message) {
-        toast.error("Something went wrong:", message);
+        toast.error(`Something went wrong:${message}`);
       } else {
         toast.error("Something went wrong.");
       }

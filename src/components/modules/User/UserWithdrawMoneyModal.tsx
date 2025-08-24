@@ -10,6 +10,14 @@ import {
 } from "@/components/ui/dialog";
 
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import {
   Form,
   FormControl,
   FormField,
@@ -18,13 +26,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAddMoneyMutation } from "@/redux/features/User/user.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { useWithdrawMoneyMutation } from "@/redux/features/User/user.api";
 
+export const TransactionSourceEnum = {
+  Bank: "bank",
+  Card: "card",
+  Bkash: "bkash",
+} as const;
+
+export type TransactionSourceEnum = keyof typeof TransactionSourceEnum;
 const cashInZodSchema = z.object({
   amount: z.preprocess(
     (val) => (val !== "" ? Number(val) : undefined),
@@ -43,28 +58,36 @@ const cashInZodSchema = z.object({
 
 type CashInInput = z.infer<typeof cashInZodSchema>;
 
-export function UserCashInModal() {
+export function UserWithdrawMoneyModal() {
   const [open, setOpen] = useState(false);
   const form = useForm<CashInInput>({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(cashInZodSchema) as any,
     mode: "onChange",
     defaultValues: {
-      source: "bkash",
+      source: "bank",
       amount: 0,
     },
   });
 
+  //
+  const transactionSourceOptions = Object.entries(TransactionSourceEnum).map(
+    ([key, value]) => ({
+      label: key.charAt(0).toUpperCase() + key.slice(1).toLowerCase(), // Format: "Bank"
+      value: value, // e.g., "bank"
+    })
+  );
+
   //   const [addMoney, { isLoading, error, data }] = useAddMoneyMutation();
 
-  const [addMoney] = useAddMoneyMutation();
+  const [withdrawMoney] = useWithdrawMoneyMutation();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     console.log("data", data);
 
     try {
-      const res = await addMoney({
+      const res = await withdrawMoney({
         source: data.source,
         amount: data.amount,
       }).unwrap();
@@ -91,7 +114,7 @@ export function UserCashInModal() {
       if (errorMessageFromSource === "Amount must be greater than zero") {
         toast.error("Amount must be greater than equal zero");
       } else if (message) {
-        toast.error(`Something went wrong:${message}`);
+        toast.error(`${message}`);
       } else {
         toast.error("Something went wrong.");
       }
@@ -103,34 +126,45 @@ export function UserCashInModal() {
       <form>
         <DialogTrigger asChild>
           <Button className="cursor-pointer font-bold  hover:bg-green-600 hover:text-white transition-colors duration-200">
-            Cash In
+            Withdraw Money
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Cash In</DialogTitle>
+            <DialogTitle>Withdraw Money</DialogTitle>
           </DialogHeader>
           <Form {...form}>
-            <form id="cash-in" onSubmit={form.handleSubmit(onSubmit)}>
+            <form id="withdraw-money" onSubmit={form.handleSubmit(onSubmit)}>
+              {/* source */}
               <FormField
                 control={form.control}
-                name="source"
-                render={() => (
-                  <FormItem>
-                    <FormLabel>Agent</FormLabel>
-                    <FormControl>
-                      <Input
-                        value="bkash"
-                        readOnly
-                        disabled
-                        className="font-bold border-2 border-rose-600 bg-blue-100 text-rose-800 rounded-md px-3 py-2"
-                      />
-                    </FormControl>
+                name="source" // or "transactionSource" depending on your form schema
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Transaction Source</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      //   disabled={divisionLoading}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select Source" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {transactionSourceOptions.map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
+              {/* source end*/}
               <FormField
                 control={form.control}
                 name="amount"
@@ -158,7 +192,7 @@ export function UserCashInModal() {
             </DialogClose>
             <Button
               type="submit"
-              form="cash-in"
+              form="withdraw-money"
               className="cursor-pointer font-bold  hover:bg-green-600 hover:text-white transition-colors duration-200"
             >
               Confirm
