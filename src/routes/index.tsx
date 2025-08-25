@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
     Component: withAuth(DashboardLayout, role.ADMIN as TRole),
     path: "/admin",
     children: [
-      { index: true, element: <Navigate to="/admin/update-profile-info" /> },
+      { index: true, element: <Navigate to="/admin/overview" /> },
       ...generateRoutes(adminSidebarItems),
     ],
   },

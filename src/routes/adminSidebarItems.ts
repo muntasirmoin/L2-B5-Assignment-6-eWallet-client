@@ -1,11 +1,24 @@
 import AdminAllTransactionsTable from "@/pages/Admin/AdminAllTransactionsTable";
+import AdminOverView from "@/pages/Admin/AdminOverView";
 import { ManageAgentTable } from "@/pages/Admin/ManageAgentTable";
 import { ManageUserTable } from "@/pages/Admin/MangeUserTable";
+
 import UpdatePersonalInfo from "@/pages/Agent/UpdatePersonalInfo";
 import ChangePin from "@/pages/ChangePin";
 import type { ISidebarItem } from "@/types";
 
 export const adminSidebarItems: ISidebarItem[] = [
+  {
+    title: "Overview",
+    items: [
+      {
+        title: "Summary",
+        url: "/admin/overview",
+        component: AdminOverView,
+      },
+    ],
+  },
+  // profile managment
   {
     title: "Profile Management",
     items: [
