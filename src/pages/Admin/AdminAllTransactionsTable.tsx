@@ -11,6 +11,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import PaginationComponent from "@/components/pagination";
+export const TransactionType = {
+  ALL: "",
+  Add: "add-money",
+  Withdraw: "withdraw-money",
+  SendMoney: "send-money",
+  CashIn: "cash-in",
+  CashOut: "cash-out",
+} as const;
+
+type sortType = "asc" | "desc" | "";
+
+export type TransactionTypeKey = keyof typeof TransactionType;
+export type TransactionTypeValue = (typeof TransactionType)[TransactionTypeKey];
 
 const AdminAllTransactionsTable = () => {
   //   const { data, isLoading, error, refetch } = useAllTransactionsInfoQuery();
@@ -19,6 +32,13 @@ const AdminAllTransactionsTable = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [limit, setLimit] = useState(8);
+  const [typeFilter, setTypeFilter] = useState<TransactionTypeValue>(
+    TransactionType.ALL
+  );
+
+  const actualTypeFilter = typeFilter === "" ? undefined : typeFilter;
+  const [sortOrder, setSortOrder] = useState<sortType>("");
+
   const {
     data: paginatedData,
     isLoading: isPaginatedLoading,
@@ -26,8 +46,15 @@ const AdminAllTransactionsTable = () => {
   } = useAllTransactionsInfoQuery({
     page: currentPage,
     limit,
-    sort: "-updatedAt",
+    // sort: "-updatedAt",
+    sort:
+      sortOrder === "asc"
+        ? "amount"
+        : sortOrder === "desc"
+        ? "-amount"
+        : "-updatedAt",
     searchTerm: search,
+    type: actualTypeFilter,
   });
 
   console.log("paginatedData", paginatedData);
@@ -81,8 +108,54 @@ const AdminAllTransactionsTable = () => {
           </h2>
         </div>
 
+        {/* serach & filter & Sort  */}
+        <div className="mt-4 sm:mt-6 mb-4 flex flex-col sm:flex-row justify-between items-center gap-4 px-4">
+          <input
+            type="text"
+            placeholder="Search by status, type, or by exact amount/TRX No"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="border rounded p-2 w-full sm:w-1/3"
+          />
+
+          <select
+            value={typeFilter}
+            onChange={(e) => {
+              setTypeFilter(e.target.value as TransactionTypeValue);
+              setCurrentPage(1);
+            }}
+            className="border rounded p-2 w-full sm:w-auto"
+          >
+            <option value={TransactionType.ALL}>All Type</option>
+            <option value={TransactionType.Add}>Add Money</option>
+            <option value={TransactionType.CashIn}>Cash In</option>
+            <option value={TransactionType.CashOut}>Cash Out</option>
+            <option value={TransactionType.SendMoney}>Send Money</option>
+            <option value={TransactionType.Withdraw}>Withdraw Money</option>
+          </select>
+
+          {/* Sort Order */}
+          <select
+            value={sortOrder}
+            onChange={(e) => {
+              setSortOrder(e.target.value as "asc" | "desc" | "");
+              setCurrentPage(1);
+            }}
+            className="border rounded p-2 w-full sm:w-auto"
+          >
+            <option value="">Sort by Amount</option>
+            <option value="desc">Amount: High to Low</option>
+            <option value="asc">Amount: Low to High</option>
+          </select>
+        </div>
+
         {/* search */}
-        <div className="mt-4 sm:mt-6 mb-4 flex justify-center px-4">
+
+        {/* search */}
+        {/* <div className="mt-4 sm:mt-6 mb-4 flex justify-center px-4">
           <input
             type="text"
             placeholder="Search by status, type, or by exact amount/TRX No"
@@ -93,7 +166,7 @@ const AdminAllTransactionsTable = () => {
             }}
             className="border rounded p-2 w-full max-w-md"
           />
-        </div>
+        </div> */}
         {/* search end */}
 
         {invoices.length === 0 ? (
