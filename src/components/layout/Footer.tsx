@@ -5,13 +5,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import {
-  FacebookIcon,
-  GithubIcon,
-  InstagramIcon,
-  TwitterIcon,
-  DribbbleIcon,
-} from "lucide-react";
+import { FacebookIcon, GithubIcon, InstagramIcon } from "lucide-react";
 import { Link } from "react-router";
 
 const footerLinks = [
@@ -23,9 +17,8 @@ const footerLinks = [
 const socialLinks = [
   { icon: FacebookIcon, label: "Facebook", href: "#" },
   { icon: InstagramIcon, label: "Instagram", href: "#" },
-  { icon: TwitterIcon, label: "Twitter", href: "#" },
+
   { icon: GithubIcon, label: "GitHub", href: "#" },
-  { icon: DribbbleIcon, label: "Dribbble", href: "#" },
 ];
 
 export default function Footer() {
