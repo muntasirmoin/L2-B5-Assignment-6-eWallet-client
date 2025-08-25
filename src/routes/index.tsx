@@ -12,6 +12,8 @@ import { userSidebarItems } from "./userSidebarItems";
 import { adminSidebarItems } from "./adminSidebarItems";
 import Home from "@/pages/Home/Home";
 import About from "@/pages/About/About";
+import Features from "@/pages/Features/Features";
+import Contact from "@/pages/Contact/Contact";
 export const router = createBrowserRouter([
   {
     Component: App,
@@ -24,6 +26,14 @@ export const router = createBrowserRouter([
       {
         Component: About,
         path: "about",
+      },
+      {
+        Component: Features,
+        path: "features",
+      },
+      {
+        Component: Contact,
+        path: "contact",
       },
     ],
   },
