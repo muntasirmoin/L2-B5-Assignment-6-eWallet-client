@@ -1,3 +1,4 @@
+import AdminAllTransactionsTable from "@/pages/Admin/AdminAllTransactionsTable";
 import { ManageAgentTable } from "@/pages/Admin/ManageAgentTable";
 import { ManageUserTable } from "@/pages/Admin/MangeUserTable";
 import UpdatePersonalInfo from "@/pages/Agent/UpdatePersonalInfo";
@@ -41,6 +42,17 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "Approve/Suspend",
         url: "/admin/approve-suspend",
         component: ManageAgentTable,
+      },
+    ],
+  },
+  // View all transactions
+  {
+    title: "Transactions",
+    items: [
+      {
+        title: "All Transaction",
+        url: "/admin/transaction",
+        component: AdminAllTransactionsTable,
       },
     ],
   },
