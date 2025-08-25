@@ -27,7 +27,7 @@ export function LoginForm({
     //   pin: "Muntasir1!",
     // },
   });
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log("data", data);
     try {
@@ -94,7 +94,7 @@ export function LoginForm({
                   <FormLabel>Account Number</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="01XXXXXXXXX"
+                      // placeholder="01XXXXXXXXX"
                       maxLength={11}
                       {...field}
                       value={field.value || ""}
@@ -132,17 +132,21 @@ export function LoginForm({
 
             <Button
               type="submit"
-              className="w-full cursor-pointer"
-              disabled={!form.formState.isValid}
+              className="w-full cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+              disabled={!form.formState.isValid || isLoading}
             >
-              Login
+              {isLoading ? "Login...." : "Login"}
             </Button>
           </form>
         </Form>
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <Link to="/register" replace className="underline underline-offset-4">
+        <Link
+          to="/register"
+          replace
+          className="underline underline-offset-4 hover:text-rose-500"
+        >
           SignIn
         </Link>
       </div>

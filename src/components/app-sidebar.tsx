@@ -28,7 +28,7 @@ import { useMyWalletQuery } from "@/redux/features/Wallet/wallet.api";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userInfo } = useUserInfoQuery(undefined);
-  console.log("userInfo dashboard", userInfo);
+  // console.log("userInfo dashboard", userInfo);
   const location = useLocation();
   const data = {
     navMain: getSidebarItems(userInfo?.data?.role),

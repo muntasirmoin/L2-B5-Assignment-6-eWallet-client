@@ -28,7 +28,7 @@ const Register = () => {
           </Link>
 
           {/* Form box */}
-          <div className="w-full max-w-md rounded-lg bg-white/90 dark:bg-black/60 p-8 shadow-lg backdrop-blur">
+          <div className="w-full max-w-md rounded-lg bg-white/90 dark:bg-black/60 p-8 mb-5 shadow-lg backdrop-blur">
             <h2 className="mb-2 text-2xl font-bold text-center text-black dark:text-white">
               Sign In
             </h2>

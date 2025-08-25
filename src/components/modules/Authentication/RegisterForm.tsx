@@ -14,13 +14,28 @@ import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useRegisterMutation } from "@/redux/features/User/user.api";
+
+export const RoleEnum = {
+  USER: "user",
+  AGENT: "agent",
+} as const;
+
+export type RoleEnum = keyof typeof RoleEnum;
 
 const createUserZodSchema = z.object({
   name: z
     .string()
     .min(2, { message: "Name must be at least 2 characters long." })
     .max(50, { message: "Name cannot exceed 50 characters." }),
+  role: z.enum(["user", "agent"], "Role Must Be User / Agent"),
 
   phone: z.string().regex(/^(01)[3-9]\d{8}$/, {
     message:
@@ -60,11 +75,17 @@ function RegisterForm({
       pin: "",
       address: "",
       email: "",
+      role: "user",
     },
   });
-  const [register] = useRegisterMutation();
+
+  const roleOptions = Object.entries(RoleEnum).map(([key, value]) => ({
+    label: key.charAt(0).toUpperCase() + key.slice(1).toLowerCase(), // Format: "Bank"
+    value: value, // e.g., "bank"
+  }));
+  const [register, { isLoading }] = useRegisterMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("data", data);
+    console.log(" registration data", data);
     const transformedData = {
       ...data,
       email: data.email?.trim() === "" ? undefined : data.email,
@@ -78,7 +99,11 @@ function RegisterForm({
 
       if (res.success) {
         toast.success("Account Created Successfully");
-        navigate("/login");
+
+        setTimeout(() => {
+          navigate("/login");
+          toast.info("Login Here!");
+        }, 1500);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
@@ -111,7 +136,7 @@ function RegisterForm({
                   <FormLabel>Full Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="John Doe"
+                      // placeholder="John Doe"
                       {...field}
                       value={field.value || ""}
                       className="border border-rose-500"
@@ -131,7 +156,7 @@ function RegisterForm({
                   <FormLabel>Phone Number</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="01XXXXXXXXX"
+                      // placeholder="01XXXXXXXXX"
                       maxLength={11}
                       {...field}
                       value={field.value || ""}
@@ -143,6 +168,37 @@ function RegisterForm({
               )}
             />
 
+            {/* role start */}
+            <FormField
+              control={form.control}
+              name="role"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Select Role</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    //   disabled={divisionLoading}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full border border-rose-500">
+                        <SelectValue placeholder="Select Role" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {roleOptions.map((item) => (
+                        <SelectItem key={item.value} value={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* role end*/}
+
             {/* PIN */}
             <FormField
               control={form.control}
@@ -153,7 +209,7 @@ function RegisterForm({
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="4–5 digit PIN"
+                      // placeholder="4–5 digit PIN"
                       maxLength={5}
                       {...field}
                       value={field.value || ""}
@@ -175,7 +231,7 @@ function RegisterForm({
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="your@email.com"
+                      // placeholder="your@email.com"
                       {...field}
                       value={field.value || ""}
                       className="border border-rose-500"
@@ -195,7 +251,7 @@ function RegisterForm({
                   <FormLabel>Address (Optional)</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Street, City, District"
+                      // placeholder="Street, City, District"
                       maxLength={100}
                       {...field}
                       value={field.value || ""}
@@ -209,17 +265,21 @@ function RegisterForm({
 
             <Button
               type="submit"
-              className="w-full"
-              disabled={!form.formState.isValid}
+              className="w-full cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+              disabled={!form.formState.isValid || isLoading}
             >
-              Sign In
+              {isLoading ? "Registering..." : "Sign In"}
             </Button>
           </form>
         </Form>
       </div>
       <div className="text-center text-sm">
         Have an account?{" "}
-        <Link to="/login" replace className="underline underline-offset-4">
+        <Link
+          to="/login"
+          replace
+          className="underline underline-offset-4 hover:text-rose-500"
+        >
           login
         </Link>
       </div>
