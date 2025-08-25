@@ -3,6 +3,7 @@ import { AdminQuickAction } from "./AdminQuickAction";
 import { useAllAgentInfoQuery } from "@/redux/features/Agent/agent.api";
 import { useAllTransactionsInfoQuery } from "@/redux/features/Transaction/transaction.api";
 import AdminChartArea from "./AdminChartArea";
+import AdminChartPie from "./AdminChartPie";
 
 const AdminOverView = () => {
   const { data: userData } = useAllUserInfoQuery(undefined);
@@ -49,7 +50,7 @@ const AdminOverView = () => {
         {/*  */}
       </div>
       <AdminChartArea />
-      {/* <AdminChartPie /> */}
+      <AdminChartPie />
     </>
   );
 };

@@ -4,6 +4,7 @@ import type { ITransaction } from "@/types/transaction";
 import { getTotalByTypeAndStatus } from "@/utils/getTotalByTypeAndStatus";
 import { Skeleton } from "@/components/ui/skeleton";
 import MyRecentTransactionTable from "./MyRecentTransactionTable";
+import AgentChartBar from "./AgentChartBar";
 
 const Overview = () => {
   // All data
@@ -15,7 +16,7 @@ const Overview = () => {
 
   const allInvoices: ITransaction[] = allData?.data ?? [];
 
-  // console.log("allInvoices", allInvoices);
+  console.log("allInvoices", allInvoices);
   //  all data for totals cash-in-out
   const totalCashInCompleted = getTotalByTypeAndStatus(
     allInvoices,
@@ -76,6 +77,10 @@ const Overview = () => {
           Cash-In and Cash-Out Summary
         </h2>
       </div>
+      {/*  */}
+      <AgentChartBar />
+      {/*  */}
+      {/* summary data start */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
         {/* Completed Cash In */}
         <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
@@ -137,7 +142,7 @@ const Overview = () => {
           </p>
         </div>
       </div>
-
+      {/* summary data end */}
       {/* Table Section */}
       <MyRecentTransactionTable />
     </div>

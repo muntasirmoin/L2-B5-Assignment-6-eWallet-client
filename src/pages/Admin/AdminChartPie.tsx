@@ -1,5 +1,6 @@
 "use client";
 
+import { useAllTransactionsInfoQuery } from "@/redux/features/Transaction/transaction.api";
 import {
   PieChart,
   Pie,
@@ -8,21 +9,67 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+// Adjust import path
+
+type TotalsByType = {
+  [type: string]: number;
+};
+
+const COLORS = [
+  "#9798e8",
+  "#72f1c6",
+  "#f09648e1",
+  "#fcbf49",
+  "#ff6b6b",
+  "#06d6a0",
+];
 
 export default function AdminChartPie() {
-  const chartData = [
-    { name: "Users", value: 20 },
-    { name: "Agents", value: 10 },
-    { name: "Transactions", value: 50 },
-  ];
+  const { data, isLoading, isError } = useAllTransactionsInfoQuery({
+    limit: 1000,
+    // limit: "all",
+  });
 
-  // Define colors for each slice
-  const COLORS = ["#6366f1", "#10b981", "#f59e0b"]; // purple, green, amber
+  const prepareChartData = (): { name: string; value: number }[] => {
+    const totals: TotalsByType = {};
+
+    if (!data?.data) return [];
+    console.log(data);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data.data.forEach((tx: any) => {
+      const { type, amount } = tx;
+      if (!totals[type]) {
+        totals[type] = 0;
+      }
+      totals[type] += amount;
+    });
+
+    return Object.entries(totals).map(([type, value]) => ({
+      name: type.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+      value,
+    }));
+  };
+
+  const chartData = prepareChartData();
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center w-full h-64 md:h-96">
+        <div className="animate-pulse rounded-full bg-gray-300 dark:bg-gray-700 w-48 h-48 md:w-72 md:h-72" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <p className="text-center text-red-500">Error loading chart data.</p>
+    );
+  }
 
   return (
     <div className="px-4 py-6 md:px-8 md:py-8 border border-green-300 dark:border-green-700 rounded-2xl bg-gradient-to-r from-green-50 to-lime-100 dark:from-green-900 dark:to-lime-900 transition-all duration-300 w-full mx-auto">
       <h2 className="text-center text-xl md:text-2xl font-semibold mb-6 md:mb-8">
-        Users, Agents & Transaction Totals
+        Transaction Totals
       </h2>
       <div className="w-full h-64 md:h-96">
         <ResponsiveContainer width="100%" height="100%">

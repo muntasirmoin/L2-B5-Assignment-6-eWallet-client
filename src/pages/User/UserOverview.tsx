@@ -4,6 +4,7 @@ import type { ITransaction } from "@/types/transaction";
 import { getTotalByTypeAndStatus } from "@/utils/getTotalByTypeAndStatus";
 import UserRecentTransactionTable from "./UserRecentTransactionTable";
 import { QuickAction } from "./QuickAction";
+import UserChartBar from "./UserChartBar";
 
 const UserOverview = () => {
   // All data
@@ -103,6 +104,9 @@ const UserOverview = () => {
             Summary OF Send Money & Withdraw Money & Add Money Summary
           </h2>
         </div>
+        {/*  */}
+        <UserChartBar />
+        {/*  */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
           {/* Completed Send Money */}
           <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
