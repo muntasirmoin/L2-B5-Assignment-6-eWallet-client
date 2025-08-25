@@ -11,6 +11,7 @@ import { generateRoutes } from "@/utils/generateRoutes";
 import { userSidebarItems } from "./userSidebarItems";
 import { adminSidebarItems } from "./adminSidebarItems";
 import Home from "@/pages/Home/Home";
+import About from "@/pages/About/About";
 export const router = createBrowserRouter([
   {
     Component: App,
@@ -20,10 +21,10 @@ export const router = createBrowserRouter([
         Component: Home,
         index: true,
       },
-      // {
-      //   Component: About,
-      //   path: "about",
-      // },
+      {
+        Component: About,
+        path: "about",
+      },
     ],
   },
   {

@@ -6,10 +6,11 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { FacebookIcon, GithubIcon, InstagramIcon } from "lucide-react";
-import { Link } from "react-router";
+// import { Link } from "react-router";
+import { HashLink } from "react-router-hash-link";
 
 const footerLinks = [
-  { label: "Terms & Conditions", href: "#" },
+  { label: "Our Team", href: "/about#team" },
   { label: "Privacy Policy", href: "#" },
   { label: "Cookies", href: "#" },
 ];
@@ -32,12 +33,19 @@ export default function Footer() {
               {footerLinks.map((link, idx) => (
                 <NavigationMenuItem key={idx}>
                   <NavigationMenuLink asChild>
-                    <Link
+                    <HashLink
+                      smooth
                       to={link.href}
-                      className="hover:text-primary transition-colors"
+                      className="font-semibold hover:text-primary transition-colors"
                     >
                       {link.label}
-                    </Link>
+                    </HashLink>
+                    {/* <Link
+                      to={link.href}
+                      className="font-semibold hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link> */}
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
