@@ -1,3 +1,4 @@
+import { ManageAgentTable } from "@/pages/Admin/ManageAgentTable";
 import { ManageUserTable } from "@/pages/Admin/MangeUserTable";
 import UpdatePersonalInfo from "@/pages/Agent/UpdatePersonalInfo";
 import ChangePin from "@/pages/ChangePin";
@@ -31,4 +32,18 @@ export const adminSidebarItems: ISidebarItem[] = [
       },
     ],
   },
+  //  Manage agents (approve, suspend)
+
+  {
+    title: "Mange Agents",
+    items: [
+      {
+        title: "Approve/Suspend",
+        url: "/admin/approve-suspend",
+        component: ManageAgentTable,
+      },
+    ],
+  },
+
+  //
 ];
