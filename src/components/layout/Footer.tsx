@@ -30,26 +30,27 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-background px-4 pt-12 pb-6 md:px-6">
+    <footer className="border-t bg-background/80 backdrop-blur-sm shadow-sm px-4 pt-12 pb-6 md:px-6">
       <div className="max-w-screen-xl mx-auto flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
         {/* Policy links */}
-        <NavigationMenu>
-          <NavigationMenuList className="flex flex-col items-center gap-2 text-sm text-muted-foreground sm:flex-row">
-            {footerLinks.map((link, idx) => (
-              <NavigationMenuItem key={idx}>
-                <NavigationMenuLink asChild>
-                  <Link
-                    to={link.href}
-                    className="hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            ))}
-          </NavigationMenuList>
-        </NavigationMenu>
-
+        <div className="w-full flex justify-center md:justify-start">
+          <NavigationMenu>
+            <NavigationMenuList className="flex flex-col items-center gap-2 text-sm text-muted-foreground sm:flex-row">
+              {footerLinks.map((link, idx) => (
+                <NavigationMenuItem key={idx}>
+                  <NavigationMenuLink asChild>
+                    <Link
+                      to={link.href}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
         {/* Social icons */}
         <div className="flex justify-center gap-4">
           {socialLinks.map(({ icon: Icon, label, href }, idx) => (
