@@ -10,15 +10,16 @@ import { agentSidebarItems } from "./agentSidebarItems";
 import { generateRoutes } from "@/utils/generateRoutes";
 import { userSidebarItems } from "./userSidebarItems";
 import { adminSidebarItems } from "./adminSidebarItems";
+import Home from "@/pages/Home/Home";
 export const router = createBrowserRouter([
   {
     Component: App,
     path: "/",
     children: [
-      // {
-      //   Component: Homepage,
-      //   index: true,
-      // },
+      {
+        Component: Home,
+        index: true,
+      },
       // {
       //   Component: About,
       //   path: "about",
