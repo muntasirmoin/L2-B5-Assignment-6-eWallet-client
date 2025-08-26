@@ -164,21 +164,6 @@ const AdminAllTransactionsTable = () => {
 
         {/* search */}
 
-        {/* search */}
-        {/* <div className="mt-4 sm:mt-6 mb-4 flex justify-center px-4">
-          <input
-            type="text"
-            placeholder="Search by status, type, or by exact amount/TRX No"
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setCurrentPage(1);
-            }}
-            className="border rounded p-2 w-full max-w-md"
-          />
-        </div> */}
-        {/* search end */}
-
         {invoices.length === 0 ? (
           <p className="text-center text-sm text-muted-foreground py-6">
             {search

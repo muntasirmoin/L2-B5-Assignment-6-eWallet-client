@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import PaginationComponent from "@/components/pagination";
+import ErrorLoading from "@/utils/ErrorLoading";
 
 const MyTransactionTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,6 +25,7 @@ const MyTransactionTable = () => {
     data: paginatedData,
     isLoading: isPaginatedLoading,
     isError: isPaginatedError,
+    refetch,
   } = useGetMyTransactionQuery({
     page: currentPage,
     limit,
@@ -71,7 +73,15 @@ const MyTransactionTable = () => {
     );
   }
 
-  if (isPaginatedError) return <div>Failed to load data.</div>;
+  if (isPaginatedError)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   return (
     <>

@@ -2,6 +2,7 @@
 
 import { useGetMyTransactionQuery } from "@/redux/features/Transaction/transaction.api";
 import type { ITransaction } from "@/types/transaction";
+import ErrorLoading from "@/utils/ErrorLoading";
 import { getTotalByTypeAndStatus } from "@/utils/getTotalByTypeAndStatus";
 import {
   BarChart,
@@ -28,6 +29,7 @@ export default function AgentChartBar() {
     data: allData,
     isLoading,
     isError,
+    refetch,
   } = useGetMyTransactionQuery({ limit: "all" });
 
   const allInvoices: ITransaction[] = allData?.data ?? [];
@@ -93,7 +95,12 @@ export default function AgentChartBar() {
 
   if (isError) {
     return (
-      <p className="text-center text-red-500">Failed to load chart data.</p>
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
     );
   }
 

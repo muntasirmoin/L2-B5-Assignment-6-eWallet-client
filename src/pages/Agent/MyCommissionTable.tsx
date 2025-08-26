@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import ErrorLoading from "@/utils/ErrorLoading";
 interface ICommission {
   _id: string;
   createdAt: string;
@@ -18,7 +19,8 @@ interface ICommission {
 }
 
 const MyCommissionTable = () => {
-  const { data, isLoading, error } = useGetMyCommissionQuery(undefined);
+  const { data, isLoading, error, refetch } =
+    useGetMyCommissionQuery(undefined);
   const commissions = data?.data?.myCommissionTransactions;
   const totalCommission = data?.data?.totalCommission;
   console.log("commission", data?.data?.myCommissionTransactions);
@@ -59,7 +61,15 @@ const MyCommissionTable = () => {
     );
   }
 
-  if (error) return <div>Failed to load data.</div>;
+  if (error)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   return (
     <>

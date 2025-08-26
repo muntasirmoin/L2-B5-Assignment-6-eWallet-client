@@ -5,6 +5,7 @@ import { getTotalByTypeAndStatus } from "@/utils/getTotalByTypeAndStatus";
 import { Skeleton } from "@/components/ui/skeleton";
 import MyRecentTransactionTable from "./MyRecentTransactionTable";
 import AgentChartBar from "./AgentChartBar";
+import ErrorLoading from "@/utils/ErrorLoading";
 
 const Overview = () => {
   // All data
@@ -12,6 +13,7 @@ const Overview = () => {
     data: allData,
     isLoading: isAllLoading,
     isError: isAllError,
+    refetch,
   } = useGetMyTransactionQuery({ limit: "all" });
 
   const allInvoices: ITransaction[] = allData?.data ?? [];
@@ -51,7 +53,7 @@ const Overview = () => {
     "reversed"
   );
 
-  //  loading & error
+  //  loading
   if (isAllLoading) {
     return (
       <>
@@ -67,7 +69,16 @@ const Overview = () => {
     );
   }
 
-  if (isAllError) return <div>Failed to load data.</div>;
+  // error
+  if (isAllError)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   return (
     <div className="space-y-6">

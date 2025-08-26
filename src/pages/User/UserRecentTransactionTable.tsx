@@ -9,10 +9,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import ErrorLoading from "@/utils/ErrorLoading";
 
 const UserRecentTransactionTable = () => {
   // Fetch only the 5 most recent transactions
-  const { data, isLoading, isError } = useGetMyTransactionQuery({
+  const { data, isLoading, isError, refetch } = useGetMyTransactionQuery({
     limit: 5,
     sort: "-createdAt",
   });
@@ -46,7 +47,14 @@ const UserRecentTransactionTable = () => {
   }
 
   if (isError)
-    return <div className="text-center py-4">Failed to load data.</div>;
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   return (
     <div className="overflow-x-auto">
