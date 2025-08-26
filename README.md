@@ -85,33 +85,53 @@ The system is built with a focus on **security**, **scalability**, and **ease of
 ├── /assets  
 │ └── /images # Static images and icons  
 │  
-├── /components # Reusable UI components  
-│ ├── /layout # Layout components (Header, Footer, Sidebar)  
-│ ├── /module # Feature-specific components or modules  
-│ └── /ui # Presentational/UI-only components  
+├── /components  
+│ ├── /layout
+│ ├── /module  
+│ └── /ui  
 │  
 ├── /config  
 │  
-├── /constants # Application-wide constants  
+├── /constants  
 │  
-├── /context # React context providers  
+├── /context  
 │  
-├── /hooks # Custom React hooks  
+├── /hooks
 │  
-├── /lib # Utility libraries or helpers  
+├── /lib  
 │  
-├── /pages # Page-level components mapped to routes  
+├── /pages
 │  
 ├── /provider  
 │  
-├── /redux # Redux Toolkit slices and store setup  
+├── /redux  
 │  
-├── /routes # Route definitions and guards  
+├── /routes
 │  
-├── /types # TypeScript type declarations  
+├── /types
 │  
-├── /utils # Utility functions  
+├── /utils
 │  
-├── app.tsx # Root App component  
-├── main.tsx # Entry point to render the React app  
-└── index.css # Global CSS (Tailwind base styles, global overrides)
+├── app.tsx
+├── main.tsx  
+└── index.css
+
+## 🧰 Tech Stack
+
+- ⚛️ **React** – UI library for building interactive user interfaces
+- 🧭 **React Router** – Client-side routing for React applications
+- 🛠 **TypeScript** – Typed JavaScript for safer and more maintainable code
+- ⚡ **Redux Toolkit** – Simplified and efficient Redux state management
+- 🔍 **RTK Query** – Powerful data fetching and caching tool integrated with Redux Toolkit
+- 🎨 **Tailwind CSS** – Utility-first CSS framework for rapid styling
+- 🧹 **ESLint** – Linting tool to enforce code quality and style
+- 🔔 **React Toast Sonner** (or similar) – Toast notifications for user feedback
+
+### Additional Tools
+
+- 🔒 **Role-Based Access Control (RBAC)** implemented in frontend routing and API calls
+- 🧩 **Custom Hooks & Context** for reusable logic and state management
+- 📊 **Data Visualization** using charts and tables for dashboard insights
+- 🧭 **Guided Tours** (e.g., react-joyride) for onboarding users
+
+---
