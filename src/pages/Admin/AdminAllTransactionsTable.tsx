@@ -30,8 +30,7 @@ const AdminAllTransactionsTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [limit, setLimit] = useState(8);
+  const [limit] = useState(8);
   const [typeFilter, setTypeFilter] = useState<TransactionTypeValue>(
     TransactionType.ALL
   );

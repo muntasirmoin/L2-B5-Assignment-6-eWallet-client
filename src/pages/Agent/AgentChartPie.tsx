@@ -34,7 +34,7 @@ export default function AgentChartPie() {
               outerRadius="80%"
               label
             >
-              {chartData.map((entry, index) => (
+              {chartData.map((_, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}

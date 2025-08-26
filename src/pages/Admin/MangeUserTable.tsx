@@ -33,8 +33,8 @@ export function ManageUserTable() {
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   console.log("search", search);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [limit, setLimit] = useState(8);
+
+  const [limit] = useState(8);
   const [typeFilter, setTypeFilter] = useState<isBlockedTypeValue>(
     isBlockedType.ALL
   );

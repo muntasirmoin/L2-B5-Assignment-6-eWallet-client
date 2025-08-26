@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TableHeader,
@@ -33,8 +33,8 @@ export function ManageAgentTable() {
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   console.log("search", search);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [limit, setLimit] = useState(8);
+
+  const [limit] = useState(8);
   const [typeFilter, setTypeFilter] = useState<isApproveTypeValue>(
     isApproveType.ALL
   );

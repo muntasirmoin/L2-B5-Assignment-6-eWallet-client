@@ -1,5 +1,3 @@
-"use client";
-
 import { useAllTransactionsInfoQuery } from "@/redux/features/Transaction/transaction.api";
 import ErrorLoading from "@/utils/ErrorLoading";
 import {
@@ -11,7 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-type TotalsByType = {
+type ITotalsByType = {
   [type: string]: number;
 };
 
@@ -24,6 +22,11 @@ const COLORS = [
   "#06d6a0",
 ];
 
+type ITransaction = {
+  type: string;
+  amount: number;
+};
+
 export default function AdminChartPie() {
   const { data, isLoading, isError, refetch } = useAllTransactionsInfoQuery({
     limit: 1000,
@@ -31,12 +34,12 @@ export default function AdminChartPie() {
   });
 
   const prepareChartData = (): { name: string; value: number }[] => {
-    const totals: TotalsByType = {};
+    const totals: ITotalsByType = {};
 
     if (!data?.data) return [];
     console.log(data);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data.data.forEach((tx: any) => {
+
+    data.data.forEach((tx: ITransaction) => {
       const { type, amount } = tx;
       if (!totals[type]) {
         totals[type] = 0;
@@ -88,7 +91,7 @@ export default function AdminChartPie() {
               outerRadius="80%"
               label
             >
-              {chartData.map((entry, index) => (
+              {chartData.map((_, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
