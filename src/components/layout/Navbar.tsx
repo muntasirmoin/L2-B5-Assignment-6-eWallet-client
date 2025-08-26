@@ -24,11 +24,11 @@ import { role } from "@/constants/role";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "/", label: "Home", role: "PUBLIC" },
-  { href: "/about", label: "About", role: "PUBLIC" },
-  { href: "/features", label: "Features", role: "PUBLIC" },
-  { href: "/contact", label: "Contact", role: "PUBLIC" },
-  { href: "/faq", label: "FAQ", role: "PUBLIC" },
+  { href: "/", label: "Home", role: "PUBLIC", id: "tour-home" },
+  { href: "/about", label: "About", role: "PUBLIC", id: "tour-about" },
+  { href: "/features", label: "Features", role: "PUBLIC", id: "tour-features" },
+  { href: "/contact", label: "Contact", role: "PUBLIC", id: "tour-contact" },
+  { href: "/faq", label: "FAQ", role: "PUBLIC", id: "tour-faq" },
   { href: "/admin", label: "Dashboard", role: role.ADMIN },
   { href: "/agent", label: "Dashboard", role: role.AGENT },
   { href: "/user", label: "Dashboard", role: role.USER },
@@ -95,7 +95,9 @@ export default function Navbar() {
                     return canShow ? (
                       <NavigationMenuItem key={index} className="w-full">
                         <NavigationMenuLink asChild className="py-1.5 w-full">
-                          <Link to={link.href}>{link.label}</Link>
+                          <Link to={link.href} id={link.id}>
+                            {link.label}
+                          </Link>
                         </NavigationMenuLink>
                       </NavigationMenuItem>
                     ) : null;
@@ -121,7 +123,9 @@ export default function Navbar() {
                         asChild
                         className="text-muted-foreground hover:text-primary py-1.5 font-medium"
                       >
-                        <Link to={link.href}>{link.label}</Link>
+                        <Link to={link.href} id={link.id}>
+                          {link.label}
+                        </Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                   ) : null;
@@ -135,10 +139,14 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             {/* mode toggler */}
             <ModeToggler />
+
+            {/* info menu */}
+            <InfoMenu />
+
             {data?.data?.phone ? (
               <>
                 {/* Info menu */}
-                <InfoMenu />
+                {/* <InfoMenu /> */}
 
                 {/* Notification */}
                 <NotificationMenu />

@@ -1,4 +1,4 @@
-import { BookIcon, InfoIcon, LifeBuoyIcon } from "lucide-react";
+import { BookIcon, InfoIcon, LifeBuoyIcon, RotateCcwIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,9 +11,14 @@ import {
 import { Link } from "react-router-dom";
 
 export default function InfoMenu() {
+  const handleRestartTour = () => {
+    localStorage.removeItem("hasSeenAppTour");
+    window.location.reload();
+  };
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild id="tour-info-dropdown-button">
         <Button
           size="icon"
           variant="ghost"
@@ -46,6 +51,37 @@ export default function InfoMenu() {
           <Link to="/contact" className="flex items-center gap-2">
             <LifeBuoyIcon size={16} className="opacity-60" aria-hidden="true" />
             Support
+          </Link>
+        </DropdownMenuItem>
+
+        {/* Restart Tour Button */}
+        <DropdownMenuItem>
+          {/* <Button
+            onClick={handleRestartTour}
+            className="w-full cursor-pointer bg-transparent hover:text-white text-gray text-sm"
+          >
+            <HelpCircleIcon
+              size={16}
+              className="opacity-60"
+              aria-hidden="true"
+            />
+            Restart Tour
+          </Button> */}
+
+          <Link
+            to="#"
+            onClick={(e) => {
+              e.preventDefault(); // prevent default navigation
+              handleRestartTour();
+            }}
+            className="w-full flex items-center gap-2"
+          >
+            <RotateCcwIcon
+              size={16}
+              className="opacity-60"
+              aria-hidden="true"
+            />
+            Restart Tour
           </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
