@@ -159,4 +159,4 @@ The system is built with a focus on **security**, **scalability**, and **ease of
 ## 🚀 Live Deployment Links
 
 - **Frontend:** [https://e-wallet-client.vercel.app](https://e-wallet-client.vercel.app)
-- **Backend:** [https://e-wallet-server-olive.vercel.app/](https://e-wallet-server-olive.vercel.app/)
+- **Backend:** [https://e-wallet-server-olive.vercel.app](https://e-wallet-server-olive.vercel.app)
