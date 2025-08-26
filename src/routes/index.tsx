@@ -14,6 +14,8 @@ import Home from "@/pages/Home/Home";
 import About from "@/pages/About/About";
 import Features from "@/pages/Features/Features";
 import Contact from "@/pages/Contact/Contact";
+import OurTeam from "@/pages/About/OurTeam";
+import Faq from "@/pages/Faq/Faq";
 export const router = createBrowserRouter([
   {
     Component: App,
@@ -34,6 +36,14 @@ export const router = createBrowserRouter([
       {
         Component: Contact,
         path: "contact",
+      },
+      {
+        Component: Faq,
+        path: "faq",
+      },
+      {
+        Component: OurTeam,
+        path: "our-team",
       },
     ],
   },

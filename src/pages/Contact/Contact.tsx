@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -7,7 +8,7 @@ const Contact = () => {
     phone: "",
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (
@@ -20,11 +21,11 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate API delay
     setTimeout(() => {
-      setSubmitted(true);
+      // setSubmitted(true);
       setLoading(false);
       setFormData({ name: "", email: "", phone: "", message: "" });
+      toast.success("Message sent successfully!");
     }, 1500);
   };
 
@@ -36,7 +37,8 @@ const Contact = () => {
         </h2>
         <p className="text-center text-white/80 mb-10">
           Have questions or feedback? Fill out the form and we’ll get back to
-          you shortly.
+          you shortly. For urgent issues, please call e-wallet 689 support at
+          689 —available 24/7.
         </p>
 
         <form
@@ -108,18 +110,18 @@ const Contact = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md transition"
+              className="w-full cursor-pointer bg-indigo-600 hover:bg-green-500 text-white font-semibold py-2 px-4 rounded-md transition"
             >
               {loading ? "Sending..." : "Send Message"}
             </button>
           </div>
 
           {/* Success Message */}
-          {submitted && (
+          {/* {submitted && (
             <p className="text-green-400 text-center">
-              ✅ Message sent successfully!
+               Message sent successfully!
             </p>
-          )}
+          )} */}
         </form>
       </div>
     </section>

@@ -5,21 +5,22 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { FacebookIcon, GithubIcon, InstagramIcon } from "lucide-react";
+
+import { FaEnvelope, FaFacebook, FaGithub, FaInstagram } from "react-icons/fa";
 import { Link } from "react-router";
-// import { HashLink } from "react-router-hash-link";
 
 const footerLinks = [
-  { label: "Our Team", href: "/about#team" },
+  { label: "Our Team", href: "/our-team" },
   { label: "Features", href: "/features" },
-  { label: "Cookies", href: "#" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 const socialLinks = [
-  { icon: FacebookIcon, label: "Facebook", href: "#" },
-  { icon: InstagramIcon, label: "Instagram", href: "#" },
+  { icon: FaFacebook, label: "Facebook", href: "#" },
+  { icon: FaInstagram, label: "Instagram", href: "#" },
 
-  { icon: GithubIcon, label: "GitHub", href: "#" },
+  { icon: FaGithub, label: "GitHub", href: "#" },
+  { icon: FaEnvelope, label: "Email", href: "#" },
 ];
 
 export default function Footer() {

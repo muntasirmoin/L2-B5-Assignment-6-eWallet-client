@@ -1,18 +1,14 @@
-import {
-  BookIcon,
-  InfoIcon,
-  LifeBuoyIcon,
-  MessageCircleMoreIcon,
-} from "lucide-react"
+import { BookIcon, InfoIcon, LifeBuoyIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
+import { Link } from "react-router";
 
 export default function InfoMenu() {
   return (
@@ -37,34 +33,22 @@ export default function InfoMenu() {
           className="cursor-pointer py-1 focus:bg-transparent focus:underline"
           asChild
         >
-          <a href="#">
+          <Link to="/faq" className="flex items-center gap-2">
             <BookIcon size={16} className="opacity-60" aria-hidden="true" />
-            Documentation
-          </a>
+            FAQ
+          </Link>
         </DropdownMenuItem>
+
         <DropdownMenuItem
           className="cursor-pointer py-1 focus:bg-transparent focus:underline"
           asChild
         >
-          <a href="#">
+          <Link to="/contact" className="flex items-center gap-2">
             <LifeBuoyIcon size={16} className="opacity-60" aria-hidden="true" />
             Support
-          </a>
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer py-1 focus:bg-transparent focus:underline"
-          asChild
-        >
-          <a href="#">
-            <MessageCircleMoreIcon
-              size={16}
-              className="opacity-60"
-              aria-hidden="true"
-            />
-            Contact us
-          </a>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

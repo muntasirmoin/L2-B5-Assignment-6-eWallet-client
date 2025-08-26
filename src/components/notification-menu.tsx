@@ -1,63 +1,63 @@
-import { useState } from "react"
-import { BellIcon } from "lucide-react"
+import { useState } from "react";
+import { BellIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 
 const initialNotifications = [
   {
     id: 1,
-    user: "Chris Tompson",
-    action: "requested review on",
-    target: "PR #42: Feature implementation",
+    user: "Chowdhury",
+    action: "added money to",
+    target: "your wallet",
     timestamp: "15 minutes ago",
     unread: true,
   },
   {
     id: 2,
-    user: "Emma Davis",
-    action: "shared",
-    target: "New component library",
+    user: "Syed",
+    action: "sent money to",
+    target: "....",
     timestamp: "45 minutes ago",
     unread: true,
   },
   {
     id: 3,
-    user: "James Wilson",
-    action: "assigned you to",
-    target: "API integration task",
+    user: "Khan",
+    action: "withdrew money from",
+    target: "your account",
     timestamp: "4 hours ago",
     unread: false,
   },
   {
     id: 4,
-    user: "Alex Morgan",
-    action: "replied to your comment in",
-    target: "Authentication flow",
+    user: "Fatema",
+    action: "completed cash in for",
+    target: "your wallet",
     timestamp: "12 hours ago",
     unread: false,
   },
   {
     id: 5,
-    user: "Sarah Chen",
-    action: "commented on",
-    target: "Dashboard redesign",
+    user: "Muntasir",
+    action: "processed cash out request for",
+    target: "your account",
     timestamp: "2 days ago",
     unread: false,
   },
   {
     id: 6,
-    user: "Miky Derya",
-    action: "mentioned you in",
-    target: "Origin UI open graph image",
+    user: "Chowdhury",
+    action: "requested withdrawal from",
+    target: "your wallet",
     timestamp: "2 weeks ago",
     unread: false,
   },
-]
+];
 
 function Dot({ className }: { className?: string }) {
   return (
@@ -72,12 +72,12 @@ function Dot({ className }: { className?: string }) {
     >
       <circle cx="3" cy="3" r="3" />
     </svg>
-  )
+  );
 }
 
 export default function NotificationMenu() {
-  const [notifications, setNotifications] = useState(initialNotifications)
-  const unreadCount = notifications.filter((n) => n.unread).length
+  const [notifications, setNotifications] = useState(initialNotifications);
+  const unreadCount = notifications.filter((n) => n.unread).length;
 
   const handleMarkAllAsRead = () => {
     setNotifications(
@@ -85,8 +85,8 @@ export default function NotificationMenu() {
         ...notification,
         unread: false,
       }))
-    )
-  }
+    );
+  };
 
   const handleNotificationClick = (id: number) => {
     setNotifications(
@@ -95,8 +95,8 @@ export default function NotificationMenu() {
           ? { ...notification, unread: false }
           : notification
       )
-    )
-  }
+    );
+  };
 
   return (
     <Popover>
@@ -168,5 +168,5 @@ export default function NotificationMenu() {
         ))}
       </PopoverContent>
     </Popover>
-  )
+  );
 }

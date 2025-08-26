@@ -62,12 +62,26 @@ export default function UserMenu({ name, phone }: UserMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
+        {/* <Button
+          variant="ghost"
+          className="h-auto cursor-pointer p-0 m-0.5  hover:bg-transparent"
+        >
           <Avatar>
             <AvatarImage src="./avatar.jpg" alt="Profile image" />
             <AvatarFallback>
-              {name?.charAt(0) ?? "M"}
-              {name?.charAt(1) ?? "E"}
+              {(name?.split(" ")[0] ?? "Me").toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+        </Button> */}
+
+        <Button
+          variant="ghost"
+          className="h-auto p-0 m-0.5 cursor-pointer hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-white/30 rounded-full transition"
+        >
+          <Avatar className="w-8 h-8 sm:w-9 sm:h-9">
+            <AvatarImage src="./avatar.jpg" alt="Profile image" />
+            <AvatarFallback className="bg-indigo-700 text-white font-semibold text-sm uppercase">
+              {name ? name.split(" ")[0].slice(0, 2).toUpperCase() : "ME"}
             </AvatarFallback>
           </Avatar>
         </Button>
