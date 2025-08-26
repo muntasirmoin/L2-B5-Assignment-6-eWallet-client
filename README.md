@@ -20,3 +20,60 @@ This project is a **Digital Wallet Management System** that enables users to sec
 The system is built with a focus on **security**, **scalability**, and **ease of use**, providing a seamless experience for digital payments and personal finance management.
 
 ---
+
+### 🏠 User Dashboard
+
+- Overview with wallet balance, quick actions, and recent transactions
+- Deposit money
+- Withdraw money
+- Send money to another user
+- Transaction history with:
+  - Pagination
+  - Filtering by type
+- Profile management: update name, phone, and password
+
+---
+
+### 🏢 Agent Dashboard
+
+- Overview with cash-in/out summary and recent activity
+- Add money to a user’s wallet (cash-in)
+- Withdraw money from a user’s wallet (cash-out)
+- View all transactions handled by the agent
+- Commission history
+- Profile management: update personal info and password
+
+---
+
+### 🛡️ Admin Dashboard
+
+- Overview with total users, agents, transaction count, and volume
+- Manage users: view, block/unblock wallets
+- Manage agents: approve, suspend
+- View all transactions with filters and search
+- Profile management: update admin account settings
+
+## 🔑 Key Features
+
+- **Role-Based Navigation Menu**  
+  Dynamic Dashboard menus tailored to each user role (User, Agent, Admin) for intuitive access.
+
+- **Loading Indicators & Global Error Handling**  
+  Visual feedback during API calls and centralized handling of errors to improve user experience.
+
+- **Form Validations**  
+  Includes required fields, numeric checks, and positive amount validations to ensure data integrity.
+
+- **Data Visualization Components**  
+  Interactive UI elements such as cards, bar charts, pie charts, and tables, all dynamically updated to reflect real-time data.
+
+- **Toast Notifications**  
+  Instant success/error messages using toast libraries for snappy UI feedback and improved user communication.
+
+- **Guided Tour**  
+   `react-joyride`
+
+  - Highlighting key features, such as the navigation menu!
+
+- **🔒 Role-Based Access Control (RBAC)**  
+  Secure API endpoints enforcing role restrictions to ensure users only access authorized resources.
