@@ -11,16 +11,7 @@ import { useGetMyTransactionQuery } from "@/redux/features/Transaction/transacti
 import type { ITransaction } from "@/types/transaction";
 import PaginationComponent from "@/components/pagination";
 import { Skeleton } from "@/components/ui/skeleton";
-
-// 👇 Add this enum or import if defined elsewhere
-// enum TransactionType {
-//   ALL = "",
-//   Add = "add-money",
-//   Withdraw = "withdraw-money",
-//   CashOut = "cash-out",
-//   Reversal = "reversal",
-
-// }
+import ErrorLoading from "@/utils/ErrorLoading";
 
 export const TransactionType = {
   ALL: "",
@@ -36,7 +27,7 @@ export type TransactionTypeValue = (typeof TransactionType)[TransactionTypeKey];
 
 const UserTransactionTypeFiltering = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  //   const [search, setSearch] = useState("");
+
   const [limit] = useState(8);
   const [typeFilter, setTypeFilter] = useState<TransactionTypeValue>(
     TransactionType.ALL
@@ -48,11 +39,10 @@ const UserTransactionTypeFiltering = () => {
     data: paginatedData,
     isLoading,
     isError,
+    refetch,
   } = useGetMyTransactionQuery({
     page: currentPage,
     limit,
-    // searchTerm: search,
-    // type: typeFilter, // Filtering by type
     type: actualTypeFilter,
   });
 
@@ -85,7 +75,15 @@ const UserTransactionTypeFiltering = () => {
   }
 
   // Handle error
-  if (isError) return <div className="text-center">Failed to load data.</div>;
+  if (isError)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   return (
     <div className="overflow-x-auto">

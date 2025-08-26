@@ -5,6 +5,7 @@ import { getTotalByTypeAndStatus } from "@/utils/getTotalByTypeAndStatus";
 import UserRecentTransactionTable from "./UserRecentTransactionTable";
 import { QuickAction } from "./QuickAction";
 import UserChartBar from "./UserChartBar";
+import ErrorLoading from "@/utils/ErrorLoading";
 
 const UserOverview = () => {
   // All data
@@ -12,12 +13,11 @@ const UserOverview = () => {
     data: allData,
     isLoading: isAllLoading,
     isError: isAllError,
+    refetch,
   } = useGetMyTransactionQuery({ limit: "all" });
 
   const allInvoices: ITransaction[] = allData?.data ?? [];
-  console.log("allInvoices", allInvoices);
-  // "completed" | "pending" | "reversed";
-  // "send-money" | "withdraw-money" | "add-money"
+
   // pending
   const totalPendingSendMoney = getTotalByTypeAndStatus(
     allInvoices,
@@ -75,7 +75,7 @@ const UserOverview = () => {
     "reversed"
   );
 
-  //  loading & error
+  //  loading
   if (isAllLoading) {
     return (
       <>
@@ -91,7 +91,17 @@ const UserOverview = () => {
     );
   }
 
-  if (isAllError) return <div>Failed to load data.</div>;
+  // error
+
+  if (isAllError)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
   //
 
   return (
@@ -101,7 +111,7 @@ const UserOverview = () => {
         {/* Summary Section */}
         <div className="bg-green-100 dark:bg-green-900 p-4 sm:p-6 rounded shadow text-center">
           <h2 className="text-lg sm:text-2xl font-bold text-green-700 dark:text-green-300">
-            Summary OF Send Money & Withdraw Money & Add Money Summary
+            Summary OF Send Money - Withdraw Money - Add Money Summary
           </h2>
         </div>
         {/*  */}

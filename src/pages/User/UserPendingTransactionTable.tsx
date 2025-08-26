@@ -13,10 +13,11 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2 } from "lucide-react";
 import { useCompleteTransactionMutation } from "@/redux/features/User/user.api";
 import { toast } from "sonner";
+import ErrorLoading from "@/utils/ErrorLoading";
 
 const UserPendingTransactionTable = () => {
   // Fetch only the 10 most recent transactions
-  const { data, isLoading, isError } = useGetMyTransactionQuery({
+  const { data, isLoading, isError, refetch } = useGetMyTransactionQuery({
     limit: "all",
     sort: "-createdAt",
   });
@@ -68,7 +69,14 @@ const UserPendingTransactionTable = () => {
   }
 
   if (isError)
-    return <div className="text-center py-4">Failed to load data.</div>;
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   return (
     <>
@@ -176,8 +184,6 @@ const UserPendingTransactionTable = () => {
           </Table>
         )}
       </div>
-      {/* complete transaction table */}
-      {/* <UserCompleteTransactionTable /> */}
     </>
   );
 };
