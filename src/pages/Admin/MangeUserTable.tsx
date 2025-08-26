@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TableHeader,
@@ -14,10 +14,11 @@ import {
 } from "@/redux/features/User/user.api";
 import { toast } from "sonner";
 import type { IUser } from "@/types/user";
-import PaginationComponent from "@/components/pagination"; // Make sure you have this component
+import PaginationComponent from "@/components/pagination";
 import { Skeleton } from "@/components/ui/skeleton";
+import ErrorLoading from "@/utils/ErrorLoading";
 
-//
+// type block
 const isBlockedType = {
   ALL: "",
   Block: "true",
@@ -26,8 +27,6 @@ const isBlockedType = {
 
 export type isBlockedTypeKey = keyof typeof isBlockedType;
 export type isBlockedTypeValue = (typeof isBlockedType)[isBlockedTypeKey];
-
-//
 
 export function ManageUserTable() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,13 +43,6 @@ export function ManageUserTable() {
 
   console.log(isBlockedFilter);
 
-  //   const { data, isLoading, error, refetch } = useAllUserInfoQuery({
-  //     page: currentPage,
-  //     limit,
-  //     searchTerm: search,
-  //     // isBlocked: isBlockedFilter,
-  //     ...(typeof isBlockedFilter === "boolean" && { isBlocked: isBlockedFilter }),
-  //   });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const queryParams: Record<string, any> = {
     page: currentPage,
@@ -58,7 +50,7 @@ export function ManageUserTable() {
     searchTerm: search || undefined,
   };
 
-  // ✅ Only include `isBlocked` if it's explicitly true or false
+  //  `isBlocked` if it's true or false
   if (typeFilter === "true") {
     queryParams.isBlocked = true;
   } else if (typeFilter === "false") {
@@ -120,7 +112,16 @@ export function ManageUserTable() {
         </div>
       </>
     );
-  if (error) return <p>Error loading users.</p>;
+  // error
+  if (error)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   const users: IUser[] = data?.data || [];
   const totalPages = data?.meta?.totalPage || 1;

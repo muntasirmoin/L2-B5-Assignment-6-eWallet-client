@@ -1,6 +1,7 @@
 import { useAllAgentInfoQuery } from "@/redux/features/Agent/agent.api";
 import { useAllTransactionsInfoQuery } from "@/redux/features/Transaction/transaction.api";
 import { useAllUserInfoQuery } from "@/redux/features/User/user.api";
+import ErrorLoading from "@/utils/ErrorLoading";
 import {
   LineChart,
   Line,
@@ -12,14 +13,72 @@ import {
 } from "recharts";
 
 export default function AdminChartArea() {
-  const { data: userData } = useAllUserInfoQuery(undefined);
+  const {
+    data: userData,
+    isLoading: isUserLoading,
+    isError: isUserError,
+    refetch: refetchUsers,
+  } = useAllUserInfoQuery(undefined);
   const totalUser = userData?.meta?.total | 0;
 
-  const { data: agentData } = useAllAgentInfoQuery(undefined);
+  const {
+    data: agentData,
+    isLoading: isAgentLoading,
+    isError: isAgentError,
+    refetch: refetchAgents,
+  } = useAllAgentInfoQuery(undefined);
   const totalAgent = agentData?.meta?.total | 0;
 
-  const { data: transactionData } = useAllTransactionsInfoQuery(undefined);
+  const {
+    data: transactionData,
+    isLoading: isTransactionLoading,
+    isError: isTransactionError,
+    refetch: refetchTransactions,
+  } = useAllTransactionsInfoQuery(undefined);
   const totalTransaction = transactionData?.meta?.total | 0;
+
+  // loading
+  if (isUserLoading || isAgentLoading || isTransactionLoading) {
+    <div className="flex space-x-4">
+      <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-700 animate-pulse" />
+    </div>;
+  }
+
+  // loading
+  if (isUserError) {
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetchUsers();
+        }}
+      />
+    );
+  }
+
+  if (isAgentError) {
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetchAgents();
+        }}
+      />
+    );
+  }
+
+  if (isTransactionError) {
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetchTransactions();
+        }}
+      />
+    );
+  }
+
+  //
 
   const chartData = [
     {
@@ -61,7 +120,7 @@ export default function AdminChartArea() {
               <Line
                 type="monotone"
                 dataKey="Total"
-                stroke="var(--chart-1)" // fallback: "#6366f1"
+                stroke="var(--chart-1)"
                 strokeWidth={2}
                 dot={{ r: 4 }}
                 activeDot={{ r: 6 }}

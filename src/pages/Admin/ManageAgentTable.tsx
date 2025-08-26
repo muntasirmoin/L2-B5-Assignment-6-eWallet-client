@@ -10,13 +10,14 @@ import {
 
 import { toast } from "sonner";
 import type { IUser } from "@/types/user";
-import PaginationComponent from "@/components/pagination"; // Make sure you have this component
+import PaginationComponent from "@/components/pagination";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   useAllAgentInfoQuery,
   useAgentApprovedMutation,
   useAgentSuspendedMutation,
 } from "@/redux/features/Agent/agent.api";
+import ErrorLoading from "@/utils/ErrorLoading";
 
 //
 const isApproveType = {
@@ -52,7 +53,7 @@ export function ManageAgentTable() {
     searchTerm: search || undefined,
   };
 
-  // ✅ Only include `isBlocked` if it's explicitly true or false
+  // `isBlocked` if it's  true or false
   if (typeFilter === "true") {
     queryParams.isAgentApproved = true;
   } else if (typeFilter === "false") {
@@ -81,6 +82,8 @@ export function ManageAgentTable() {
       setLoadingUserId(null);
     }
   };
+
+  // loading
 
   if (isLoading)
     return (
@@ -114,7 +117,17 @@ export function ManageAgentTable() {
         </div>
       </>
     );
-  if (error) return <p>Error loading agents.</p>;
+
+  // error
+  if (error)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   const users: IUser[] = data?.data || [];
   const totalPages = data?.meta?.totalPage || 1;

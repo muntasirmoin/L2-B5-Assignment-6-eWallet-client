@@ -18,22 +18,6 @@ export const adminSidebarItems: ISidebarItem[] = [
       },
     ],
   },
-  // profile managment
-  {
-    title: "Profile Management",
-    items: [
-      {
-        title: "Update personal Info",
-        url: "/admin/update-profile-info",
-        component: UpdatePersonalInfo,
-      },
-      {
-        title: "Change Pin",
-        url: "/admin/change-pin",
-        component: ChangePin,
-      },
-    ],
-  },
 
   // manage user
   {
@@ -66,6 +50,23 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "All Transaction",
         url: "/admin/transaction",
         component: AdminAllTransactionsTable,
+      },
+    ],
+  },
+
+  // profile managment
+  {
+    title: "Profile Management",
+    items: [
+      {
+        title: "Update personal Info",
+        url: "/admin/update-profile-info",
+        component: UpdatePersonalInfo,
+      },
+      {
+        title: "Change Pin",
+        url: "/admin/change-pin",
+        component: ChangePin,
       },
     ],
   },

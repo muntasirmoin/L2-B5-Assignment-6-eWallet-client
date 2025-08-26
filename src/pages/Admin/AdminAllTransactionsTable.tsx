@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import PaginationComponent from "@/components/pagination";
+import ErrorLoading from "@/utils/ErrorLoading";
 export const TransactionType = {
   ALL: "",
   Add: "add-money",
@@ -43,6 +44,7 @@ const AdminAllTransactionsTable = () => {
     data: paginatedData,
     isLoading: isPaginatedLoading,
     isError: isPaginatedError,
+    refetch,
   } = useAllTransactionsInfoQuery({
     page: currentPage,
     limit,
@@ -98,7 +100,15 @@ const AdminAllTransactionsTable = () => {
     );
   }
 
-  if (isPaginatedError) return <div>Failed to load data.</div>;
+  if (isPaginatedError)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
   return (
     <>
       <div className="overflow-x-auto">

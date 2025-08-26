@@ -1,6 +1,7 @@
 "use client";
 
 import { useAllTransactionsInfoQuery } from "@/redux/features/Transaction/transaction.api";
+import ErrorLoading from "@/utils/ErrorLoading";
 import {
   PieChart,
   Pie,
@@ -9,7 +10,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-// Adjust import path
 
 type TotalsByType = {
   [type: string]: number;
@@ -25,7 +25,7 @@ const COLORS = [
 ];
 
 export default function AdminChartPie() {
-  const { data, isLoading, isError } = useAllTransactionsInfoQuery({
+  const { data, isLoading, isError, refetch } = useAllTransactionsInfoQuery({
     limit: 1000,
     // limit: "all",
   });
@@ -62,7 +62,12 @@ export default function AdminChartPie() {
 
   if (isError) {
     return (
-      <p className="text-center text-red-500">Error loading chart data.</p>
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
     );
   }
 
