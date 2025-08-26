@@ -77,3 +77,41 @@ The system is built with a focus on **security**, **scalability**, and **ease of
 
 - **🔒 Role-Based Access Control (RBAC)**  
   Secure API endpoints enforcing role restrictions to ensure users only access authorized resources.
+
+## 📂 Structure Overview
+
+/ src  
+│  
+├── /assets  
+│ └── /images # Static images and icons  
+│  
+├── /components # Reusable UI components  
+│ ├── /layout # Layout components (Header, Footer, Sidebar)  
+│ ├── /module # Feature-specific components or modules  
+│ └── /ui # Presentational/UI-only components  
+│  
+├── /config  
+│  
+├── /constants # Application-wide constants  
+│  
+├── /context # React context providers  
+│  
+├── /hooks # Custom React hooks  
+│  
+├── /lib # Utility libraries or helpers  
+│  
+├── /pages # Page-level components mapped to routes  
+│  
+├── /provider  
+│  
+├── /redux # Redux Toolkit slices and store setup  
+│  
+├── /routes # Route definitions and guards  
+│  
+├── /types # TypeScript type declarations  
+│  
+├── /utils # Utility functions  
+│  
+├── app.tsx # Root App component  
+├── main.tsx # Entry point to render the React app  
+└── index.css # Global CSS (Tailwind base styles, global overrides)
