@@ -135,3 +135,23 @@ The system is built with a focus on **security**, **scalability**, and **ease of
 - 🧭 **Guided Tours** (e.g., react-joyride) for onboarding users
 
 ---
+
+### 📦 Installation Steps
+
+1. **Clone the Repository Frontend**
+
+   ```bash
+   https://github.com/muntasirmoin/L2-B5-Assignment-6-eWallet-client.git
+   ```
+
+2. **Clone the Repository Backend**
+
+   ```bash
+    https://github.com/muntasirmoin/L2-B5-Assignment-5-eWallet-server.git
+   ```
+
+3. **Install Dependencies**
+
+   ```bash
+   npm install / bun install
+   ```
