@@ -23,7 +23,7 @@ import { getSidebarItems } from "@/utils/getSidebarItems";
 
 import Logo from "@/assets/icons/Logo";
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 import { useMyWalletQuery } from "@/redux/features/Wallet/wallet.api";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

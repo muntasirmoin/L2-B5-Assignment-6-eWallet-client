@@ -26,7 +26,7 @@ import {
 
 // <-- Import your user info query hook here
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "@/redux/features/Auth/auth.api";
 export function UserUpdateProfileForm() {
   // Fetch the user info from API

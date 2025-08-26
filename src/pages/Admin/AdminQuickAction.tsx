@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Ban, CheckCircle } from "lucide-react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export function AdminQuickAction() {
   return (

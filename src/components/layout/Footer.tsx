@@ -7,7 +7,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { FaEnvelope, FaFacebook, FaGithub, FaInstagram } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const footerLinks = [
   { label: "Our Team", href: "/our-team" },

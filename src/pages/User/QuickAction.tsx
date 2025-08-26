@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useMyWalletQuery } from "@/redux/features/Wallet/wallet.api";
 import { ArrowDown, ArrowUpRight, Wallet } from "lucide-react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export function QuickAction() {
   const { data: userWallet, error, isLoading } = useMyWalletQuery();

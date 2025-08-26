@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/popover";
 import Logo from "@/assets/icons/Logo";
 import { ModeToggler } from "./ModeToggler";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { authApi, useLogoutMutation } from "@/redux/features/Auth/auth.api";
 import { useAppDispatch } from "@/redux/hook";
 import { useUserInfoQuery } from "@/redux/features/User/user.api";

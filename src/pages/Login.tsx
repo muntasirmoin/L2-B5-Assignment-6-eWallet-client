@@ -1,5 +1,5 @@
 import ImageLogin from "@/assets/images/image-login.jpg";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 import { LoginForm } from "@/components/modules/Authentication/LoginForm";
 import Logo from "@/assets/icons/Logo";

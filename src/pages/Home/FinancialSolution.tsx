@@ -1,7 +1,7 @@
 import SendMoneyImage from "@/assets/images/send-money.jpg";
 import WithdrawMoneyImage from "@/assets/images/withdraw-money.jpg";
 import CashInImage from "@/assets/images/cash-in.jpg";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const FinancialSolution = () => {
   return (

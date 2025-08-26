@@ -1,6 +1,6 @@
 import BannerImage from "@/assets/images/hero-banner1.jpg";
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const HeroBanner = () => {
   const { data } = useUserInfoQuery(undefined);

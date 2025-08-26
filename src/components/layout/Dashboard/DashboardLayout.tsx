@@ -9,7 +9,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Home } from "lucide-react";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet } from "react-router-dom";
 
 export default function DashboardLayout() {
   return (
