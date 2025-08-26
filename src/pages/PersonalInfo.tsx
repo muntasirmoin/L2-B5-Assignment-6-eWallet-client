@@ -3,7 +3,7 @@ import { useUserInfoQuery } from "@/redux/features/User/user.api";
 const PersonalInfo = () => {
   const { data: userInfo } = useUserInfoQuery(undefined);
   const user = userInfo?.data;
-  // console.log("userInfo", userInfo);
+
   return (
     <>
       <div className="flex items-center justify-center px-4">

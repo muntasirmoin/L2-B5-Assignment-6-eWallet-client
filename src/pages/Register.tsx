@@ -9,7 +9,7 @@ const Register = () => {
       <div className="relative min-h-screen w-full bg-rose-300">
         {/* Background image */}
         <img
-          src={ImageRegister} // Replace with actual path
+          src={ImageRegister}
           alt="Background"
           className="absolute inset-0 h-full w-full object-cover"
         />

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   Form,
   FormField,
@@ -24,13 +24,19 @@ import {
   useUpdateProfileMutation,
 } from "@/redux/features/User/user.api";
 
-// <-- Import your user info query hook here
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
 import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "@/redux/features/Auth/auth.api";
+import ErrorLoading from "@/utils/ErrorLoading";
+import { Skeleton } from "@/components/ui/skeleton";
 export function UserUpdateProfileForm() {
   // Fetch the user info from API
-  const { data: userInfo, isLoading } = useUserInfoQuery(undefined);
+  const {
+    data: userInfo,
+    isLoading,
+    isError,
+    refetch,
+  } = useUserInfoQuery(undefined);
   const user = userInfo?.data;
 
   const [logout] = useLogoutMutation();
@@ -70,7 +76,6 @@ export function UserUpdateProfileForm() {
       const userMessage = userResponse?.message;
 
       if (userPhone) {
-        //Phone is already registered
         toast.error(
           "Already registered with this phone number. Try with another."
         );
@@ -119,7 +124,7 @@ export function UserUpdateProfileForm() {
       if (shouldLogout) {
         await logout(undefined).unwrap();
         toast.info("You've been logged out due to phone number change.");
-        navigate("/login"); // ✅ use navigate instead of router.push
+        navigate("/login");
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -130,9 +135,9 @@ export function UserUpdateProfileForm() {
       const message = err?.data?.message;
       if (err) {
         if (errorMessageFromSource) {
-          toast.error(errorMessageFromSource); // fallback to source error if available
+          toast.error(errorMessageFromSource);
         } else if (message) {
-          toast.error(message); // fallback to general message
+          toast.error(message);
         } else {
           toast.error("Failed to update profile.");
         }
@@ -141,7 +146,25 @@ export function UserUpdateProfileForm() {
     }
   };
 
-  if (isLoading) return <div>Loading user info...</div>;
+  if (isLoading)
+    return (
+      <div className="w-full max-w-sm p-4 border rounded-md shadow-sm bg-white dark:bg-gray-900">
+        <Skeleton className="h-6 w-3/4 mb-4 rounded" />
+        <Skeleton className="h-4 w-full mb-2 rounded" />
+        <Skeleton className="h-4 w-full mb-2 rounded" />
+        <Skeleton className="h-4 w-2/3 rounded" />
+      </div>
+    );
+
+  if (isError)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   return (
     <div className="max-w-md mx-auto bg-white dark:bg-gray-900 shadow-md rounded-xl p-6 space-y-6">

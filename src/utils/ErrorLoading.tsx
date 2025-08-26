@@ -40,19 +40,3 @@ const ErrorLoading = ({
 };
 
 export default ErrorLoading;
-
-//  {
-//     data
-//     isLoading
-//     isError,
-//     refetch,
-//   }
-
-// return (
-//       <ErrorLoading
-//         message="Failed to load!"
-//         onRetry={() => {
-//           void refetch();
-//         }}
-//       />
-//     );

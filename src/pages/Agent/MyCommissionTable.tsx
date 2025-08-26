@@ -96,7 +96,6 @@ const MyCommissionTable = () => {
         ) : (
           <>
             <Table>
-              {/* <TableCaption>Recent Cash-In and Cash-Out Transactions</TableCaption> */}
               <TableHeader>
                 <TableRow className="text-center bg-gray-100 dark:bg-gray-800 font-semibold text-gray-700 dark:text-gray-300">
                   <TableHead className="py-3 px-2 text-center font-bold">

@@ -80,8 +80,8 @@ function RegisterForm({
   });
 
   const roleOptions = Object.entries(RoleEnum).map(([key, value]) => ({
-    label: key.charAt(0).toUpperCase() + key.slice(1).toLowerCase(), // Format: "Bank"
-    value: value, // e.g., "bank"
+    label: key.charAt(0).toUpperCase() + key.slice(1).toLowerCase(),
+    value: value,
   }));
   const [register, { isLoading }] = useRegisterMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -136,7 +136,6 @@ function RegisterForm({
                   <FormLabel>Full Name</FormLabel>
                   <FormControl>
                     <Input
-                      // placeholder="John Doe"
                       {...field}
                       value={field.value || ""}
                       className="border border-rose-500"
@@ -156,7 +155,6 @@ function RegisterForm({
                   <FormLabel>Phone Number</FormLabel>
                   <FormControl>
                     <Input
-                      // placeholder="01XXXXXXXXX"
                       maxLength={11}
                       {...field}
                       value={field.value || ""}
@@ -178,7 +176,6 @@ function RegisterForm({
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    //   disabled={divisionLoading}
                   >
                     <FormControl>
                       <SelectTrigger className="w-full border border-rose-500">
@@ -209,7 +206,6 @@ function RegisterForm({
                   <FormControl>
                     <Input
                       type="password"
-                      // placeholder="4–5 digit PIN"
                       maxLength={5}
                       {...field}
                       value={field.value || ""}
@@ -231,7 +227,6 @@ function RegisterForm({
                   <FormControl>
                     <Input
                       type="email"
-                      // placeholder="your@email.com"
                       {...field}
                       value={field.value || ""}
                       className="border border-rose-500"
@@ -251,7 +246,6 @@ function RegisterForm({
                   <FormLabel>Address (Optional)</FormLabel>
                   <FormControl>
                     <Input
-                      // placeholder="Street, City, District"
                       maxLength={100}
                       {...field}
                       value={field.value || ""}

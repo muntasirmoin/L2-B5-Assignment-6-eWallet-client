@@ -1,4 +1,3 @@
-// import { AppSidebar } from "@/components/app-sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Button } from "@/components/ui/button";
 
@@ -16,20 +15,6 @@ export default function DashboardLayout() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
-
-          <h1 className="absolute left-1/2 transform -translate-x-1/2 text-lg font-bold text-rose-500">
-            Dashboard
-          </h1>
-        </header> */}
-
-        {/*  */}
-        {/* HEADER */}
         {/* Header */}
         <header className="flex items-center h-16 border-b px-4 sticky top-0 bg-white dark:bg-black z-50">
           {/* Left side: Sidebar Trigger + Home Button */}
@@ -65,7 +50,6 @@ export default function DashboardLayout() {
 
         <div className="flex flex-1 flex-col gap-4 p-4">
           <Outlet />
-          {/* <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" /> */}
         </div>
       </SidebarInset>
     </SidebarProvider>

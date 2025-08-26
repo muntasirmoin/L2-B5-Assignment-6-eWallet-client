@@ -34,7 +34,7 @@ const cashInZodSchema = z.object({
       })
       .nonnegative("Amount must be 0 or greater")
   ),
-  //
+
   source: z.enum(
     ["bank", "card", "bkash"],
     "Source must be one of: bank, card, bkash"
@@ -55,8 +55,6 @@ export function UserCashInModal() {
     },
   });
 
-  //   const [addMoney, { isLoading, error, data }] = useAddMoneyMutation();
-
   const [addMoney] = useAddMoneyMutation();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -71,11 +69,10 @@ export function UserCashInModal() {
 
       console.log("res", res);
       if (res.success) {
-        // toast.success(`Cash In Done: ${data.amount} tk`);
         toast.success(res.message);
 
-        form.reset(); //  Reset form
-        setOpen(false); //  Close modal
+        form.reset();
+        setOpen(false);
       }
 
       form.reset();
@@ -154,7 +151,9 @@ export function UserCashInModal() {
 
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline" className="cursor-pointer">
+                Cancel
+              </Button>
             </DialogClose>
             <Button
               type="submit"

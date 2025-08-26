@@ -21,12 +21,18 @@ import {
 } from "../Schema/updateUserSchema";
 import { useUpdateProfileMutation } from "@/redux/features/User/user.api";
 
-// <-- Import your user info query hook here
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
+import ErrorLoading from "@/utils/ErrorLoading";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function UpdateProfileForm() {
-  // Fetch the user info from API
-  const { data: userInfo, isLoading } = useUserInfoQuery(undefined);
+  // Fetch  user info
+  const {
+    data: userInfo,
+    isLoading,
+    isError,
+    refetch,
+  } = useUserInfoQuery(undefined);
   const user = userInfo?.data;
 
   // Initialize form with empty strings
@@ -75,9 +81,9 @@ export function UpdateProfileForm() {
       const message = err?.data?.message;
       if (err) {
         if (errorMessageFromSource) {
-          toast.error(errorMessageFromSource); // fallback to source error if available
+          toast.error(errorMessageFromSource);
         } else if (message) {
-          toast.error(message); // fallback to general message
+          toast.error(message);
         } else {
           toast.error("Failed to update profile.");
         }
@@ -86,7 +92,25 @@ export function UpdateProfileForm() {
     }
   };
 
-  if (isLoading) return <div>Loading user info...</div>;
+  if (isLoading)
+    return (
+      <div className="w-full max-w-sm p-4 border rounded-md shadow-sm bg-white dark:bg-gray-900">
+        <Skeleton className="h-6 w-3/4 mb-4 rounded" />
+        <Skeleton className="h-4 w-full mb-2 rounded" />
+        <Skeleton className="h-4 w-full mb-2 rounded" />
+        <Skeleton className="h-4 w-2/3 rounded" />
+      </div>
+    );
+
+  if (isError)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   return (
     <div className="max-w-md mx-auto bg-white dark:bg-gray-900 shadow-md rounded-xl p-6 space-y-6">

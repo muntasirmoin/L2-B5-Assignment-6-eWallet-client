@@ -3,17 +3,7 @@ import Joyride, { ACTIONS, EVENTS, STATUS } from "react-joyride";
 
 const TOUR_KEY = "hasSeenAppTour";
 
-//   const handleRestartTour = () => {
-//     localStorage.removeItem("hasSeenAppTour");
-//     window.location.reload();
-//   };
-
 const TOUR_STEPS = [
-  //   {
-  //     target: ".nav-menu",
-  //     content: "Use this navigation menu to switch sections instantly!",
-  //     disableBeacon: true,
-  //   },
   {
     target: "#tour-home",
     content: "Welcome! Use this to quickly navigate the Home at any time.",

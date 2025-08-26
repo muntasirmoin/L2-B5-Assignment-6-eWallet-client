@@ -101,7 +101,7 @@ const UserTransactionTypeFiltering = () => {
             setTypeFilter(e.target.value as TransactionTypeValue);
             setCurrentPage(1);
           }}
-          className="border rounded p-2"
+          className="border rounded p-2  bg-white text-black dark:bg-gray-800 dark:text-white"
         >
           <option value={TransactionType.ALL}>All Types</option>
           <option value={TransactionType.Withdraw}>Withdraw Money</option>
@@ -159,9 +159,6 @@ const UserTransactionTypeFiltering = () => {
                   }`}
                 >
                   <TableCell className="text-center font-bold">
-                    {/* {invoice.type === "send-money"
-                      ? invoice.receiver?.name
-                      : `You`} */}
                     {invoice.type === "send-money"
                       ? invoice.receiver?.name
                       : invoice.type === "cash-in" ||
@@ -170,9 +167,6 @@ const UserTransactionTypeFiltering = () => {
                       : "You"}
                   </TableCell>
                   <TableCell className="text-center font-semibold">
-                    {/* {invoice.type === "send-money"
-                      ? invoice.receiver?.phone
-                      : invoice.source} */}
                     {invoice.type === "send-money"
                       ? invoice.receiver?.phone
                       : invoice.type === "cash-in" ||

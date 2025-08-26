@@ -28,24 +28,11 @@ import { useMyWalletQuery } from "@/redux/features/Wallet/wallet.api";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userInfo } = useUserInfoQuery(undefined);
-  // console.log("userInfo dashboard", userInfo);
+
   const location = useLocation();
   const data = {
     navMain: getSidebarItems(userInfo?.data?.role),
   };
-
-  // const { data: userWallet, error, isLoading } = useMyWalletQuery();
-  // console.log("userWallet", userWallet);
-
-  // if (isLoading)
-  //   return (
-  //     <div className="flex flex-col gap-1 leading-none ml-1.5 animate-pulse">
-  //       <span className="h-4 w-16 bg-gray-300 rounded-md mb-1"></span>
-  //       <span className="h-6 w-24 bg-gray-300 rounded-md"></span>
-  //     </div>
-  //   );
-  // if (error) return <p>Error fetching wallet data</p>;
-  // console.log("balance", userWallet?.myWallet?.balance);
 
   const role = userInfo?.data?.role;
   const isWalletUser = role === "user" || role === "agent";
@@ -162,10 +149,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       <SidebarMenuSub>
                         {item.items.map((item) => (
                           <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton
-                              asChild
-                              // isActive={item.isActive}
-                            >
+                            <SidebarMenuSubButton asChild>
                               <a href={item.url}>{item.title}</a>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>

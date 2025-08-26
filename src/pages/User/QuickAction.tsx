@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { useMyWalletQuery } from "@/redux/features/Wallet/wallet.api";
+import ErrorLoading from "@/utils/ErrorLoading";
 import { ArrowDown, ArrowUpRight, Wallet } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function QuickAction() {
-  const { data: userWallet, error, isLoading } = useMyWalletQuery();
+  const { data: userWallet, isError, isLoading, refetch } = useMyWalletQuery();
 
   if (isLoading)
     return (
@@ -13,8 +14,15 @@ export function QuickAction() {
         <span className="h-6 w-24 bg-gray-300 rounded-md"></span>
       </div>
     );
-  if (error) return <p>Error fetching wallet data</p>;
-  // console.log("balance", userWallet?.myWallet?.balance);
+  if (isError)
+    return (
+      <ErrorLoading
+        message="Failed to load!"
+        onRetry={() => {
+          void refetch();
+        }}
+      />
+    );
 
   return (
     <>

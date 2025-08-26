@@ -112,9 +112,6 @@ const UserCompleteTransactionTable = () => {
                     }`}
                   >
                     <TableCell className="text-center font-bold">
-                      {/* {invoice.type === "send-money"
-                        ? invoice.receiver?.name
-                        : `You`} */}
                       {invoice.type === "send-money"
                         ? invoice.receiver?.name
                         : invoice.type === "cash-in" ||
@@ -123,9 +120,6 @@ const UserCompleteTransactionTable = () => {
                         : "You"}
                     </TableCell>
                     <TableCell className="text-center font-semibold">
-                      {/* {invoice.type === "send-money"
-                        ? invoice.receiver?.phone
-                        : invoice.source} */}
                       {invoice.type === "send-money"
                         ? invoice.receiver?.phone
                         : invoice.type === "cash-in" ||

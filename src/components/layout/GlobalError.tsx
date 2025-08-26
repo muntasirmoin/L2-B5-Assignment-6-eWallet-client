@@ -22,7 +22,7 @@ const GlobalError = () => {
     );
   }
 
-  // Try to match your backend error structure
+  // Match your backend error structure
   const customError = error as TGenericErrorResponse;
 
   return (

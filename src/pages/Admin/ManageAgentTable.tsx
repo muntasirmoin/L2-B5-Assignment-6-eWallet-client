@@ -19,7 +19,6 @@ import {
 } from "@/redux/features/Agent/agent.api";
 import ErrorLoading from "@/utils/ErrorLoading";
 
-//
 const isApproveType = {
   ALL: "",
   Approve: "true",
@@ -28,8 +27,6 @@ const isApproveType = {
 
 export type isApproveTypeKey = keyof typeof isApproveType;
 export type isApproveTypeValue = (typeof isApproveType)[isApproveTypeKey];
-
-//
 
 export function ManageAgentTable() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -160,7 +157,7 @@ export function ManageAgentTable() {
               setTypeFilter(e.target.value as isApproveTypeValue);
               setCurrentPage(1);
             }}
-            className="border rounded p-2 w-full sm:w-auto"
+            className="border rounded p-2 w-full sm:w-auto bg-white text-black dark:bg-gray-800 dark:text-white"
           >
             <option value={isApproveType.ALL}>All Status</option>
             <option value={isApproveType.Approve}>Approve</option>

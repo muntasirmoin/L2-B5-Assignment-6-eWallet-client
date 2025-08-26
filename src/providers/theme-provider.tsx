@@ -1,4 +1,3 @@
-// import { ThemeProviderContext } from "@/context/theme.context";
 import { ThemeProviderContext } from "@/context/theme.context";
 import { useEffect, useState } from "react";
 

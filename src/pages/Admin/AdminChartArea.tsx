@@ -78,8 +78,6 @@ export default function AdminChartArea() {
     );
   }
 
-  //
-
   const chartData = [
     {
       name: "User",

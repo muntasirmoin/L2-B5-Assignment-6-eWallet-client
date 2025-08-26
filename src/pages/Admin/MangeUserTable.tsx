@@ -154,7 +154,7 @@ export function ManageUserTable() {
               setTypeFilter(e.target.value as isBlockedTypeValue);
               setCurrentPage(1);
             }}
-            className="border rounded p-2 w-full sm:w-auto"
+            className="border rounded p-2 w-full sm:w-auto bg-white text-black dark:bg-gray-800 dark:text-white"
           >
             <option value={isBlockedType.ALL}>All Status</option>
             <option value={isBlockedType.Active}>Active</option>

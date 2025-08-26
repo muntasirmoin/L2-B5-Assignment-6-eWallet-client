@@ -27,7 +27,6 @@ export type TransactionTypeKey = keyof typeof TransactionType;
 export type TransactionTypeValue = (typeof TransactionType)[TransactionTypeKey];
 
 const AdminAllTransactionsTable = () => {
-  //   const { data, isLoading, error, refetch } = useAllTransactionsInfoQuery();
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
@@ -137,7 +136,7 @@ const AdminAllTransactionsTable = () => {
               setTypeFilter(e.target.value as TransactionTypeValue);
               setCurrentPage(1);
             }}
-            className="border rounded p-2 w-full sm:w-auto"
+            className="border rounded p-2 w-full sm:w-auto bg-white text-black dark:bg-gray-800 dark:text-white"
           >
             <option value={TransactionType.ALL}>All Type</option>
             <option value={TransactionType.Add}>Add Money</option>
@@ -154,7 +153,7 @@ const AdminAllTransactionsTable = () => {
               setSortOrder(e.target.value as "asc" | "desc" | "");
               setCurrentPage(1);
             }}
-            className="border rounded p-2 w-full sm:w-auto"
+            className="border rounded p-2 w-full sm:w-auto bg-white text-black dark:bg-gray-800 dark:text-white"
           >
             <option value="">Sort by Amount</option>
             <option value="desc">Amount: High to Low</option>

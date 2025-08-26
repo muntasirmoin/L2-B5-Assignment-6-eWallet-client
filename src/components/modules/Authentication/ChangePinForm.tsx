@@ -15,7 +15,7 @@ import { toast } from "sonner";
 import { PasswordInputEye } from "@/utils/PasswordInputEye";
 import { useChangePinMutation } from "@/redux/features/Auth/auth.api";
 
-// ✅ Zod schema with validation
+// Zod schema with validation
 const changePinSchema = z
   .object({
     oldPin: z.string().regex(/^\d{4,5}$/, {
@@ -39,7 +39,6 @@ const changePinSchema = z
 
 type ChangePinFormData = z.infer<typeof changePinSchema>;
 
-// ✅ Final Form Component
 export function ChangePinForm({
   className,
   ...props
@@ -53,7 +52,6 @@ export function ChangePinForm({
     try {
       console.log("Change PIN Data:", data);
 
-      // Fake API logic / mutation
       const res = await changePin({
         oldPin: data.oldPin,
         newPin: data.newPin,

@@ -11,7 +11,6 @@ interface Invoice {
   type: TransactionType;
   status: TransactionStatus;
   amount: number;
-  // other props...
 }
 
 export function getTotalByTypeAndStatus(

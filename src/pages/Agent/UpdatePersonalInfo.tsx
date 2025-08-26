@@ -4,7 +4,7 @@ import { UpdateProfileForm } from "@/components/modules/User/UpdateProfileForm";
 
 const UpdatePersonalInfo = () => {
   const { data: userInfo } = useUserInfoQuery(undefined);
-  //   const user = userInfo?.data;
+
   console.log("userInfo", userInfo);
   return (
     <>
@@ -12,7 +12,7 @@ const UpdatePersonalInfo = () => {
         {/* Personal Info Modal Card */}
         <PersonalInfo />
 
-        {/* ✅ Responsive Transaction Table Below */}
+        {/*  Responsive Transaction Table Below */}
         <div className="mt-10 px-2 sm:px-4 md:px-8 overflow-x-auto">
           <div className="min-w-[320px] w-full max-w-7xl mx-auto">
             {/* <MyRecentTransactionTable /> */}

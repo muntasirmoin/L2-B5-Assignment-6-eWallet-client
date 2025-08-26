@@ -8,7 +8,7 @@ const Contact = () => {
     phone: "",
     message: "",
   });
-  // const [submitted, setSubmitted] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
   const handleChange = (
@@ -45,7 +45,6 @@ const Contact = () => {
           onSubmit={handleSubmit}
           className="bg-white/10 backdrop-blur-lg p-8 rounded-xl shadow-lg space-y-6"
         >
-          {/* Row 1: Name & Phone */}
           <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
             <div className="md:w-1/2">
               <label htmlFor="name" className="block text-sm font-medium mb-1">
@@ -75,7 +74,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Row 2: Email */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium mb-1">
               Email
@@ -90,7 +88,6 @@ const Contact = () => {
             />
           </div>
 
-          {/* Row 3: Message */}
           <div>
             <label htmlFor="message" className="block text-sm font-medium mb-1">
               Message
@@ -115,13 +112,6 @@ const Contact = () => {
               {loading ? "Sending..." : "Send Message"}
             </button>
           </div>
-
-          {/* Success Message */}
-          {/* {submitted && (
-            <p className="text-green-400 text-center">
-               Message sent successfully!
-            </p>
-          )} */}
         </form>
       </div>
     </section>

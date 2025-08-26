@@ -77,7 +77,6 @@ export function UserSendMoneyModal() {
       }
 
       const res = await sendMoney({
-        // userId: data.phone,
         receiverUserId,
         amount: data.amount,
       }).unwrap();
@@ -85,8 +84,8 @@ export function UserSendMoneyModal() {
       if (res.success) {
         toast.success(`Send Money Done: ${data.amount} tk`);
 
-        form.reset(); //  Reset form
-        setOpen(false); //  Close modal
+        form.reset();
+        setOpen(false);
       }
 
       form.reset();
@@ -113,9 +112,9 @@ export function UserSendMoneyModal() {
       } else if (message === "Receiver must be a  User Role ObjectId.") {
         toast.error("It's Not a User Number");
       } else if (errorMessageFromSource) {
-        toast.error(errorMessageFromSource); // fallback to source error if available
+        toast.error(errorMessageFromSource);
       } else if (message) {
-        toast.error(message); // fallback to general message
+        toast.error(message);
       } else {
         toast.error("Something went wrong.");
       }
@@ -177,7 +176,9 @@ export function UserSendMoneyModal() {
 
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline" className="cursor-pointer">
+                Cancel
+              </Button>
             </DialogClose>
             <Button
               type="submit"

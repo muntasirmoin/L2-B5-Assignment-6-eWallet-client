@@ -52,7 +52,6 @@ const HeroBanner = () => {
                     Go to Admin Dashboard
                   </Link>
                 ) : (
-                  // fallback if role unknown
                   <Link
                     to="/dashboard"
                     className="inline-block rounded-md bg-indigo-600 px-6 py-3 text-center text-sm font-medium text-white hover:bg-indigo-700"

@@ -12,47 +12,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-// interface UserMenuProps {
-//   name?: string;
-//   phone?: string;
-// }
-
-// export default function UserMenu({ name, email }: UserMenuProps) {
-//   return (
-//     <DropdownMenu>
-//       <DropdownMenuTrigger asChild>
-//         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
-//           <Avatar>
-//             <AvatarImage src="./avatar.jpg" alt="Profile image" />
-//             <AvatarFallback>KK</AvatarFallback>
-//           </Avatar>
-//         </Button>
-//       </DropdownMenuTrigger>
-//       <DropdownMenuContent className="max-w-64" align="end">
-//         <DropdownMenuLabel className="flex min-w-0 flex-col">
-//           <span className="text-foreground truncate text-sm font-medium">
-//             Keith Kennedy
-//           </span>
-//           <span className="text-muted-foreground truncate text-xs font-normal">
-//             k.kennedy@originui.com
-//           </span>
-//         </DropdownMenuLabel>
-//         <DropdownMenuSeparator />
-
-//         <DropdownMenuGroup>
-//           <DropdownMenuItem>
-//             <UserPenIcon size={16} className="opacity-60" aria-hidden="true" />
-//             <span>Option 5</span>
-//           </DropdownMenuItem>
-//         </DropdownMenuGroup>
-//         {/* <DropdownMenuSeparator /> */}
-//       </DropdownMenuContent>
-//     </DropdownMenu>
-//   );
-// }
-
-// UserMenu.tsx
-
 interface UserMenuProps {
   name?: string;
   phone?: string;
@@ -62,18 +21,6 @@ export default function UserMenu({ name, phone }: UserMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {/* <Button
-          variant="ghost"
-          className="h-auto cursor-pointer p-0 m-0.5  hover:bg-transparent"
-        >
-          <Avatar>
-            <AvatarImage src="./avatar.jpg" alt="Profile image" />
-            <AvatarFallback>
-              {(name?.split(" ")[0] ?? "Me").toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-        </Button> */}
-
         <Button
           variant="ghost"
           className="h-auto p-0 m-0.5 cursor-pointer hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-white/30 rounded-full transition"

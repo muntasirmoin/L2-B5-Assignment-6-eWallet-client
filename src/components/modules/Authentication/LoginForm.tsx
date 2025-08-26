@@ -21,11 +21,6 @@ export function LoginForm({
   const navigate = useNavigate();
   const form = useForm({
     mode: "onChange",
-    // For development only
-    // defaultValues: {
-    //   phone: "muntasirmoinchowdhury099@gmail.com",
-    //   pin: "Muntasir1!",
-    // },
   });
   const [login, { isLoading }] = useLoginMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {

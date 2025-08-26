@@ -54,24 +54,11 @@ export default function InfoMenu() {
           </Link>
         </DropdownMenuItem>
 
-        {/* Restart Tour Button */}
         <DropdownMenuItem>
-          {/* <Button
-            onClick={handleRestartTour}
-            className="w-full cursor-pointer bg-transparent hover:text-white text-gray text-sm"
-          >
-            <HelpCircleIcon
-              size={16}
-              className="opacity-60"
-              aria-hidden="true"
-            />
-            Restart Tour
-          </Button> */}
-
           <Link
             to="#"
             onClick={(e) => {
-              e.preventDefault(); // prevent default navigation
+              e.preventDefault();
               handleRestartTour();
             }}
             className="w-full flex items-center gap-2"

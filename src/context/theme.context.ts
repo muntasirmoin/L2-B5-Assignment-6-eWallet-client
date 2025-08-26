@@ -1,5 +1,3 @@
-// import { Theme } from "@/providers/theme.provider";
-
 import type { Theme } from "@/providers/theme-provider";
 import { createContext } from "react";
 

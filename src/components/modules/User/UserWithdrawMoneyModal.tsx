@@ -49,7 +49,7 @@ const cashInZodSchema = z.object({
       })
       .nonnegative("Amount must be 0 or greater")
   ),
-  //
+
   source: z.enum(
     ["bank", "card", "bkash"],
     "Source must be one of: bank, card, bkash"
@@ -70,15 +70,12 @@ export function UserWithdrawMoneyModal() {
     },
   });
 
-  //
   const transactionSourceOptions = Object.entries(TransactionSourceEnum).map(
     ([key, value]) => ({
-      label: key.charAt(0).toUpperCase() + key.slice(1).toLowerCase(), // Format: "Bank"
-      value: value, // e.g., "bank"
+      label: key.charAt(0).toUpperCase() + key.slice(1).toLowerCase(),
+      value: value,
     })
   );
-
-  //   const [addMoney, { isLoading, error, data }] = useAddMoneyMutation();
 
   const [withdrawMoney] = useWithdrawMoneyMutation();
 
@@ -94,11 +91,10 @@ export function UserWithdrawMoneyModal() {
 
       console.log("res", res);
       if (res.success) {
-        // toast.success(`Cash In Done: ${data.amount} tk`);
         toast.success(res.message);
 
-        form.reset(); //  Reset form
-        setOpen(false); //  Close modal
+        form.reset();
+        setOpen(false);
       }
 
       form.reset();
@@ -138,14 +134,13 @@ export function UserWithdrawMoneyModal() {
               {/* source */}
               <FormField
                 control={form.control}
-                name="source" // or "transactionSource" depending on your form schema
+                name="source"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>Transaction Source</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
-                      //   disabled={divisionLoading}
                     >
                       <FormControl>
                         <SelectTrigger className="w-full">
@@ -188,7 +183,9 @@ export function UserWithdrawMoneyModal() {
 
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline" className="cursor-pointer">
+                Cancel
+              </Button>
             </DialogClose>
             <Button
               type="submit"

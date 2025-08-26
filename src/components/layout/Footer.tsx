@@ -34,13 +34,6 @@ export default function Footer() {
               {footerLinks.map((link, idx) => (
                 <NavigationMenuItem key={idx}>
                   <NavigationMenuLink asChild>
-                    {/* <HashLink
-                      smooth
-                      to={link.href}
-                      className="font-semibold hover:text-primary transition-colors"
-                    >
-                      {link.label}
-                    </HashLink> */}
                     <Link
                       to={link.href}
                       className="font-semibold hover:text-primary transition-colors"
