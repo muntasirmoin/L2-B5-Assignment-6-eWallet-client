@@ -125,7 +125,7 @@ The system is built with a focus on **security**, **scalability**, and **ease of
 - 🔍 **RTK Query** – Powerful data fetching and caching tool integrated with Redux Toolkit
 - 🎨 **Tailwind CSS** – Utility-first CSS framework for rapid styling
 - 🧹 **ESLint** – Linting tool to enforce code quality and style
-- 🔔 **React Toast Sonner** (or similar) – Toast notifications for user feedback
+- 🔔 **React Toast Sonner** – Toast notifications for user feedback
 
 ### Additional Tools
 
