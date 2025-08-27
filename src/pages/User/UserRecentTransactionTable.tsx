@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import ErrorLoading from "@/utils/ErrorLoading";
+import { useUserInfoQuery } from "@/redux/features/User/user.api";
 
 const UserRecentTransactionTable = () => {
   // Fetch only the 5 most recent transactions
@@ -17,6 +18,8 @@ const UserRecentTransactionTable = () => {
     limit: 5,
     sort: "-createdAt",
   });
+
+  const { data: currentUser } = useUserInfoQuery(undefined);
 
   const invoices: ITransaction[] = data?.data ?? [];
 
@@ -73,10 +76,10 @@ const UserRecentTransactionTable = () => {
           <TableHeader>
             <TableRow className="text-center bg-gray-100 dark:bg-gray-800 font-semibold text-gray-700 dark:text-gray-300">
               <TableHead className="py-3 px-2 text-center font-bold">
-                Name
+                Do By Name
               </TableHead>
               <TableHead className="py-3 px-2 text-center font-bold">
-                Phone/Source
+                A/C Number / Source
               </TableHead>
               <TableHead className="py-3 px-2 text-center font-bold">
                 Status
@@ -106,24 +109,53 @@ const UserRecentTransactionTable = () => {
                 }`}
               >
                 <TableCell className="text-center font-bold">
-                  {/* {invoice.type === "send-money"
-                    ? invoice.receiver?.name
-                    : `You`} */}
                   {invoice.type === "send-money"
-                    ? invoice.receiver?.name
-                    : invoice.type === "cash-in" || invoice.type === "cash-out"
-                    ? invoice.createdBy?.name
-                    : "You"}
+                    ? invoice?.createdBy?._id === currentUser?.data?._id &&
+                      invoice?.sender?._id === currentUser?.data?._id
+                      ? "You"
+                      : invoice?.receiver?._id === currentUser?.data?._id
+                      ? `${invoice.sender?.name}`
+                      : "---"
+                    : [
+                        "add-money",
+                        "withdraw-money",
+                        "cash-in",
+                        "cash-out",
+                      ].includes(invoice.type) &&
+                      invoice?.createdBy?._id === currentUser?.data?._id
+                    ? "You"
+                    : invoice.createdBy?.name}
                 </TableCell>
                 <TableCell className="text-center font-semibold">
                   {/* {invoice.type === "send-money"
-                    ? invoice.receiver?.phone
-                    : invoice.source} */}
+                        ? invoice?.createdBy?._id === currentUser?.data?._id &&
+                          invoice?.sender?._id === currentUser?.data?._id
+                          ? invoice.receiver?.phone
+                          : invoice?.receiver?._id === currentUser?.data?._id
+                          ? invoice.sender?.phone
+                          : invoice.receiver?.phone
+                        : ["add-money", "withdraw-money"].includes(invoice.type)
+                        ? invoice.source
+                        : "---"} */}
+
                   {invoice.type === "send-money"
-                    ? invoice.receiver?.phone
-                    : invoice.type === "cash-in" || invoice.type === "cash-out"
-                    ? invoice.createdBy?.phone
-                    : invoice.source}
+                    ? invoice?.createdBy?._id === currentUser?.data?._id &&
+                      invoice?.sender?._id === currentUser?.data?._id
+                      ? invoice.receiver?.phone
+                      : invoice?.receiver?._id === currentUser?.data?._id
+                      ? invoice.sender?.phone
+                      : invoice.receiver?.phone
+                    : ["add-money", "withdraw-money"].includes(invoice.type)
+                    ? invoice.source
+                    : invoice.type === "cash-in"
+                    ? invoice?.createdBy?._id === currentUser?.data?._id
+                      ? invoice.source
+                      : invoice?.createdBy?.phone
+                    : invoice.type === "cash-out"
+                    ? invoice?.createdBy?.phone
+                    : "---"}
+
+                  {/*  */}
                 </TableCell>
                 <TableCell className="text-center font-semibold uppercase">
                   {invoice.status}
@@ -132,7 +164,7 @@ const UserRecentTransactionTable = () => {
                   {invoice._id}
                 </TableCell>
                 <TableCell className="text-center font-semibold">
-                  {new Date(invoice.createdAt).toLocaleString("en-GB", {
+                  {new Date(invoice.updatedAt).toLocaleString("en-GB", {
                     day: "2-digit",
                     month: "2-digit",
                     year: "2-digit",
@@ -143,7 +175,10 @@ const UserRecentTransactionTable = () => {
                   })}
                 </TableCell>
                 <TableCell className="text-center font-semibold uppercase">
-                  {invoice.type}
+                  {invoice.type === "send-money" &&
+                  invoice?.createdBy?._id !== currentUser?.data?._id
+                    ? "send-Money[Received]"
+                    : invoice.type}
                 </TableCell>
                 <TableCell className="text-center font-extrabold">
                   {invoice.type === "cash-out"
