@@ -82,7 +82,7 @@ export function UserSendMoneyModal() {
       }).unwrap();
 
       if (res.success) {
-        toast.success(`Send Money Done: ${data.amount} tk`);
+        toast.success(`Sending Money: ${data.amount} tk`);
 
         form.reset();
         setOpen(false);
