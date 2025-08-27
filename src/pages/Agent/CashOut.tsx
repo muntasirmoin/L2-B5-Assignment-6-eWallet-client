@@ -21,7 +21,7 @@ const CashOut = () => {
           </div>
         </div>
 
-        {/* ✅ Responsive Transaction Table Below */}
+        {/* Responsive Transaction Table Below */}
         <div className="mt-10 px-2 sm:px-4 md:px-8 overflow-x-auto">
           <div className="min-w-[320px] w-full max-w-7xl mx-auto">
             <MyRecentTransactionTable />

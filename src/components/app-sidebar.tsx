@@ -66,7 +66,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </div>
                 )} */}
 
-                {/* ✅ Balance section with loading/error block */}
+                {/*  Balance section with loading/error block */}
                 {/* {isWalletUser && (
                   <div className="flex flex-col gap-0.5 leading-none ml-1.5">
                     <span className="font-bold mb-0.5 text-center">
