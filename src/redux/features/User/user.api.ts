@@ -47,6 +47,17 @@ export const userApi = baseApi.injectEndpoints({
       invalidatesTags: ["TRANSACTION"],
     }),
 
+    // user addMoneyAsCashIn
+
+    addMoneyAsCashIn: builder.mutation({
+      query: (addMoneyInfo) => ({
+        url: "/wallet/add-money-as-cash-in",
+        method: "POST",
+        data: addMoneyInfo,
+      }),
+      invalidatesTags: ["TRANSACTION"],
+    }),
+
     // withdraw money
     withdrawMoney: builder.mutation({
       query: (withdrawMoneyInfo) => ({
@@ -114,6 +125,7 @@ export const userApi = baseApi.injectEndpoints({
 export const {
   useRegisterMutation,
   useUserInfoQuery,
+  useLazyUserInfoQuery,
   useUserByPhoneNumberQuery,
   useLazyUserByPhoneNumberQuery,
   useUpdateProfileMutation,
@@ -124,4 +136,5 @@ export const {
   useAllUserInfoQuery,
   useBlockUserMutation,
   useUnblockUserMutation,
+  useAddMoneyAsCashInMutation,
 } = userApi;

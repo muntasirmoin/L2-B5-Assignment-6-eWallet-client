@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetMyTransactionQuery } from "@/redux/features/Transaction/transaction.api";
+import { useUserInfoQuery } from "@/redux/features/User/user.api";
 import type { ITransaction } from "@/types/transaction";
 import { getTotalByTypeAndStatus } from "@/utils/getTotalByTypeAndStatus";
 import {
@@ -21,6 +22,7 @@ const STATUS_COLORS = {
 };
 
 export default function UserChartBar() {
+  const { data: currentUser } = useUserInfoQuery(undefined);
   const {
     data: allData,
     isLoading,
@@ -28,51 +30,54 @@ export default function UserChartBar() {
   } = useGetMyTransactionQuery({ limit: "all" });
 
   const allInvoices: ITransaction[] = allData?.data ?? [];
+  const myInvoices: ITransaction[] = allInvoices.filter(
+    (invoice) => invoice.createdBy?._id === currentUser?.data?._id
+  );
 
   const totalPendingSendMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "send-money",
     "pending"
   );
   const totalPendingWithdrawMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "withdraw-money",
     "pending"
   );
   const totalPendingAddMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "add-money",
     "pending"
   );
 
   const totalCompletedSendMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "send-money",
     "completed"
   );
   const totalCompletedWithdrawMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "withdraw-money",
     "completed"
   );
   const totalCompletedAddMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "add-money",
     "completed"
   );
 
   const totalReversedSendMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "send-money",
     "reversed"
   );
   const totalReversedWithdrawMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "withdraw-money",
     "reversed"
   );
   const totalReversedAddMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "add-money",
     "reversed"
   );

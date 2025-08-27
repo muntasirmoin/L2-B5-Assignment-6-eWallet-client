@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useAddMoneyMutation } from "@/redux/features/User/user.api";
+import { useAddMoneyAsCashInMutation } from "@/redux/features/User/user.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -55,7 +55,7 @@ export function UserCashInModal() {
     },
   });
 
-  const [addMoney] = useAddMoneyMutation();
+  const [addMoney] = useAddMoneyAsCashInMutation();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {

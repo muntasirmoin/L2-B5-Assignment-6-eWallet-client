@@ -1,12 +1,12 @@
-import { UserPenIcon } from "lucide-react";
+// import { UserPenIcon } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
+  // DropdownMenuGroup,
+  // DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -43,12 +43,12 @@ export default function UserMenu({ name, phone }: UserMenuProps) {
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup>
+        {/* <DropdownMenuGroup>
           <DropdownMenuItem>
             <UserPenIcon size={16} className="opacity-60" aria-hidden="true" />
             <span>Profile Settings</span>
           </DropdownMenuItem>
-        </DropdownMenuGroup>
+        </DropdownMenuGroup> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -146,7 +146,11 @@ const UserRecentTransactionTable = () => {
                   {invoice.type}
                 </TableCell>
                 <TableCell className="text-center font-extrabold">
-                  {invoice.amount.toLocaleString()}
+                  {invoice.type === "cash-out"
+                    ? (
+                        invoice?.amount + (invoice?.commission ?? 0)
+                      ).toLocaleString()
+                    : invoice.amount.toLocaleString()}
                 </TableCell>
               </TableRow>
             ))}

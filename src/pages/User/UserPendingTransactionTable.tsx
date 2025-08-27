@@ -11,11 +11,18 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2 } from "lucide-react";
-import { useCompleteTransactionMutation } from "@/redux/features/User/user.api";
+import {
+  useCompleteTransactionMutation,
+  useUserInfoQuery,
+} from "@/redux/features/User/user.api";
 import { toast } from "sonner";
 import ErrorLoading from "@/utils/ErrorLoading";
 
 const UserPendingTransactionTable = () => {
+  const { data: currentUser } = useUserInfoQuery(undefined);
+
+  console.log("pending user name", currentUser?.data?.name, currentUser?.data);
+
   // Fetch only the 10 most recent transactions
   const { data, isLoading, isError, refetch } = useGetMyTransactionQuery({
     limit: "all",
@@ -25,7 +32,7 @@ const UserPendingTransactionTable = () => {
   const handleConfirm = async (transactionId: string) => {
     try {
       const res = await completeTransaction(transactionId).unwrap();
-      console.log("res", res);
+      console.log("CompleteTransactionRes", res);
       if (res.success) {
         toast.success("Transaction Completed Successfully!");
       }
@@ -98,8 +105,9 @@ const UserPendingTransactionTable = () => {
                 <TableHead className="py-3 px-2 text-center font-bold">
                   Name
                 </TableHead>
+
                 <TableHead className="py-3 px-2 text-center font-bold">
-                  Phone/Source
+                  A/C Number
                 </TableHead>
                 <TableHead className="py-3 px-2 text-center font-bold">
                   Status
@@ -121,7 +129,11 @@ const UserPendingTransactionTable = () => {
             </TableHeader>
             <TableBody>
               {invoices
-                .filter((invoice) => invoice.status === "pending")
+                .filter(
+                  (invoice) =>
+                    invoice.status === "pending" &&
+                    invoice.createdBy?._id === currentUser?.data?._id
+                )
                 .slice(0, 10)
                 .map((invoice) => (
                   <TableRow
@@ -133,14 +145,36 @@ const UserPendingTransactionTable = () => {
                     }`}
                   >
                     <TableCell className="text-center font-bold">
-                      {invoice.type === "send-money"
+                      {/* {invoice.type === "send-money"
                         ? invoice.receiver?.name
-                        : `You`}
+                        : `You`} */}
+
+                      {["bkash", "card", "bank"].includes(invoice.source)
+                        ? "You"
+                        : (invoice?.sender?.phone === currentUser?.data?.phone
+                            ? invoice?.receiver?.name
+                            : invoice?.sender?.name) === currentUser?.data?.name
+                        ? "You"
+                        : invoice?.sender?.phone === currentUser?.data?.phone
+                        ? invoice?.receiver?.name
+                        : invoice?.sender?.name}
                     </TableCell>
+
+                    {/* from */}
                     <TableCell className="text-center font-semibold">
-                      {invoice.type === "send-money"
+                      {/* {invoice.type === "send-money"
                         ? invoice.receiver?.phone
-                        : invoice.source}
+                        : invoice.source} */}
+                      {["bkash", "card", "bank"].includes(invoice.source)
+                        ? invoice.source
+                        : (invoice?.sender?.phone === currentUser?.data?.phone
+                            ? invoice?.receiver?.phone
+                            : invoice?.sender?.phone) ===
+                          currentUser?.data?.phone
+                        ? currentUser?.data?.phone
+                        : invoice?.sender?.phone === currentUser?.data?.phone
+                        ? invoice?.receiver?.phone
+                        : invoice?.sender?.phone}
                     </TableCell>
                     <TableCell className="text-center font-semibold uppercase">
                       {invoice.status}

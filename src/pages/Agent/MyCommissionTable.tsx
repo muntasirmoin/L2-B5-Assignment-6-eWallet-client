@@ -116,46 +116,53 @@ const MyCommissionTable = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {commissions.map((commission: ICommission) => (
-                  <TableRow
-                    key={commission._id}
-                    className={`text-center ${
-                      commission.type === "cash-in"
-                        ? "bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-300"
-                        : commission.type === "cash-out"
-                        ? "bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-300"
-                        : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
-                    }`}
-                  >
-                    <TableCell className="text-center font-semibold">
-                      {commission._id}
-                    </TableCell>
-                    <TableCell className="text-center font-semibold">
-                      {new Date(commission.createdAt)
-                        .toLocaleString("en-GB", {
-                          day: "2-digit",
-                          month: "2-digit",
-                          year: "2-digit",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                          second: "2-digit",
-                          hour12: false,
-                        })
-                        .replace(",", "")
-                        .replace(/\//g, "-")
-                        .replace(" ", " (") + ")"}
-                    </TableCell>
-                    <TableCell className="text-center font-semibold uppercase">
-                      {commission.type}
-                    </TableCell>
-                    <TableCell className="text-center font-extrabold">
-                      {commission.commission.toLocaleString()}
-                    </TableCell>
-                    <TableCell className="text-center font-extrabold">
-                      {commission.amount.toLocaleString()}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {commissions
+                  .slice()
+                  .sort(
+                    (a: ICommission, b: ICommission) =>
+                      new Date(b.createdAt).getTime() -
+                      new Date(a.createdAt).getTime()
+                  )
+                  .map((commission: ICommission) => (
+                    <TableRow
+                      key={commission._id}
+                      className={`text-center ${
+                        commission.type === "cash-in"
+                          ? "bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-300"
+                          : commission.type === "cash-out"
+                          ? "bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-300"
+                          : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+                      }`}
+                    >
+                      <TableCell className="text-center font-semibold">
+                        {commission._id}
+                      </TableCell>
+                      <TableCell className="text-center font-semibold">
+                        {new Date(commission.createdAt)
+                          .toLocaleString("en-GB", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit",
+                            hour12: false,
+                          })
+                          .replace(",", "")
+                          .replace(/\//g, "-")
+                          .replace(" ", " (") + ")"}
+                      </TableCell>
+                      <TableCell className="text-center font-semibold uppercase">
+                        {commission.type}
+                      </TableCell>
+                      <TableCell className="text-center font-extrabold">
+                        {commission.commission.toLocaleString()}
+                      </TableCell>
+                      <TableCell className="text-center font-extrabold">
+                        {commission.amount.toLocaleString()}
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </>

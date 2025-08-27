@@ -6,8 +6,10 @@ import UserRecentTransactionTable from "./UserRecentTransactionTable";
 import { QuickAction } from "./QuickAction";
 import UserChartBar from "./UserChartBar";
 import ErrorLoading from "@/utils/ErrorLoading";
+import { useUserInfoQuery } from "@/redux/features/User/user.api";
 
 const UserOverview = () => {
+  const { data: currentUser } = useUserInfoQuery(undefined);
   // All data
   const {
     data: allData,
@@ -17,60 +19,63 @@ const UserOverview = () => {
   } = useGetMyTransactionQuery({ limit: "all" });
 
   const allInvoices: ITransaction[] = allData?.data ?? [];
+  const myInvoices: ITransaction[] = allInvoices.filter(
+    (invoice) => invoice.createdBy?._id === currentUser?.data?._id
+  );
 
   // pending
   const totalPendingSendMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "send-money",
     "pending"
   );
 
   const totalPendingWithdrawMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "withdraw-money",
     "pending"
   );
 
   const totalPendingAddMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "add-money",
     "pending"
   );
 
   // completed
   const totalCompletedSendMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "send-money",
     "completed"
   );
 
   const totalCompletedWithdrawMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "withdraw-money",
     "completed"
   );
 
   const totalCompletedAddMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "add-money",
     "completed"
   );
 
   // reversed
   const totalReversedSendMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "send-money",
     "reversed"
   );
 
   const totalReversedWithdrawMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "withdraw-money",
     "reversed"
   );
 
   const totalReversedAddMoney = getTotalByTypeAndStatus(
-    allInvoices,
+    myInvoices,
     "add-money",
     "reversed"
   );

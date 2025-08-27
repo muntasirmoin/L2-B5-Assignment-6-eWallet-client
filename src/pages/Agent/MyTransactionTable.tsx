@@ -13,9 +13,31 @@ import { useState } from "react";
 import PaginationComponent from "@/components/pagination";
 import ErrorLoading from "@/utils/ErrorLoading";
 
+export const TransactionType = {
+  ALL: "",
+  Add: "add-money",
+  Withdraw: "withdraw-money",
+  SendMoney: "send-money",
+  CashIn: "cash-in",
+  CashOut: "cash-out",
+} as const;
+
+type sortType = "asc" | "desc" | "";
+
+export type TransactionTypeKey = keyof typeof TransactionType;
+export type TransactionTypeValue = (typeof TransactionType)[TransactionTypeKey];
+
+//
+
 const MyTransactionTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [typeFilter, setTypeFilter] = useState<TransactionTypeValue>(
+    TransactionType.ALL
+  );
+
+  const actualTypeFilter = typeFilter === "" ? undefined : typeFilter;
+  const [sortOrder, setSortOrder] = useState<sortType>("");
 
   const [limit] = useState(8);
 
@@ -29,6 +51,13 @@ const MyTransactionTable = () => {
     page: currentPage,
     limit,
     searchTerm: search,
+    type: actualTypeFilter,
+    sort:
+      sortOrder === "asc"
+        ? "amount"
+        : sortOrder === "desc"
+        ? "-amount"
+        : "-updatedAt",
   });
 
   console.log("paginatedData", paginatedData);
@@ -92,7 +121,7 @@ const MyTransactionTable = () => {
         </div>
 
         {/* search */}
-        <div className="mt-4 sm:mt-6 mb-4 flex justify-center px-4">
+        {/* <div className="mt-4 sm:mt-6 mb-4 flex justify-center px-4">
           <input
             type="text"
             placeholder="Search by status, type, or by exact amount/TRX No"
@@ -103,8 +132,47 @@ const MyTransactionTable = () => {
             }}
             className="border rounded p-2 w-full max-w-md"
           />
-        </div>
+        </div> */}
         {/* search end */}
+        <div className="mt-4 sm:mt-6 mb-4 flex flex-col sm:flex-row justify-between items-center gap-4 px-4">
+          <input
+            type="text"
+            placeholder="Search by status, type, or by exact amount/TRX No"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
+            className="border rounded p-2 w-full sm:w-1/3"
+          />
+
+          <select
+            value={typeFilter}
+            onChange={(e) => {
+              setTypeFilter(e.target.value as TransactionTypeValue);
+              setCurrentPage(1);
+            }}
+            className="border rounded p-2 w-full sm:w-auto bg-white text-black dark:bg-gray-800 dark:text-white"
+          >
+            <option value={TransactionType.ALL}>All Type</option>
+            <option value={TransactionType.CashIn}>Cash In</option>
+            <option value={TransactionType.CashOut}>Cash Out</option>
+          </select>
+
+          {/* Sort Order */}
+          <select
+            value={sortOrder}
+            onChange={(e) => {
+              setSortOrder(e.target.value as "asc" | "desc" | "");
+              setCurrentPage(1);
+            }}
+            className="border rounded p-2 w-full sm:w-auto bg-white text-black dark:bg-gray-800 dark:text-white"
+          >
+            <option value="">Sort by Amount</option>
+            <option value="desc">Amount: High to Low</option>
+            <option value="asc">Amount: Low to High</option>
+          </select>
+        </div>
 
         {invoices.length === 0 ? (
           <p className="text-center text-sm text-muted-foreground py-6">
