@@ -9,7 +9,8 @@ const CashOut = () => {
         <div className="flex items-center justify-center">
           <div className="bg-white dark:bg-gray-900 shadow-2xl rounded-2xl p-6 sm:p-8 md:p-10 w-full max-w-md transition-all duration-300 hover:shadow-green-300 text-center">
             <h1 className="text-xl sm:text-xl font-bold text-green-700 dark:text-green-300 mb-4">
-              Quickly Withdraw from a user's wallet.
+              Quickly Withdraw from a user's wallet. Deducated Commission 0.02%
+              Taka
             </h1>
             <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base mb-4">
               {/* description text */}
