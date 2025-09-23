@@ -24,6 +24,8 @@ export function LoginForm({
   });
   const [login, { isLoading }] = useLoginMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+
+
     console.log("data", data);
     try {
       const res = await login(data).unwrap();
@@ -67,6 +69,22 @@ export function LoginForm({
     }
   };
 
+    // ✅ Add predefined credentials for demo login
+  const handleDemoLogin = async (type: "user" | "admin" | "agent") => {
+    if (type === "user") {
+      form.setValue("phone", "01762557708"); // demo user phone
+      form.setValue("pin", "12345");         // demo user PIN
+    } else if (type === "admin") {
+      form.setValue("phone", "01700000000"); // demo admin phone
+      form.setValue("pin", "12345");         // demo admin PIN
+    }
+    else if (type === "agent") {
+      form.setValue("phone", "01717258119"); // demo admin phone
+      form.setValue("pin", "12345");         // demo admin PIN
+    }
+     await form.handleSubmit(onSubmit)();
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
@@ -75,6 +93,11 @@ export function LoginForm({
           Enter your email below to login to your account
         </p> */}
       </div>
+
+ 
+
+
+
       <div className="grid gap-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -124,6 +147,39 @@ export function LoginForm({
                 </FormItem>
               )}
             />
+
+     {/*  */}
+{/* ✅ Demo Login Buttons */}
+      <div className="flex gap-2 justify-center">
+  
+  <Button
+
+    onClick={() => handleDemoLogin("user")}
+className=" cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+  >
+    Login as User
+  </Button>
+
+  <Button
+   
+    onClick={() => handleDemoLogin("admin")}
+   className=" cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+  >
+    Login as Admin
+  </Button>
+
+  <Button
+    
+    onClick={() => handleDemoLogin("agent")}
+    className=" cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+  >
+    Login as Agent
+  </Button>
+</div>
+
+
+      {/*  */}
+
 
             <Button
               type="submit"
