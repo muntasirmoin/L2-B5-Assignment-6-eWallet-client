@@ -24,8 +24,6 @@ export function LoginForm({
   });
   const [login, { isLoading }] = useLoginMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-
-
     console.log("data", data);
     try {
       const res = await login(data).unwrap();
@@ -69,20 +67,19 @@ export function LoginForm({
     }
   };
 
-    // ✅ Add predefined credentials for demo login
+  // ✅ Add predefined credentials for demo login
   const handleDemoLogin = async (type: "user" | "admin" | "agent") => {
     if (type === "user") {
       form.setValue("phone", "01762557708"); // demo user phone
-      form.setValue("pin", "12345");         // demo user PIN
+      form.setValue("pin", "12345"); // demo user PIN
     } else if (type === "admin") {
       form.setValue("phone", "01700000000"); // demo admin phone
-      form.setValue("pin", "12345");         // demo admin PIN
-    }
-    else if (type === "agent") {
+      form.setValue("pin", "12345"); // demo admin PIN
+    } else if (type === "agent") {
       form.setValue("phone", "01717258119"); // demo admin phone
-      form.setValue("pin", "12345");         // demo admin PIN
+      form.setValue("pin", "12345"); // demo admin PIN
     }
-     await form.handleSubmit(onSubmit)();
+    await form.handleSubmit(onSubmit)();
   };
 
   return (
@@ -93,10 +90,6 @@ export function LoginForm({
           Enter your email below to login to your account
         </p> */}
       </div>
-
- 
-
-
 
       <div className="grid gap-6">
         <Form {...form}>
@@ -148,38 +141,32 @@ export function LoginForm({
               )}
             />
 
-     {/*  */}
-{/* ✅ Demo Login Buttons */}
-      <div className="flex gap-2 justify-center">
-  
-  <Button
+            {/*  */}
+            {/* ✅ Demo Login Buttons */}
+            <div className="flex flex-col sm:flex-row gap-2 justify-center items-center w-full">
+              <Button
+                onClick={() => handleDemoLogin("user")}
+                className="w-full sm:w-auto cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+              >
+                Login as User
+              </Button>
 
-    onClick={() => handleDemoLogin("user")}
-className=" cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
-  >
-    Login as User
-  </Button>
+              <Button
+                onClick={() => handleDemoLogin("admin")}
+                className="w-full sm:w-auto cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+              >
+                Login as Admin
+              </Button>
 
-  <Button
-   
-    onClick={() => handleDemoLogin("admin")}
-   className=" cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
-  >
-    Login as Admin
-  </Button>
+              <Button
+                onClick={() => handleDemoLogin("agent")}
+                className="w-full sm:w-auto cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+              >
+                Login as Agent
+              </Button>
+            </div>
 
-  <Button
-    
-    onClick={() => handleDemoLogin("agent")}
-    className=" cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
-  >
-    Login as Agent
-  </Button>
-</div>
-
-
-      {/*  */}
-
+            {/*  */}
 
             <Button
               type="submit"
