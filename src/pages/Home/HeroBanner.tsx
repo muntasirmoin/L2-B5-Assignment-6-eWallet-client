@@ -1,6 +1,7 @@
 import BannerImage from "@/assets/images/hero-banner1.jpg";
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
 import { Link } from "react-router-dom";
+import "@/assets/css/fonts.css";
 
 const HeroBanner = () => {
   const { data } = useUserInfoQuery(undefined);
@@ -12,7 +13,7 @@ const HeroBanner = () => {
       >
         <div className="absolute inset-0 bg-black/50 dark:bg-black/60"></div>{" "}
         {/* Optional overlay */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 text-white">
+        <div className="relative z-10 mx-auto w-full px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32 text-white">
           <div className="max-w-2xl text-center lg:text-left">
             <h1 className="text-4xl font-extrabold sm:text-5xl sm:leading-tight">
               Take Control of Your
