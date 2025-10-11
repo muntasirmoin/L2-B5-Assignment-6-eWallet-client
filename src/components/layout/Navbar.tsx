@@ -111,6 +111,13 @@ export default function Navbar() {
             <a href="#" className="text-primary hover:text-primary/90">
               <Logo />
             </a>
+            {/* <a href="#" className="text-primary hover:text-primary/90 flex items-center gap-2">
+  <img
+    src="https://res.cloudinary.com/dta2gcxsl/image/upload/v1760193118/walletLogo_xdo4ua.avif"
+    alt="Company Logo"
+    className="h-10 w-auto object-contain"
+  />
+</a> */}
             {/* Navigation menu */}
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">
