@@ -14,7 +14,7 @@ const Mission = () => {
   return (
     <section
       className="relative flex flex-col items-center justify-center text-center
-                 w-full min-h-screen px-6 sm:px-10 lg:px-16 py-20
+                 w-full  px-6 sm:px-10 lg:px-16 py-20
                  bg-gradient-to-br from-indigo-50 via-slate-100 to-indigo-100
                  dark:from-slate-900 dark:via-slate-800 dark:to-slate-900
                  transition-colors duration-700 overflow-hidden"
@@ -28,7 +28,7 @@ const Mission = () => {
       />
 
       <motion.div
-        className="relative z-10 max-w-4xl"
+        className="relative z-10 "
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.3 }}
