@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import muntasirImage from "@/assets/teams/muntasir.jpg";
 import fatemaImage from "@/assets/teams/fatema.png";
 import rahimImage from "@/assets/teams/rahim.png";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: (i: number) => ({
     opacity: 1,

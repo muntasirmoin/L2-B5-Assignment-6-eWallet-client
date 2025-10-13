@@ -1,7 +1,6 @@
-"use client";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 50 },
   visible: (i: number) => ({
     opacity: 1,
@@ -63,13 +62,13 @@ const Mission = () => {
           At the heart of our mission lies a commitment to fostering a fully
           cashless economy where digital financial services are universally
           accessible, efficient, and secure. We strive to deliver innovative
-          digital solutions that empower individuals and businesses across
-          urban centers and remote areas alike.
+          digital solutions that empower individuals and businesses across urban
+          centers and remote areas alike.
           <br />
           <br />
           Recognizing the diverse financial needs of our communities, our
-          platform is designed to provide seamless, real-time transactions
-          that uphold the highest standards of security and compliance. We are
+          platform is designed to provide seamless, real-time transactions that
+          uphold the highest standards of security and compliance. We are
           dedicated to bridging the gap between traditional financial systems
           and the digital future by promoting financial inclusion and
           transparency.
@@ -85,8 +84,8 @@ const Mission = () => {
           invest in robust security measures and regulatory compliance to
           safeguard our users’ data and funds. By partnering with stakeholders
           across the financial ecosystem, we aim to create a sustainable and
-          resilient digital economy that fosters economic growth and
-          opportunity for everyone.
+          resilient digital economy that fosters economic growth and opportunity
+          for everyone.
           <br />
           <br />
           Through our unwavering dedication to innovation, accessibility, and

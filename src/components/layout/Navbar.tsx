@@ -25,9 +25,10 @@ import { role } from "@/constants/role";
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
   { href: "/", label: "Home", role: "PUBLIC", id: "tour-home" },
-  { href: "/about", label: "About", role: "PUBLIC", id: "tour-about" },
+
   { href: "/features", label: "Features", role: "PUBLIC", id: "tour-features" },
   { href: "/contact", label: "Contact", role: "PUBLIC", id: "tour-contact" },
+  { href: "/about", label: "About", role: "PUBLIC", id: "tour-about" },
   { href: "/faq", label: "FAQ", role: "PUBLIC", id: "tour-faq" },
   { href: "/admin", label: "Dashboard", role: role.ADMIN },
   { href: "/agent", label: "Dashboard", role: role.AGENT },
@@ -167,7 +168,7 @@ export default function Navbar() {
                 <Button
                   onClick={handleLogout}
                   // variant="outline"
-                  className="text-sm cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+                  className=" cursor-pointer bg-gradient-to-r from-blue-500 to-indigo-700 text-white rounded-lg font-medium text-sm hover:from-blue-600 hover:to-indigo-800 transition-all shadow-md hover:shadow-lg"
                 >
                   Logout
                 </Button>
@@ -175,7 +176,7 @@ export default function Navbar() {
             ) : (
               <Button
                 asChild
-                className="text-sm cursor-pointer hover:bg-green-500 hover:text-white hover:border-green-100"
+                className="py-2 px-2 cursor-pointer bg-gradient-to-r from-blue-500 to-indigo-700 text-white rounded-lg font-medium text-sm hover:from-blue-600 hover:to-indigo-800 transition-all shadow-md hover:shadow-lg"
               >
                 <Link to="/login">Login</Link>
               </Button>
