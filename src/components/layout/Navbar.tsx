@@ -14,7 +14,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import Logo from "@/assets/icons/Logo";
+// import Logo from "@/assets/icons/Logo";
 import { ModeToggler } from "./ModeToggler";
 import { Link } from "react-router-dom";
 import { authApi, useLogoutMutation } from "@/redux/features/Auth/auth.api";
@@ -107,17 +107,20 @@ export default function Navbar() {
             </PopoverContent>
           </Popover>
           {/* Main nav */}
-          <div className="flex items-center gap-6">
-            <a href="#" className="text-primary hover:text-primary/90">
+          <div className="flex items-center gap-2">
+            {/* <a href="#" className="text-primary hover:text-primary/90">
               <Logo />
+            </a> */}
+            <a
+              href="#"
+              className="text-primary hover:text-primary/90 flex items-center ml-3"
+            >
+              <img
+                src="https://res.cloudinary.com/dta2gcxsl/image/upload/v1760332205/output-onlinepngtools_iis7wf.png"
+                alt="Company Logo"
+                className="h-10 w-auto object-contain"
+              />
             </a>
-            {/* <a href="#" className="text-primary hover:text-primary/90 flex items-center gap-2">
-  <img
-    src="https://res.cloudinary.com/dta2gcxsl/image/upload/v1760193118/walletLogo_xdo4ua.avif"
-    alt="Company Logo"
-    className="h-10 w-auto object-contain"
-  />
-</a> */}
             {/* Navigation menu */}
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">
