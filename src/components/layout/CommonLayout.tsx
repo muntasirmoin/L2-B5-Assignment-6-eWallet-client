@@ -9,12 +9,21 @@ interface IProps {
 }
 
 const CommonLayout = ({ children }: IProps) => {
+  const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate page/content loading
-    const timer = setTimeout(() => setLoading(false), 2000); // replace with real fetch
-    return () => clearTimeout(timer);
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          setTimeout(() => setLoading(false), 500);
+          return 100;
+        }
+        return prev + Math.random() * 7;
+      });
+    }, 200);
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -31,10 +40,6 @@ const CommonLayout = ({ children }: IProps) => {
             exit={{ opacity: 0 }}
             className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900 dark:bg-slate-900 z-50"
           >
-            {/* Logo as React component */}
-            {/* <div className=" mb-4 justify-center align-center">
-              <Logo />
-            </div> */}
             <div className="flex justify-center mb-8">
               <motion.img
                 src="https://res.cloudinary.com/dta2gcxsl/image/upload/v1760332205/output-onlinepngtools_iis7wf.png"
@@ -47,12 +52,37 @@ const CommonLayout = ({ children }: IProps) => {
               />
             </div>
 
-            {/* Spinner */}
-            <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+            <div className="flex flex-col items-center justify-center">
+              {/* Spinner with glow & gradient border */}
+              <div className="relative w-20 h-20 flex items-center justify-center">
+                {/* Glowing background circle */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 blur-2xl opacity-50 animate-pulse"></div>
 
-            <p className="mt-4 text-slate-700 dark:text-slate-300 font-medium">
-              Loading...
-            </p>
+                {/* Rotating gradient ring */}
+                <div className="w-16 h-16 rounded-full border-4 border-transparent border-t-purple-500 border-r-pink-500 animate-spin-slow"></div>
+
+                {/* Inner dot */}
+                <div className="absolute w-3 h-3 bg-purple-400 rounded-full animate-ping"></div>
+              </div>
+
+              {/* Loading text with percentage */}
+              <p className="mt-5 text-lg font-semibold text-slate-700 dark:text-slate-200 tracking-wide flex items-center gap-2">
+                <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient-x">
+                  E-Wallet Loading
+                </span>
+                <motion.span
+                  key={progress}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-purple-500 dark:text-purple-400"
+                >
+                  {Math.floor(progress)}%
+                </motion.span>
+              </p>
+            </div>
+
+            {/*  */}
           </motion.div>
         )}
       </AnimatePresence>
