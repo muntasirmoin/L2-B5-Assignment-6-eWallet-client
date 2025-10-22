@@ -40,6 +40,16 @@ const Features = () => {
       desc: "Track your spending with clean visual insights and intelligent reporting tools.",
       icon: ReportImage,
     },
+    {
+      title: "Bill Payments",
+      desc: "Pay your bills directly from the wallet — electricity, water, internet, and more, with ease.",
+      icon: "https://res.cloudinary.com/dta2gcxsl/image/upload/v1761140516/utilitybill_ptrv3r.avif",
+    },
+    {
+      title: "QR Code Payments",
+      desc: "Scan or generate QR codes for instant payments  hassle-free and secure.",
+      icon: "https://res.cloudinary.com/dta2gcxsl/image/upload/v1761141635/qr-code-payment_nfvlvs.jpg",
+    },
   ];
 
   const motionVariants = [
@@ -61,13 +71,16 @@ const Features = () => {
         viewport={{ once: false }}
         className="text-center mb-16"
       >
-        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight 
+        <h2
+          className="text-4xl sm:text-5xl font-extrabold tracking-tight 
                        bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500
-                       bg-clip-text text-transparent drop-shadow-lg">
+                       bg-clip-text text-transparent drop-shadow-lg"
+        >
           Explore Our Features
         </h2>
         <p className="mt-4 max-w-2xl mx-auto text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-          Experience modern financial tools designed for simplicity, security, and total control.
+          Experience modern financial tools designed for simplicity, security,
+          and total control.
         </p>
       </motion.div>
 
