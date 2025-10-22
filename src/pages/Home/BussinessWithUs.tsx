@@ -1,4 +1,4 @@
-import { CheckCircle2, UserPlus } from "lucide-react";
+import { CheckCircle2, UserPlus, MousePointer2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
 
@@ -9,6 +9,7 @@ export interface IProject {
   features: string[];
   description: string;
   signup?: string;
+  featuresLink?: string;
 }
 
 const projectData: IProject[] = [
@@ -21,6 +22,7 @@ const projectData: IProject[] = [
     description:
       "Provides a secure one-stop payment solution for your business, connecting you with a user base of more than a million customers.",
     signup: "/register",
+    featuresLink: "/features",
   },
 ];
 
@@ -36,6 +38,7 @@ const textVariants = {
 
 export default function BusinessWithUs() {
   const { data } = useUserInfoQuery(undefined);
+  console.log("inside business with us", data);
   return (
     <section className="py-16 px-4 md:px-8 mx-auto bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a] transition-colors duration-500">
       {/* Header */}
@@ -109,22 +112,35 @@ export default function BusinessWithUs() {
 
               {/* CTA */}
               <div className="pt-4">
-                <a
-                  href={project.signup}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-medium rounded-lg text-sm shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-                >
-                  <UserPlus
-                    size={18}
-                    className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
-                  />
-                  {data?.data?.phone ? (
+                {data?.data?.phone ? (
+                  <a
+                    href={project.featuresLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-medium rounded-lg text-sm shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                  >
+                    <MousePointer2
+                      size={18}
+                      className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+                    />
+
+                    <span className="tracking-wide">Features</span>
+                  </a>
+                ) : (
+                  <a
+                    href={project.signup}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-medium rounded-lg text-sm shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                  >
+                    <UserPlus
+                      size={18}
+                      className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+                    />
+
                     <span className="tracking-wide">Sign Up</span>
-                  ) : (
-                    <span className="tracking-wide">Learn More</span>
-                  )}
-                </a>
+                  </a>
+                )}
               </div>
             </motion.div>
           </div>
