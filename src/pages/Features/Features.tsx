@@ -50,6 +50,11 @@ const Features = () => {
       desc: "Scan or generate QR codes for instant payments  hassle-free and secure.",
       icon: "https://res.cloudinary.com/dta2gcxsl/image/upload/v1761141635/qr-code-payment_nfvlvs.jpg",
     },
+    {
+      title: "Investment Options",
+      desc: "Grow your funds by investing in safe, curated financial products directly from your wallet.",
+      icon: "https://res.cloudinary.com/dta2gcxsl/image/upload/v1761141919/investment_wmx6tu.avif",
+    },
   ];
 
   const motionVariants = [
