@@ -1,5 +1,6 @@
 import { CheckCircle2, UserPlus } from "lucide-react";
 import { motion } from "framer-motion";
+import { useUserInfoQuery } from "@/redux/features/User/user.api";
 
 export interface IProject {
   title: string;
@@ -34,6 +35,7 @@ const textVariants = {
 };
 
 export default function BusinessWithUs() {
+  const { data } = useUserInfoQuery(undefined);
   return (
     <section className="py-16 px-4 md:px-8 mx-auto bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a] transition-colors duration-500">
       {/* Header */}
@@ -117,7 +119,11 @@ export default function BusinessWithUs() {
                     size={18}
                     className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
                   />
-                  <span className="tracking-wide">Sign Up</span>
+                  {data?.data?.phone ? (
+                    <span className="tracking-wide">Sign Up</span>
+                  ) : (
+                    <span className="tracking-wide">Learn More</span>
+                  )}
                 </a>
               </div>
             </motion.div>
