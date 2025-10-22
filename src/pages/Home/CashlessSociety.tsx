@@ -1,5 +1,6 @@
-import { CheckCircle2, UserPlus } from "lucide-react";
+import { CheckCircle2, MousePointer2, UserPlus } from "lucide-react";
 import { motion } from "framer-motion";
+import { useUserInfoQuery } from "@/redux/features/User/user.api";
 
 export interface IProject {
   title: string;
@@ -8,6 +9,7 @@ export interface IProject {
   features: string[];
   description: string;
   signup?: string;
+  featuresLink?: string;
 }
 
 const projectData: IProject[] = [
@@ -23,6 +25,7 @@ const projectData: IProject[] = [
     description:
       "We are committed to transforming Bangladesh into a cashless society. We were the first to introduce QR code–based payments in the country and are continuously evolving to eliminate cash and build a connected digital ecosystem for everyone.",
     signup: "/register",
+    featuresLink: "/features",
   },
 ];
 
@@ -37,6 +40,7 @@ const imageVariants = {
 };
 
 export default function CashlessSociety() {
+  const { data } = useUserInfoQuery(undefined);
   return (
     <section className="py-20 px-6 md:px-12 mx-auto bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-500">
       {/* Section header */}
@@ -121,23 +125,35 @@ export default function CashlessSociety() {
 
               {/* CTA Button */}
               <div className="pt-6">
-                <a
-                  href={project.signup}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 px-5 py-3 
-                    bg-gradient-to-r from-blue-600 to-indigo-700 
-                    hover:from-blue-700 hover:to-indigo-800 
-                    text-white font-semibold rounded-xl text-base 
-                    shadow-md hover:shadow-xl transition-all duration-300 
-                    focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
-                >
-                  <UserPlus
-                    size={20}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                  <span>Sign Up</span>
-                </a>
+                {data?.data?.phone ? (
+                  <a
+                    href={project.featuresLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-medium rounded-lg text-sm shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                  >
+                    <MousePointer2
+                      size={18}
+                      className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+                    />
+
+                    <span className="tracking-wide">Features</span>
+                  </a>
+                ) : (
+                  <a
+                    href={project.signup}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-medium rounded-lg text-sm shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                  >
+                    <UserPlus
+                      size={18}
+                      className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+                    />
+
+                    <span className="tracking-wide">Sign Up</span>
+                  </a>
+                )}
               </div>
             </motion.div>
           </div>
