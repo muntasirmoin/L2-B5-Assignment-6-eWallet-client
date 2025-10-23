@@ -131,7 +131,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             {data.navMain.map((item) => (
               <Collapsible
                 key={item.title}
-                defaultOpen={item.items.some(
+                defaultOpen={item?.items?.some(
                   (subItem) => location.pathname === subItem.url
                 )}
                 className="group/collapsible"
