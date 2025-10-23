@@ -1,5 +1,4 @@
 import { BookIcon, InfoIcon, LifeBuoyIcon, RotateCcwIcon } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function InfoMenu() {
   const handleRestartTour = () => {
@@ -22,55 +22,66 @@ export default function InfoMenu() {
         <Button
           size="icon"
           variant="ghost"
-          className="size-8 rounded-full shadow-none"
-          aria-label="Open edit menu"
+          className="relative rounded-full bg-white/10 hover:bg-white/20 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all shadow-sm hover:shadow-md"
+          aria-label="Open info menu"
         >
-          <InfoIcon
-            className="text-muted-foreground"
-            size={16}
-            aria-hidden="true"
-          />
+          <InfoIcon className="text-primary" size={18} aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="pb-2">
-        <DropdownMenuLabel>Need help?</DropdownMenuLabel>
-        <DropdownMenuItem
-          className="cursor-pointer py-1 focus:bg-transparent focus:underline"
-          asChild
-        >
-          <Link to="/faq" className="flex items-center gap-2">
-            <BookIcon size={16} className="opacity-60" aria-hidden="true" />
-            FAQ
-          </Link>
-        </DropdownMenuItem>
 
-        <DropdownMenuItem
-          className="cursor-pointer py-1 focus:bg-transparent focus:underline"
-          asChild
+      <DropdownMenuContent
+        align="end"
+        side="bottom"
+        className="p-0"
+        sideOffset={12}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+          className="min-w-[200px] bg-background border border-border shadow-lg rounded-xl overflow-hidden dark:bg-gray-900 dark:border-gray-700"
         >
-          <Link to="/contact" className="flex items-center gap-2">
-            <LifeBuoyIcon size={16} className="opacity-60" aria-hidden="true" />
-            Support
-          </Link>
-        </DropdownMenuItem>
+          <DropdownMenuLabel className="text-sm text-muted-foreground px-4 py-2">
+            Need help?
+          </DropdownMenuLabel>
 
-        <DropdownMenuItem>
-          <Link
-            to="#"
-            onClick={(e) => {
-              e.preventDefault();
-              handleRestartTour();
-            }}
-            className="w-full flex items-center gap-2"
+          <DropdownMenuItem
+            asChild
+            className="px-4 py-2 rounded-md hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors flex items-center gap-2"
           >
-            <RotateCcwIcon
-              size={16}
-              className="opacity-60"
-              aria-hidden="true"
-            />
-            Restart Tour
-          </Link>
-        </DropdownMenuItem>
+            <Link to="/faq">
+              <BookIcon size={18} className="opacity-70" />
+              FAQ
+            </Link>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
+            asChild
+            className="px-4 py-2 rounded-md hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors flex items-center gap-2"
+          >
+            <Link to="/contact">
+              <LifeBuoyIcon size={18} className="opacity-70" />
+              Support
+            </Link>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
+            asChild
+            className="px-4 py-2 rounded-md hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors flex items-center gap-2 cursor-pointer"
+          >
+            <Link
+              to="#"
+              onClick={(e) => {
+                e.preventDefault();
+                handleRestartTour();
+              }}
+            >
+              <RotateCcwIcon size={18} className="opacity-70" />
+              Restart Tour
+            </Link>
+          </DropdownMenuItem>
+        </motion.div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
