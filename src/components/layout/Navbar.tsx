@@ -21,6 +21,8 @@ import { authApi, useLogoutMutation } from "@/redux/features/Auth/auth.api";
 import { useAppDispatch } from "@/redux/hook";
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
 import { role } from "@/constants/role";
+import { motion } from "framer-motion";
+import { LogIn, LogOut } from "lucide-react";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -165,21 +167,37 @@ export default function Navbar() {
                 {/* User menu */}
                 <UserMenu name={data?.data?.name} phone={data?.data?.phone} />
                 {/* logout */}
-                <Button
+                <motion.button
                   onClick={handleLogout}
-                  // variant="outline"
-                  className=" cursor-pointer bg-gradient-to-r from-blue-500 to-indigo-700 text-white rounded-lg font-medium text-sm hover:from-blue-600 hover:to-indigo-800 transition-all shadow-md hover:shadow-lg"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative inline-flex items-center gap-2 overflow-hidden rounded-xl 
+                 bg-gradient-to-r from-blue-500 to-indigo-700 px-4 py-2.5 text-sm font-medium 
+                 text-white shadow-md transition-all duration-300 hover:shadow-lg 
+                 hover:from-blue-600 hover:to-indigo-800 focus:outline-none"
                 >
-                  Logout
-                </Button>
+                  <span className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-20 transition-opacity"></span>
+                  <LogOut className="h-4 w-4" />
+                  <span>Logout</span>
+                </motion.button>
               </>
             ) : (
-              <Button
-                asChild
-                className="py-2 px-2 cursor-pointer bg-gradient-to-r from-blue-500 to-indigo-700 text-white rounded-lg font-medium text-sm hover:from-blue-600 hover:to-indigo-800 transition-all shadow-md hover:shadow-lg"
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Link to="/login">Login</Link>
-              </Button>
+                <Link
+                  to="/login"
+                  className="relative inline-flex items-center gap-2 overflow-hidden rounded-xl 
+                 bg-gradient-to-r from-blue-500 to-indigo-700 px-4 py-2.5 text-sm font-medium 
+                 text-white shadow-md transition-all duration-300 hover:shadow-lg 
+                 hover:from-blue-600 hover:to-indigo-800 focus:outline-none"
+                >
+                  <span className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-20 transition-opacity"></span>
+                  <LogIn className="h-4 w-4" />
+                  <span>Login</span>
+                </Link>
+              </motion.div>
             )}
           </div>
         </div>
