@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Home } from "lucide-react";
 import { Link, Outlet } from "react-router-dom";
+import { ModeToggler } from "../ModeToggler";
 
 export default function DashboardLayout() {
   return (
@@ -24,6 +25,8 @@ export default function DashboardLayout() {
               orientation="vertical"
               className="mr-2 data-[orientation=vertical]:h-4"
             />
+            {/* mode toggler */}
+            <ModeToggler />
 
             <Button
               asChild
