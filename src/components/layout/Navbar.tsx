@@ -171,7 +171,7 @@ export default function Navbar() {
                   onClick={handleLogout}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative inline-flex items-center gap-2 overflow-hidden rounded-xl 
+                  className="cursor-pointer relative inline-flex items-center gap-2 overflow-hidden rounded-xl 
                  bg-gradient-to-r from-blue-500 to-indigo-700 px-4 py-2.5 text-sm font-medium 
                  text-white shadow-md transition-all duration-300 hover:shadow-lg 
                  hover:from-blue-600 hover:to-indigo-800 focus:outline-none"
@@ -188,7 +188,7 @@ export default function Navbar() {
               >
                 <Link
                   to="/login"
-                  className="relative inline-flex items-center gap-2 overflow-hidden rounded-xl 
+                  className="cursor-pointer relative inline-flex items-center gap-2 overflow-hidden rounded-xl 
                  bg-gradient-to-r from-blue-500 to-indigo-700 px-4 py-2.5 text-sm font-medium 
                  text-white shadow-md transition-all duration-300 hover:shadow-lg 
                  hover:from-blue-600 hover:to-indigo-800 focus:outline-none"
