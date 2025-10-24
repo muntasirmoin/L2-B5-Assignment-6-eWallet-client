@@ -117,7 +117,7 @@ const Features = () => {
                 }}
                 transition={{ duration: 1, ease: "easeOut" }}
               />
-              {/* Subtle gradient overlay for better text contrast */}
+              {/* Subtle Gradient overlay for better text contrast */}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
             </div>
 
