@@ -66,7 +66,7 @@ export function UserAddMoneyModal() {
     mode: "onChange",
     defaultValues: {
       source: "bank",
-      // amount: 0,
+      amount: 0,
     },
   });
 
@@ -168,10 +168,10 @@ export function UserAddMoneyModal() {
                     <FormLabel>Amount</FormLabel>
                     <FormControl>
                       <Input
-                        type="text"
+                        type="number"
                         placeholder="Amount"
                         {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
+                        value={field.value || ""}
                       />
                     </FormControl>
                     <FormMessage />
