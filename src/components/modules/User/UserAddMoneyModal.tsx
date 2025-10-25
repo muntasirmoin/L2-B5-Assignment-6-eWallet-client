@@ -66,7 +66,7 @@ export function UserAddMoneyModal() {
     mode: "onChange",
     defaultValues: {
       source: "bank",
-      amount: 0,
+      // amount: 0,
     },
   });
 
