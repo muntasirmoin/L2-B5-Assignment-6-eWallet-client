@@ -168,10 +168,10 @@ export function UserAddMoneyModal() {
                     <FormLabel>Amount</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type="text"
                         placeholder="Amount"
                         {...field}
-                        value={field.value || ""}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
                       />
                     </FormControl>
                     <FormMessage />
