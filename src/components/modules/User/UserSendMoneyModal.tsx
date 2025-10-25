@@ -161,10 +161,14 @@ export function UserSendMoneyModal() {
                     <FormLabel>Amount</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type="text"
                         placeholder="Amount"
                         {...field}
                         value={field.value || ""}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          field.onChange(val === "" ? "" : Number(val));
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
