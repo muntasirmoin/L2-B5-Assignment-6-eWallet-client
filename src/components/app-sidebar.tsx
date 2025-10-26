@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/sidebar";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 
-import Logo from "@/assets/icons/Logo";
+// import Logo from "@/assets/icons/Logo";
 import { useUserInfoQuery } from "@/redux/features/User/user.api";
 import { Link, useLocation } from "react-router-dom";
 import { useMyWalletQuery } from "@/redux/features/Wallet/wallet.api";
@@ -53,7 +53,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton size="lg" asChild>
               <Link to="/" className="flex items-center gap-2 no-underline ">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square w-8 h-8 items-center justify-center rounded-lg">
-                  <Logo />
+                  {/* <Logo /> */}
                 </div>
                 {/* {["user", "agent"].includes(userInfo?.data?.role ?? "") && (
                   <div className="flex flex-col gap-0.5 leading-none ml-1.5">
