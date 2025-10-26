@@ -52,9 +52,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link to="/" className="flex items-center gap-2 no-underline ">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square w-8 h-8 items-center justify-center rounded-lg">
-                  {/* <Logo /> */}
+                <div className="flex items-center justify-center rounded-lg p-1">
+                  <a href="/" className="flex items-center">
+                    <img
+                      src="https://res.cloudinary.com/dta2gcxsl/image/upload/v1760332205/output-onlinepngtools_iis7wf.png"
+                      alt="Company Logo"
+                      className="h-8 w-auto object-contain"
+                    />
+                  </a>
                 </div>
+
                 {/* {["user", "agent"].includes(userInfo?.data?.role ?? "") && (
                   <div className="flex flex-col gap-0.5 leading-none ml-1.5">
                     <span className="font-bold mb-0.5 text-center">
