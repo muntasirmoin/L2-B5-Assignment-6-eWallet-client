@@ -131,7 +131,7 @@ const GuidedTour = () => {
         back: "Previous",
         next: "Next",
         skip: "Skip",
-        last: "🎉 Finish Tour",
+        last: "🎉 Finish",
       }}
     />
   );
