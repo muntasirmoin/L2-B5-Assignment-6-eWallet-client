@@ -2,7 +2,6 @@ import { type ReactNode, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-// import Logo from "@/assets/icons/Logo"; // SVG component
 
 interface IProps {
   children: ReactNode;
