@@ -1,84 +1,84 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetMyTransactionQuery } from "@/redux/features/Transaction/transaction.api";
-import type { ITransaction } from "@/types/transaction";
-import { getTotalByTypeAndStatus } from "@/utils/getTotalByTypeAndStatus";
+// import type { ITransaction } from "@/types/transaction";
+// import { getTotalByTypeAndStatus } from "@/utils/getTotalByTypeAndStatus";
 import UserRecentTransactionTable from "./UserRecentTransactionTable";
 import { QuickAction } from "./QuickAction";
 import UserChartBar from "./UserChartBar";
 import ErrorLoading from "@/utils/ErrorLoading";
-import { useUserInfoQuery } from "@/redux/features/User/user.api";
+// import { useUserInfoQuery } from "@/redux/features/User/user.api";
 
 const UserOverview = () => {
-  const { data: currentUser } = useUserInfoQuery(undefined);
+  // const { data: currentUser } = useUserInfoQuery(undefined);
   // All data
   const {
-    data: allData,
+    // data: allData,
     isLoading: isAllLoading,
     isError: isAllError,
     refetch,
   } = useGetMyTransactionQuery({ limit: "all" });
 
-  const allInvoices: ITransaction[] = allData?.data ?? [];
-  const myInvoices: ITransaction[] = allInvoices.filter(
-    (invoice) => invoice.createdBy?._id === currentUser?.data?._id
-  );
+  // const allInvoices: ITransaction[] = allData?.data ?? [];
+  // const myInvoices: ITransaction[] = allInvoices.filter(
+  //   (invoice) => invoice.createdBy?._id === currentUser?.data?._id
+  // );
 
-  // pending
-  const totalPendingSendMoney = getTotalByTypeAndStatus(
-    myInvoices,
-    "send-money",
-    "pending"
-  );
+  // // pending
+  // const totalPendingSendMoney = getTotalByTypeAndStatus(
+  //   myInvoices,
+  //   "send-money",
+  //   "pending"
+  // );
 
-  const totalPendingWithdrawMoney = getTotalByTypeAndStatus(
-    myInvoices,
-    "withdraw-money",
-    "pending"
-  );
+  // const totalPendingWithdrawMoney = getTotalByTypeAndStatus(
+  //   myInvoices,
+  //   "withdraw-money",
+  //   "pending"
+  // );
 
-  const totalPendingAddMoney = getTotalByTypeAndStatus(
-    myInvoices,
-    "add-money",
-    "pending"
-  );
+  // const totalPendingAddMoney = getTotalByTypeAndStatus(
+  //   myInvoices,
+  //   "add-money",
+  //   "pending"
+  // );
 
-  // completed
-  const totalCompletedSendMoney = getTotalByTypeAndStatus(
-    myInvoices,
-    "send-money",
-    "completed"
-  );
+  // // completed
+  // const totalCompletedSendMoney = getTotalByTypeAndStatus(
+  //   myInvoices,
+  //   "send-money",
+  //   "completed"
+  // );
 
-  const totalCompletedWithdrawMoney = getTotalByTypeAndStatus(
-    myInvoices,
-    "withdraw-money",
-    "completed"
-  );
+  // const totalCompletedWithdrawMoney = getTotalByTypeAndStatus(
+  //   myInvoices,
+  //   "withdraw-money",
+  //   "completed"
+  // );
 
-  const totalCompletedAddMoney = getTotalByTypeAndStatus(
-    myInvoices,
-    "add-money",
-    "completed"
-  );
+  // const totalCompletedAddMoney = getTotalByTypeAndStatus(
+  //   myInvoices,
+  //   "add-money",
+  //   "completed"
+  // );
 
-  // reversed
-  const totalReversedSendMoney = getTotalByTypeAndStatus(
-    myInvoices,
-    "send-money",
-    "reversed"
-  );
+  // // reversed
+  // const totalReversedSendMoney = getTotalByTypeAndStatus(
+  //   myInvoices,
+  //   "send-money",
+  //   "reversed"
+  // );
 
-  const totalReversedWithdrawMoney = getTotalByTypeAndStatus(
-    myInvoices,
-    "withdraw-money",
-    "reversed"
-  );
+  // const totalReversedWithdrawMoney = getTotalByTypeAndStatus(
+  //   myInvoices,
+  //   "withdraw-money",
+  //   "reversed"
+  // );
 
-  const totalReversedAddMoney = getTotalByTypeAndStatus(
-    myInvoices,
-    "add-money",
-    "reversed"
-  );
+  // const totalReversedAddMoney = getTotalByTypeAndStatus(
+  //   myInvoices,
+  //   "add-money",
+  //   "reversed"
+  // );
 
   //  loading
   if (isAllLoading) {
