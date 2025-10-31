@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   useCompleteTransactionMutation,
   useUserInfoQuery,
@@ -188,30 +188,47 @@ const UserPendingTransactionTable = () => {
             </Table>
 
             {/* 🔹 Pagination Controls */}
-            <div className="flex justify-center items-center gap-3 mt-4">
-              <Button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                variant="outline"
-                size="sm"
-              >
-                Previous
-              </Button>
+            <div className="bg-gradient-to-r from-emerald-100 to-lime-200  dark:from-gray-900 dark:to-gray-800 px-4 py-2 transition-colors duration-500">
+              <div className="flex justify-center items-center gap-3 mt-1 mb-1">
+                {/* Previous Button */}
+                <Button
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
+                  disabled={currentPage === 1}
+                  variant="outline"
+                  size="sm"
+                  className={`flex items-center justify-center 
+        bg-white text-gray-700 hover:bg-emerald-100 
+        dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-emerald-900 
+        transition-colors duration-300
+        disabled:opacity-50 disabled:cursor-not-allowed`}
+                >
+                  <ChevronLeft size={16} />
+                </Button>
 
-              <span className="text-sm font-medium">
-                Page {currentPage} of {totalPages}
-              </span>
+                {/* Page Info */}
+                <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
+                  Page {currentPage} of {totalPages}
+                </span>
 
-              <Button
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                disabled={currentPage === totalPages}
-                variant="outline"
-                size="sm"
-              >
-                Next
-              </Button>
+                {/* Next Button */}
+                <Button
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                  }
+                  disabled={currentPage === totalPages}
+                  variant="outline"
+                  size="sm"
+                  className={`flex items-center justify-center 
+        bg-white text-gray-700 hover:bg-emerald-100 
+        dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-emerald-900 
+        transition-colors duration-300
+        disabled:opacity-50 disabled:cursor-not-allowed`}
+                >
+                  <ChevronRight size={16} />
+                </Button>
+              </div>
             </div>
           </>
         )}
