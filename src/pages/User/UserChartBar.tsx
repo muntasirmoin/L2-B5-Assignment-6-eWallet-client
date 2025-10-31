@@ -121,6 +121,12 @@ export default function UserChartBar() {
 
   return (
     <div className="px-4 py-6 md:px-8 md:py-8 border border-green-300 dark:border-green-700 rounded-2xl bg-gradient-to-r from-green-50 to-lime-100 dark:from-green-900 dark:to-lime-900 shadow-sm dark:shadow-md transition-all duration-300 w-full mx-auto">
+      <div className=" text-center">
+        <h2 className="text-lg sm:text-2xl font-bold text-green-700 dark:text-green-300">
+          {/* Summary OF Send Money - Withdraw Money - Add Money Summary */}
+          Summary OF Transactions
+        </h2>
+      </div>
       <h2 className="text-center text-xl md:text-2xl font-semibold mb-6 md:mb-8 text-gray-800 dark:text-white">
         {/* Transaction Totals by Type & Status (Stacked) */}
       </h2>
