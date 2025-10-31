@@ -112,14 +112,14 @@ const UserPendingTransactionTable = () => {
             <Table>
               <TableHeader>
                 <TableRow className="text-center bg-gray-100 dark:bg-gray-800 font-semibold text-gray-700 dark:text-gray-300">
-                  <TableHead>Name</TableHead>
-                  <TableHead>A/C Number</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>TRX No</TableHead>
-                  <TableHead>TRX Date</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead className="text-center">Name</TableHead>
+                  <TableHead className="text-center">A/C Number</TableHead>
+                  <TableHead className="text-center">Status</TableHead>
+                  <TableHead className="text-center">TRX No</TableHead>
+                  <TableHead className="text-center">TRX Date</TableHead>
+                  <TableHead className="text-center">Type</TableHead>
+                  <TableHead className="text-center">Amount</TableHead>
+                  <TableHead className="text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
