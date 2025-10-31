@@ -90,7 +90,7 @@ const UserPendingTransactionTable = () => {
       <div className="overflow-x-auto">
         <div className="bg-green-100 dark:bg-green-900 p-4 sm:p-6 rounded shadow text-center">
           <h2 className="text-lg sm:text-2xl font-bold text-green-700 dark:text-green-300">
-            Showing up to the most recent 10 pending transactions
+            Most recent Pending Transactions
           </h2>
         </div>
 
@@ -134,7 +134,7 @@ const UserPendingTransactionTable = () => {
                     invoice.status === "pending" &&
                     invoice.createdBy?._id === currentUser?.data?._id
                 )
-                .slice(0, 10)
+                .slice(0, 5)
                 .map((invoice) => (
                   <TableRow
                     key={invoice._id}
