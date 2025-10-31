@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetMyTransactionQuery } from "@/redux/features/Transaction/transaction.api";
 import type { ITransaction } from "@/types/transaction";
@@ -21,35 +22,28 @@ import ErrorLoading from "@/utils/ErrorLoading";
 const UserPendingTransactionTable = () => {
   const { data: currentUser } = useUserInfoQuery(undefined);
 
-  console.log("pending user name", currentUser?.data?.name, currentUser?.data);
-
-  // Fetch only the 10 most recent transactions
   const { data, isLoading, isError, refetch } = useGetMyTransactionQuery({
     limit: "all",
     sort: "-createdAt",
   });
+
   const [completeTransaction] = useCompleteTransactionMutation();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   const handleConfirm = async (transactionId: string) => {
     try {
       const res = await completeTransaction(transactionId).unwrap();
-      console.log("CompleteTransactionRes", res);
       if (res.success) {
         toast.success("Transaction Completed Successfully!");
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.log("error", error);
-      if (error?.data?.message) {
-        toast.error(error?.data?.message);
-      } else {
-        toast.error("Failed to complete transaction");
-      }
+      toast.error(error?.data?.message || "Failed to complete transaction");
     }
   };
 
   const invoices: ITransaction[] = data?.data ?? [];
-
-  console.log("user invoice", invoices);
 
   if (isLoading) {
     return (
@@ -85,6 +79,21 @@ const UserPendingTransactionTable = () => {
       />
     );
 
+  // 🔹 Filter only pending transactions created by this user
+  const filteredInvoices = invoices.filter(
+    (invoice) =>
+      invoice.status === "pending" &&
+      invoice.createdBy?._id === currentUser?.data?._id
+  );
+
+  // 🔹 Pagination calculations
+  const totalPages = Math.ceil(filteredInvoices.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedInvoices = filteredInvoices.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
   return (
     <>
       <div className="overflow-x-auto">
@@ -94,48 +103,27 @@ const UserPendingTransactionTable = () => {
           </h2>
         </div>
 
-        {invoices.length === 0 ? (
+        {filteredInvoices.length === 0 ? (
           <p className="text-center text-sm text-muted-foreground py-6">
             No recent transactions found.
           </p>
         ) : (
-          <Table>
-            <TableHeader>
-              <TableRow className="text-center bg-gray-100 dark:bg-gray-800 font-semibold text-gray-700 dark:text-gray-300">
-                <TableHead className="py-3 px-2 text-center font-bold">
-                  Name
-                </TableHead>
-
-                <TableHead className="py-3 px-2 text-center font-bold">
-                  A/C Number
-                </TableHead>
-                <TableHead className="py-3 px-2 text-center font-bold">
-                  Status
-                </TableHead>
-                <TableHead className="py-3 px-2 text-center font-bold">
-                  TRX No
-                </TableHead>
-                <TableHead className="py-3 px-2 text-center font-bold">
-                  TRX Date
-                </TableHead>
-                <TableHead className="py-3 px-2 text-center font-bold">
-                  Type
-                </TableHead>
-                <TableHead className="py-3 px-2 text-center font-bold">
-                  Amount
-                </TableHead>
-                <TableHead className="text-center">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {invoices
-                .filter(
-                  (invoice) =>
-                    invoice.status === "pending" &&
-                    invoice.createdBy?._id === currentUser?.data?._id
-                )
-                .slice(0, 5)
-                .map((invoice) => (
+          <>
+            <Table>
+              <TableHeader>
+                <TableRow className="text-center bg-gray-100 dark:bg-gray-800 font-semibold text-gray-700 dark:text-gray-300">
+                  <TableHead>Name</TableHead>
+                  <TableHead>A/C Number</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>TRX No</TableHead>
+                  <TableHead>TRX Date</TableHead>
+                  <TableHead>Type</TableHead>
+                  <TableHead>Amount</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {paginatedInvoices.map((invoice) => (
                   <TableRow
                     key={invoice._id}
                     className={`text-center ${
@@ -144,45 +132,29 @@ const UserPendingTransactionTable = () => {
                         : "bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-300"
                     }`}
                   >
-                    <TableCell className="text-center font-bold">
-                      {/* {invoice.type === "send-money"
-                        ? invoice.receiver?.name
-                        : `You`} */}
-
+                    <TableCell className="font-bold">
                       {["bkash", "card", "bank"].includes(invoice.source)
-                        ? "You"
-                        : (invoice?.sender?.phone === currentUser?.data?.phone
-                            ? invoice?.receiver?.name
-                            : invoice?.sender?.name) === currentUser?.data?.name
                         ? "You"
                         : invoice?.sender?.phone === currentUser?.data?.phone
                         ? invoice?.receiver?.name
                         : invoice?.sender?.name}
                     </TableCell>
 
-                    {/* from */}
-                    <TableCell className="text-center font-semibold">
-                      {/* {invoice.type === "send-money"
-                        ? invoice.receiver?.phone
-                        : invoice.source} */}
+                    <TableCell className="font-semibold">
                       {["bkash", "card", "bank"].includes(invoice.source)
                         ? invoice.source
-                        : (invoice?.sender?.phone === currentUser?.data?.phone
-                            ? invoice?.receiver?.phone
-                            : invoice?.sender?.phone) ===
-                          currentUser?.data?.phone
-                        ? currentUser?.data?.phone
                         : invoice?.sender?.phone === currentUser?.data?.phone
                         ? invoice?.receiver?.phone
                         : invoice?.sender?.phone}
                     </TableCell>
-                    <TableCell className="text-center font-semibold uppercase">
+
+                    <TableCell className="font-semibold uppercase">
                       {invoice.status}
                     </TableCell>
-                    <TableCell className="text-center font-semibold">
+                    <TableCell className="font-semibold">
                       {invoice._id}
                     </TableCell>
-                    <TableCell className="text-center font-semibold">
+                    <TableCell className="font-semibold">
                       {new Date(invoice.createdAt).toLocaleString("en-GB", {
                         day: "2-digit",
                         month: "2-digit",
@@ -193,29 +165,55 @@ const UserPendingTransactionTable = () => {
                         hour12: false,
                       })}
                     </TableCell>
-                    <TableCell className="text-center font-semibold uppercase">
+                    <TableCell className="font-semibold uppercase">
                       {invoice.type}
                     </TableCell>
-                    <TableCell className="text-center font-extrabold">
+                    <TableCell className="font-extrabold">
                       {invoice.amount.toLocaleString()}
                     </TableCell>
-                    <TableCell className="text-center items-center justify-center space-x-2">
+                    <TableCell>
                       <Button
                         onClick={() => handleConfirm(invoice._id)}
                         disabled={isLoading}
-                        className="cursor-pointer font-bold  hover:bg-green-600 hover:text-white transition-colors duration-200"
+                        className="cursor-pointer font-bold hover:bg-green-600 hover:text-white transition-colors duration-200"
                         size="sm"
                       >
-                        <>
-                          <CheckCircle2 size={16} className="mr-1" />
-                          Complete
-                        </>
+                        <CheckCircle2 size={16} className="mr-1" />
+                        Complete
                       </Button>
                     </TableCell>
                   </TableRow>
                 ))}
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
+
+            {/* 🔹 Pagination Controls */}
+            <div className="flex justify-center items-center gap-3 mt-4">
+              <Button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                variant="outline"
+                size="sm"
+              >
+                Previous
+              </Button>
+
+              <span className="text-sm font-medium">
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <Button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                disabled={currentPage === totalPages}
+                variant="outline"
+                size="sm"
+              >
+                Next
+              </Button>
+            </div>
+          </>
         )}
       </div>
     </>
