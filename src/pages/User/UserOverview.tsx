@@ -111,21 +111,21 @@ const UserOverview = () => {
   return (
     <>
       <QuickAction />
-      <div className="space-y-6">
-        {/* Summary Section */}
-        <div className="bg-green-100 dark:bg-green-900 p-4 sm:p-6 rounded shadow text-center">
-          <h2 className="text-lg sm:text-2xl font-bold text-green-700 dark:text-green-300">
-            {/* Summary OF Send Money - Withdraw Money - Add Money Summary */}
-            Summary OF Transactions
-          </h2>
-        </div>
-        {/*  */}
-        <UserChartBar />
-        {/*  */}
-        {/* start */}
-        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center"> */}
-        {/* Completed Send Money */}
-        {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+      {/* <div className="space-y-6"> */}
+      {/* Summary Section */}
+      <div className="bg-green-100 dark:bg-green-900 p-4 sm:p-6 rounded shadow text-center">
+        <h2 className="text-lg sm:text-2xl font-bold text-green-700 dark:text-green-300">
+          {/* Summary OF Send Money - Withdraw Money - Add Money Summary */}
+          Summary OF Transactions
+        </h2>
+      </div>
+      {/*  */}
+      <UserChartBar />
+      {/*  */}
+      {/* start */}
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center"> */}
+      {/* Completed Send Money */}
+      {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Send Money(Completed)
             </h3>
@@ -134,8 +134,8 @@ const UserOverview = () => {
             </p>
           </div> */}
 
-        {/* Completed Add Money */}
-        {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+      {/* Completed Add Money */}
+      {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Add Money (Completed)
             </h3>
@@ -144,8 +144,8 @@ const UserOverview = () => {
             </p>
           </div> */}
 
-        {/* Completed Withdraw Money */}
-        {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+      {/* Completed Withdraw Money */}
+      {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Withdraw Money (Completed)
             </h3>
@@ -153,9 +153,9 @@ const UserOverview = () => {
               {totalCompletedWithdrawMoney.toLocaleString()}
             </p>
           </div> */}
-        {/* pending */}
-        {/* pending Send Money */}
-        {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
+      {/* pending */}
+      {/* pending Send Money */}
+      {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Send Money(Pending)
             </h3>
@@ -164,8 +164,8 @@ const UserOverview = () => {
             </p>
           </div> */}
 
-        {/* Pending Add Money */}
-        {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
+      {/* Pending Add Money */}
+      {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Add Money (Pending)
             </h3>
@@ -174,8 +174,8 @@ const UserOverview = () => {
             </p>
           </div> */}
 
-        {/* Pending Withdraw Money */}
-        {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
+      {/* Pending Withdraw Money */}
+      {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Withdraw Money (Pending)
             </h3>
@@ -183,10 +183,10 @@ const UserOverview = () => {
               {totalPendingWithdrawMoney.toLocaleString()}
             </p>
           </div> */}
-        {/* Reversed */}
+      {/* Reversed */}
 
-        {/* ReversedSend Money */}
-        {/* <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
+      {/* ReversedSend Money */}
+      {/* <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Send Money(Reversed)
             </h3>
@@ -195,8 +195,8 @@ const UserOverview = () => {
             </p>
           </div> */}
 
-        {/* Reversed Add Money */}
-        {/* <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
+      {/* Reversed Add Money */}
+      {/* <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Add Money (Reversed)
             </h3>
@@ -205,8 +205,8 @@ const UserOverview = () => {
             </p>
           </div> */}
 
-        {/* ReversedWithdraw Money */}
-        {/* <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
+      {/* ReversedWithdraw Money */}
+      {/* <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Withdraw Money (Reversed)
             </h3>
@@ -214,13 +214,13 @@ const UserOverview = () => {
               {totalReversedWithdrawMoney.toLocaleString()}
             </p>
           </div> */}
-        {/* </div> */}
+      {/* </div> */}
 
-        {/* end */}
+      {/* end */}
 
-        {/* Table Section */}
-        <UserRecentTransactionTable />
-      </div>
+      {/* Table Section */}
+      <UserRecentTransactionTable />
+      {/* </div> */}
     </>
   );
 };
