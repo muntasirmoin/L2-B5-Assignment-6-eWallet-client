@@ -69,7 +69,7 @@ const UserCompleteTransactionTable = () => {
       <div className="overflow-x-auto">
         <div className="bg-green-100 dark:bg-green-900 p-4 sm:p-6 rounded shadow text-center mt-2">
           <h2 className="text-lg sm:text-2xl font-bold text-green-700 dark:text-green-300">
-            Most recent Completed Transactions
+            Most Recent Completed Transactions
           </h2>
         </div>
 
