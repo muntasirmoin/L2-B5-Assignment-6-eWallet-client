@@ -122,98 +122,101 @@ const UserOverview = () => {
         {/*  */}
         <UserChartBar />
         {/*  */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
-          {/* Completed Send Money */}
-          <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+        {/* start */}
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center"> */}
+        {/* Completed Send Money */}
+        {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Send Money(Completed)
             </h3>
             <p className="text-2xl font-bold text-red-700 dark:text-red-300">
               {totalCompletedSendMoney.toLocaleString()}
             </p>
-          </div>
+          </div> */}
 
-          {/* Completed Add Money */}
-          <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+        {/* Completed Add Money */}
+        {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Add Money (Completed)
             </h3>
             <p className="text-2xl font-bold text-green-700 dark:text-green-300">
               {totalCompletedAddMoney.toLocaleString()}
             </p>
-          </div>
+          </div> */}
 
-          {/* Completed Withdraw Money */}
-          <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+        {/* Completed Withdraw Money */}
+        {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Withdraw Money (Completed)
             </h3>
             <p className="text-2xl font-bold text-red-700 dark:text-red-300">
               {totalCompletedWithdrawMoney.toLocaleString()}
             </p>
-          </div>
-          {/* pending */}
-          {/* pending Send Money */}
-          <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
+          </div> */}
+        {/* pending */}
+        {/* pending Send Money */}
+        {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Send Money(Pending)
             </h3>
             <p className="text-2xl font-bold text-green-700 dark:text-green-300">
               {totalPendingSendMoney.toLocaleString()}
             </p>
-          </div>
+          </div> */}
 
-          {/* Pending Add Money */}
-          <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
+        {/* Pending Add Money */}
+        {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Add Money (Pending)
             </h3>
             <p className="text-2xl font-bold text-red-700 dark:text-red-300">
               {totalPendingAddMoney.toLocaleString()}
             </p>
-          </div>
+          </div> */}
 
-          {/* Pending Withdraw Money */}
-          <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
+        {/* Pending Withdraw Money */}
+        {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Withdraw Money (Pending)
             </h3>
             <p className="text-2xl font-bold text-green-700 dark:text-green-300">
               {totalPendingWithdrawMoney.toLocaleString()}
             </p>
-          </div>
-          {/* Reversed */}
+          </div> */}
+        {/* Reversed */}
 
-          {/* ReversedSend Money */}
-          <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
+        {/* ReversedSend Money */}
+        {/* <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Send Money(Reversed)
             </h3>
             <p className="text-2xl font-bold text-green-700 dark:text-green-300">
               {totalReversedSendMoney.toLocaleString()}
             </p>
-          </div>
+          </div> */}
 
-          {/* Reversed Add Money */}
-          <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
+        {/* Reversed Add Money */}
+        {/* <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Add Money (Reversed)
             </h3>
             <p className="text-2xl font-bold text-red-700 dark:text-red-300">
               {totalReversedAddMoney.toLocaleString()}
             </p>
-          </div>
+          </div> */}
 
-          {/* ReversedWithdraw Money */}
-          <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
+        {/* ReversedWithdraw Money */}
+        {/* <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
               Total Withdraw Money (Reversed)
             </h3>
             <p className="text-2xl font-bold text-green-700 dark:text-green-300">
               {totalReversedWithdrawMoney.toLocaleString()}
             </p>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
+
+        {/* end */}
 
         {/* Table Section */}
         <UserRecentTransactionTable />
