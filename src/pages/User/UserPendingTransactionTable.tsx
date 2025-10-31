@@ -188,8 +188,8 @@ const UserPendingTransactionTable = () => {
             </Table>
 
             {/* 🔹 Pagination Controls */}
-            <div className="bg-gradient-to-r from-emerald-100 to-lime-200  dark:from-gray-900 dark:to-gray-800 px-4 py-2 transition-colors duration-500">
-              <div className="flex justify-center items-center gap-3 mt-1 mb-1">
+            <div className="bg-green-100 dark:bg-green-900  px-4 py-2 transition-colors duration-500 border-t-1 dark:border-gray-600">
+              <div className="flex justify-end items-center gap-3 mt-1 mb-1">
                 {/* Previous Button */}
                 <Button
                   onClick={() =>
