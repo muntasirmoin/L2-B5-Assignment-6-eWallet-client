@@ -27,12 +27,12 @@ const AdminOverView = () => {
   // const totalAgent = agentData?.meta?.total | 0;
 
   const {
-    data: transactionData,
+    // data: transactionData,
     isLoading: isTransactionLoading,
     isError: isTransactionError,
     refetch: refetchTransaction,
   } = useAllTransactionsInfoQuery(undefined);
-  const totalTransaction = transactionData?.meta?.total | 0;
+  // const totalTransaction = transactionData?.meta?.total | 0;
 
   if (isUserLoading || isAgentLoading) {
     return (
@@ -116,14 +116,14 @@ const AdminOverView = () => {
           </p>
         </div> */}
         {/* Total agents */}
-        <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
+        {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
             Total Agent
           </h3>
           <p className="text-2xl font-bold text-green-700 dark:text-green-300">
             {totalAgent.toLocaleString()}
           </p>
-        </div>
+        </div> */}
         {/*  */}
       </div>
       <AdminChartArea />
