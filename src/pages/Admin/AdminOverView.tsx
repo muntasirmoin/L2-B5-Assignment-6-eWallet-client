@@ -18,13 +18,13 @@ const AdminOverView = () => {
   // const totalUser = userData?.meta?.total | 0;
 
   const {
-    data: agentData,
+    // data: agentData,
     isLoading: isAgentLoading,
     isError: isAgentError,
     refetch: refetchAgent,
   } = useAllAgentInfoQuery(undefined);
 
-  const totalAgent = agentData?.meta?.total | 0;
+  // const totalAgent = agentData?.meta?.total | 0;
 
   const {
     data: transactionData,
@@ -107,14 +107,14 @@ const AdminOverView = () => {
         </div> */}
 
         {/* Total Transaction */}
-        <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+        {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
             Total Transaction
           </h3>
           <p className="text-2xl font-bold text-red-700 dark:text-red-300">
             {totalTransaction.toLocaleString()}
           </p>
-        </div>
+        </div> */}
         {/* Total agents */}
         <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
