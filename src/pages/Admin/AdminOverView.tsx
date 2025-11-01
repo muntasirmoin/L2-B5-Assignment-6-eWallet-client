@@ -95,9 +95,9 @@ const AdminOverView = () => {
   return (
     <>
       <AdminQuickAction />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
-        {/* Total user */}
-        {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center"> */}
+      {/* Total user */}
+      {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
             Total User
           </h3>
@@ -106,8 +106,8 @@ const AdminOverView = () => {
           </p>
         </div> */}
 
-        {/* Total Transaction */}
-        {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+      {/* Total Transaction */}
+      {/* <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
             Total Transaction
           </h3>
@@ -115,8 +115,8 @@ const AdminOverView = () => {
             {totalTransaction.toLocaleString()}
           </p>
         </div> */}
-        {/* Total agents */}
-        {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
+      {/* Total agents */}
+      {/* <div className="bg-yellow-100 dark:bg-yellow-900 p-6 rounded shadow">
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
             Total Agent
           </h3>
@@ -124,8 +124,8 @@ const AdminOverView = () => {
             {totalAgent.toLocaleString()}
           </p>
         </div> */}
-        {/*  */}
-      </div>
+      {/*  */}
+      {/* </div> */}
       <AdminChartArea />
       <AdminChartPie />
     </>
