@@ -159,13 +159,18 @@ const Overview = () => {
           //{" "}
         </div>
         {/* Reversed Cash Out */}
+        //{" "}
         <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
+          //{" "}
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
-            Total Reversed Cash Out
+            // Total Reversed Cash Out //{" "}
           </h3>
+          //{" "}
           <p className="text-2xl font-bold text-green-700 dark:text-green-300">
-            {totalReversedCashOut.toLocaleString()}
+            // {totalReversedCashOut.toLocaleString()}
+            //{" "}
           </p>
+          //{" "}
         </div>
       </div>
       {/* summary data end */}
