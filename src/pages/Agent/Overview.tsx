@@ -47,11 +47,6 @@ const Overview = () => {
     "cash-in",
     "reversed"
   );
-  const totalReversedCashOut = getTotalByTypeAndStatus(
-    allInvoices,
-    "cash-out",
-    "reversed"
-  );
 
   //  loading
   if (isAllLoading) {
