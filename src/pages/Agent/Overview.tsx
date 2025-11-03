@@ -94,27 +94,32 @@ const Overview = () => {
       {/* summary data start */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
         {/* Completed Cash In */}
-        //{" "}
+        // //{" "}
         <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
+          // // //{" "}
+          <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
+            // // Total Cash In (Completed) // //{" "}
+          </h3>
+          // // //{" "}
+          <p className="text-2xl font-bold text-green-700 dark:text-green-300">
+            // // {totalCashInCompleted.toLocaleString()}
+            // // //{" "}
+          </p>
+          // // //{" "}
+        </div>
+        "{/* Completed Cash Out */}
+        //{" "}
+        <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
           //{" "}
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
-            // Total Cash In (Completed) //{" "}
+            // Total Cash Out (Completed) //{" "}
           </h3>
           //{" "}
-          <p className="text-2xl font-bold text-green-700 dark:text-green-300">
-            // {totalCashInCompleted.toLocaleString()}
+          <p className="text-2xl font-bold text-red-700 dark:text-red-300">
+            // {totalCashOutCompleted.toLocaleString()}
             //{" "}
           </p>
           //{" "}
-        </div>
-        {/* Completed Cash Out */}
-        <div className="bg-red-100 dark:bg-red-900 p-6 rounded shadow">
-          <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-300">
-            Total Cash Out (Completed)
-          </h3>
-          <p className="text-2xl font-bold text-red-700 dark:text-red-300">
-            {totalCashOutCompleted.toLocaleString()}
-          </p>
         </div>
         {/* Pending Cash In */}
         <div className="bg-green-100 dark:bg-green-900 p-6 rounded shadow">
