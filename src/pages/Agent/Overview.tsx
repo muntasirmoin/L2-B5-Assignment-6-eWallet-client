@@ -1,7 +1,6 @@
 import { useGetMyTransactionQuery } from "@/redux/features/Transaction/transaction.api";
 
 import type { ITransaction } from "@/types/transaction";
-// import { getTotalByTypeAndStatus } from "@/utils/getTotalByTypeAndStatus";
 import { Skeleton } from "@/components/ui/skeleton";
 import MyRecentTransactionTable from "./MyRecentTransactionTable";
 import AgentChartBar from "./AgentChartBar";
@@ -19,28 +18,6 @@ const Overview = () => {
   const allInvoices: ITransaction[] = allData?.data ?? [];
 
   console.log("allInvoices", allInvoices);
-  //  all data for totals cash-in-out
-  // const totalCashInCompleted = getTotalByTypeAndStatus(
-  //   allInvoices,
-  //   "cash-in",
-  //   "completed"
-  // );
-  // const totalCashOutCompleted = getTotalByTypeAndStatus(
-  //   allInvoices,
-  //   "cash-out",
-  //   "completed"
-  // );
-
-  // const totalPendingCashIn = getTotalByTypeAndStatus(
-  //   allInvoices,
-  //   "cash-in",
-  //   "pending"
-  // );
-  // const totalPendingCashOut = getTotalByTypeAndStatus(
-  //   allInvoices,
-  //   "cash-out",
-  //   "pending"
-  // );
 
   //  loading
   if (isAllLoading) {
