@@ -49,11 +49,7 @@ const Overview = () => {
   return (
     <div className="space-y-6">
       {/* Summary Section */}
-      {/* <div className="bg-green-100 dark:bg-green-900 p-4 sm:p-6 rounded shadow text-center">
-        <h2 className="text-lg sm:text-2xl font-bold text-green-700 dark:text-green-300">
-          Cash-In and Cash-Out Summary
-        </h2>
-      </div> */}
+
       {/*  */}
       <AgentChartBar />
       {/*  */}
