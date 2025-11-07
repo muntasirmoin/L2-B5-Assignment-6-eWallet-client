@@ -53,9 +53,7 @@ const Overview = () => {
       {/*  */}
       <AgentChartBar />
       {/*  */}
-      {/* summary data start */}
 
-      {/* summary data end */}
       {/* Table Section */}
       <MyRecentTransactionTable />
     </div>
