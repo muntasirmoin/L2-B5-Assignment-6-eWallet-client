@@ -27,6 +27,15 @@ export const userApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    // get user by ID
+    userById: builder.query<IUser, string>({
+      query: (id) => ({
+        url: `/user/get-user-by-id?id=${id}`,
+        method: "GET",
+      }),
+      providesTags: ["USER"],
+    }),
     //update profile
 
     updateProfile: builder.mutation<UpdateProfileResponse, Partial<IUser>>({
@@ -137,4 +146,5 @@ export const {
   useBlockUserMutation,
   useUnblockUserMutation,
   useAddMoneyAsCashInMutation,
+  useUserByIdQuery,
 } = userApi;
