@@ -183,6 +183,8 @@ import {
   useMarkAllNotificationsSeenMutation,
   useMarkNotificationSeenMutation,
 } from "@/redux/features/Notification/notification.api";
+import { useUserByIdQuery } from "@/redux/features/User/user.api";
+import type { IUser } from "@/types/user";
 
 export interface INotification {
   _id?: string;
@@ -193,6 +195,13 @@ export interface INotification {
   seen: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+interface GetUserByIdResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: IUser;
 }
 
 function Dot({ className }: { className?: string }) {
@@ -220,6 +229,14 @@ export default function NotificationMenu() {
 
   const [markNotificationSeen] = useMarkNotificationSeenMutation();
   const [markAllNotificationsSeen] = useMarkAllNotificationsSeenMutation();
+
+  const useUserName = (userId?: string) => {
+    const { data } = useUserByIdQuery(userId!, { skip: !userId });
+
+    // Ensure we respect the actual response shape
+    const userData = (data as GetUserByIdResponse | undefined)?.data;
+    return userData?.name || "Unknown User";
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const unreadCount = notifications.filter((n: any) => !n.seen).length;
@@ -270,35 +287,40 @@ export default function NotificationMenu() {
           className="bg-border -mx-1 my-1 h-px"
         ></div>
 
-        {notifications.map((notification: INotification) => (
-          <div
-            key={notification._id}
-            className="hover:bg-accent rounded-md px-3 py-2 text-sm transition-colors"
-          >
-            <div className="relative flex items-start pe-3">
-              <div className="flex-1 space-y-1">
-                <button
-                  className="text-foreground/80 text-left after:absolute after:inset-0"
-                  onClick={() => handleNotificationClick(notification._id!)}
-                >
-                  <span className="text-foreground font-medium hover:underline">
-                    {notification.user}
-                  </span>{" "}
-                  {notification.message}
-                </button>
-                <div className="text-muted-foreground text-xs">
-                  {new Date(notification.createdAt!).toLocaleString()}
+        {notifications.map((notification: INotification) => {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const userName = useUserName(notification.user); // fetch name from userId
+
+          return (
+            <div
+              key={notification._id}
+              className="hover:bg-accent rounded-md px-3 py-2 text-sm transition-colors"
+            >
+              <div className="relative flex items-start pe-3">
+                <div className="flex-1 space-y-1">
+                  <button
+                    className="text-foreground/80 text-left after:absolute after:inset-0"
+                    onClick={() => handleNotificationClick(notification._id!)}
+                  >
+                    <span className="text-foreground font-medium hover:underline">
+                      {userName}
+                    </span>{" "}
+                    {notification.message}
+                  </button>
+                  <div className="text-muted-foreground text-xs">
+                    {new Date(notification.createdAt!).toLocaleString()}
+                  </div>
                 </div>
+                {!notification.seen && (
+                  <div className="absolute end-0 self-center">
+                    <span className="sr-only">Unread</span>
+                    <Dot />
+                  </div>
+                )}
               </div>
-              {!notification.seen && (
-                <div className="absolute end-0 self-center">
-                  <span className="sr-only">Unread</span>
-                  <Dot />
-                </div>
-              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </PopoverContent>
     </Popover>
   );
