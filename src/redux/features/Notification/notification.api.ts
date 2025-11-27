@@ -20,10 +20,19 @@ export const notificationApi = baseApi.injectEndpoints({
       invalidatesTags: ["NOTIFICATION"],
     }),
 
-   
+    // Mark all notifications as seen
+    markAllNotificationsSeen: builder.mutation({
+      query: () => ({
+        url: "/notification/seen-all",
+        method: "PATCH",
+      }),
+      invalidatesTags: ["NOTIFICATION"],
+    }),
+  }),
+});
 
 export const {
   useGetMyNotificationsQuery,
   useMarkNotificationSeenMutation,
-
+  useMarkAllNotificationsSeenMutation,
 } = notificationApi;
