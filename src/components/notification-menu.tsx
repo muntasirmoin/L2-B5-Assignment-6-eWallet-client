@@ -213,6 +213,13 @@ function Dot({ className }: { className?: string }) {
 
 export default function NotificationMenu() {
   // Fetch notifications from backend
+  const { data, refetch } = useGetMyNotificationsQuery(undefined);
+
+  // Ensure notifications is ALWAYS an array
+  const notifications = Array.isArray(data?.data) ? data.data : [];
+
+  const [markNotificationSeen] = useMarkNotificationSeenMutation();
+  const [markAllNotificationsSeen] = useMarkAllNotificationsSeenMutation();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const unreadCount = notifications.filter((n: any) => !n.seen).length;
