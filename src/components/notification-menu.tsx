@@ -238,6 +238,9 @@ export default function NotificationMenu() {
     return userData?.name || "Unknown User";
   };
 
+  // user phone
+  const useUserPhone = (userId?: string) => {};
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const unreadCount = notifications.filter((n: any) => !n.seen).length;
 
