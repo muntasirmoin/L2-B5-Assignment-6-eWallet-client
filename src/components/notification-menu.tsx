@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
@@ -15,8 +16,9 @@ import {
   useMarkNotificationSeenMutation,
 } from "@/redux/features/Notification/notification.api";
 
-import { useUserByIdQuery } from "@/redux/features/User/user.api";
-import type { IUser } from "@/types/user";
+// import { useUserByIdQuery } from "@/redux/features/User/user.api";
+// import type { IUser } from "@/types/user";
+
 export interface INotification {
   _id?: string;
   user: string; // receiver of the notification
@@ -27,41 +29,46 @@ export interface INotification {
   createdAt?: Date;
   updatedAt?: Date;
 }
-interface GetUserByIdResponse {
-  statusCode: number;
-  success: boolean;
-  message: string;
-  data: IUser;
-}
 
-// Fake dot
+// interface GetUserByIdResponse {
+//   statusCode: number;
+//   success: boolean;
+//   message: string;
+//   data: IUser;
+// }
+
+// Small dot
 function Dot() {
   return (
-    <svg
-      width="6"
-      height="6"
-      fill="currentColor"
-      viewBox="0 0 6 6"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
+    <svg width="6" height="6" fill="currentColor" viewBox="0 0 6 6">
       <circle cx="3" cy="3" r="3" />
     </svg>
   );
 }
 
-// Custom hook OUTSIDE component
-function useUserInfo(userId?: string) {
-  const { data, isLoading } = useUserByIdQuery(userId!, { skip: !userId });
+/**
+ * ---------------------------------------------------------
+ *   Fetch ALL user info at once — no hooks inside loops
+ * ---------------------------------------------------------
+ */
 
-  return {
-    name:
-      (data as GetUserByIdResponse | undefined)?.data?.name || "Unknown User",
-    phone:
-      (data as GetUserByIdResponse | undefined)?.data?.phone || "Unknown Phone",
-    loading: isLoading,
-  };
-}
+// export function useUsersInfo(userIds: string[]) {
+//   const results = userIds.map((id) => useUserByIdQuery(id, { skip: !id }));
+
+//   const infoMap: Record<string, { name: string; phone: string }> = {};
+
+//   results.forEach((result, index) => {
+//     const data = result.data as GetUserByIdResponse | undefined;
+//     const id = userIds[index];
+
+//     infoMap[id] = {
+//       name: data?.data?.name || "Unknown User",
+//       phone: data?.data?.phone || "Unknown Phone",
+//     };
+//   });
+
+//   return infoMap;
+// }
 
 export default function NotificationMenu() {
   const { data, refetch } = useGetMyNotificationsQuery(undefined);
@@ -71,8 +78,12 @@ export default function NotificationMenu() {
   const [markNotificationSeen] = useMarkNotificationSeenMutation();
   const [markAllNotificationsSeen] = useMarkAllNotificationsSeenMutation();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const unreadCount = notifications.filter((n: any) => !n.seen).length;
+
+  // Load ALL user data once
+  // const userIds = notifications.map((n: any) => n.user);
+
+  // const usersInfo = useUsersInfo(userIds);
 
   const handleMarkAllAsRead = async () => {
     await markAllNotificationsSeen(undefined).unwrap();
@@ -105,8 +116,8 @@ export default function NotificationMenu() {
 
           {unreadCount > 0 && (
             <button
-              onClick={handleMarkAllAsRead}
               className="text-xs font-medium hover:underline"
+              onClick={handleMarkAllAsRead}
             >
               Mark all as read
             </button>
@@ -116,22 +127,22 @@ export default function NotificationMenu() {
         <div className="bg-border -mx-1 my-1 h-px" />
 
         {notifications.map((notification: INotification) => {
-          // Fetch user info OUTSIDE map via custom hook
-          const { name, phone } = useUserInfo(notification.user);
+          // const userInfo = usersInfo[notification.user];
 
           return (
             <div
               key={notification._id}
-              className="hover:bg-accent rounded-md px-3 py-2 text-sm"
+              className="hover:bg-accent rounded-md px-3 py-2 text-sm transition-colors"
             >
               <div className="relative flex items-start pe-3">
                 <div className="flex-1 space-y-1">
                   <button
-                    onClick={() => handleNotificationClick(notification._id!)}
                     className="text-left"
+                    onClick={() => handleNotificationClick(notification._id!)}
                   >
                     <span className="font-medium hover:underline">
-                      {name} ({phone})
+                      {/* {userInfo?.name} ({userInfo?.phone}) */}
+                      {notification.user}
                     </span>{" "}
                     {notification.message}
                   </button>
