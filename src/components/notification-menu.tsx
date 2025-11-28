@@ -313,7 +313,7 @@ export default function NotificationMenu() {
                     onClick={() => handleNotificationClick(notification._id!)}
                   >
                     <span className="text-foreground font-medium hover:underline">
-                      {userName}
+                      {userName} {"("} {userPhone} {")"}
                     </span>{" "}
                     {notification.message}
                   </button>
