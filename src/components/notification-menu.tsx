@@ -239,7 +239,9 @@ export default function NotificationMenu() {
   };
 
   // user phone
-  const useUserPhone = (userId?: string) => {};
+  const useUserPhone = (userId?: string) => {
+    const { data } = useUserByIdQuery(userId!, { skip: !userId });
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const unreadCount = notifications.filter((n: any) => !n.seen).length;
