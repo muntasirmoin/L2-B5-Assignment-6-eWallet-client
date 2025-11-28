@@ -241,6 +241,9 @@ export default function NotificationMenu() {
   // user phone
   const useUserPhone = (userId?: string) => {
     const { data } = useUserByIdQuery(userId!, { skip: !userId });
+
+    const userData = (data as GetUserByIdResponse | undefined)?.data;
+    return userData?.phone || "Unknown User";
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
