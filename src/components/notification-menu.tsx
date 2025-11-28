@@ -298,6 +298,8 @@ export default function NotificationMenu() {
         {notifications.map((notification: INotification) => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
           const userName = useUserName(notification.user); // fetch name from userId
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const userPhone = useUserPhone(notification.user);
 
           return (
             <div
